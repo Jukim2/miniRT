@@ -38,4 +38,4 @@ re :
 	$(MAKE) all
 
 test :
-	cc test.c -lmlx -I. -Ivector3 -framework OpenGL -framework Appkit vector3/*.c
+	cc test.c -lmlx -Iincludes -framework OpenGL -framework Appkit srcs/vector3/*.c
