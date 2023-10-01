@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 14:55:15 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/01 20:20:46 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/01 21:12:37 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,16 +58,34 @@ int	hit_sphere(t_ray ray, t_vector3 center, double radius)
 	double		c;
 
 	c_a = subtract_vector3(ray.origin, center);
-
 	a = dot_product_vector3(ray.direction, ray.direction);
 	b = 2.0 * dot_product_vector3(c_a, ray.direction);
 	c = dot_product_vector3(c_a, c_a) - radius * radius;
-
-	if (b * b - 4 * a * c > 0)
-		return (1);
-	else
-		return (0);
+	return (b * b - 4 * a * c >= 0);
 }
+
+t_vector3	get_color_vector3(t_ray ray)
+{
+	t_vector3	color;
+	t_vector3	center; // sphere
+	double		radius;
+
+	center = get_vector3(0, 0, -1);
+	radius = 0.5;
+	if (hit_sphere(ray, center, radius))
+		return (get_vector3(1, 0, 0));
+	double a = 0.5 * (ray.direction.y + 1.0);
+	color = add_vector3(get_vector3(1 - a, 1 - a, 1 - a), get_vector3(0.5 * a, 0.7 * a, 1.0 * a));
+	return (color);
+}
+
+int	convert_color_vector3(t_vector3 color_vec3)
+{
+	return (((int)(color_vec3.x * 255) << 16) | \
+			((int)(color_vec3.y * 255) << 8) | \
+			((int)(color_vec3.z * 255)));
+}
+
 
 int	main(void)
 {
@@ -92,36 +110,22 @@ int	main(void)
 	top_left_pixel.y = -viewport_height / 2. + pixel_delta_y * 0.5;
 	top_left_pixel.z = -focal_length;
 
-
+	t_vector3	pixel_center;
 	t_ray		ray;
-	t_vector3	unit_direction;
 
 	for (int i = 0; i < 1024; i++)
 	{
 		for (int j = 0; j < 512; j++)
 		{
-			t_vector3 pixel_center;
 
 			pixel_center = add_vector3(top_left_pixel, get_vector3(i * pixel_delta_x, j * pixel_delta_y, 0));
 			ray.origin = get_vector3(0, 0, 0); // camera center;
 			ray.direction = subtract_vector3(pixel_center, get_vector3(0, 0, 0));
-			unit_direction = get_unit_vector3(ray.direction);
+			ray.direction = get_unit_vector3(ray.direction); // get unit_vector
 
-			//printf("%f, %f %f\n", ray.direction.x, ray.direction.y, ray.direction.z);
-
-			t_vector3	color;
-			double		a;
-
-			a = 0.5 * (unit_direction.y + 1.0);
-			color = add_vector3(get_vector3(1 - a, 1 - a, 1 - a), get_vector3(0.5 * a, 0.7 * a, 1.0 * a));
-
-			int c = ((int)(color.x * 255) << 16) | ((int)(color.y * 255) << 8) | ((int)(color.z * 255));
-
-			if (hit_sphere(ray, get_vector3(0, 0, -1.0), 0.5))
-			{
-				c = 0xFF0000;
-			}
-			my_mlx_pixel_put(&img, i, j, c);
+			t_vector3 color_vector = get_color_vector3(ray);
+			int color = convert_color_vector3(color_vector);
+			my_mlx_pixel_put(&img, i, j, color);
 		}
 	}
 
