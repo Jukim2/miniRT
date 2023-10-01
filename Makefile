@@ -6,6 +6,7 @@ OBJS = $(SRCS:.c=.o)
 NAME = miniRT
 LIBFT = libft.a
 #CPPFLAGS = -fsanitize=address -g3#-Wall -Wextra -Werror
+
 INCLUDES = -Iincludes
 
 .PHONY : clean all fclean re
@@ -35,3 +36,6 @@ fclean :
 re :
 	$(MAKE) fclean
 	$(MAKE) all
+
+test :
+	cc test.c -lmlx -I. -Ivector3 -framework OpenGL -framework Appkit vector3/*.c
