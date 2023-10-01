@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 14:55:15 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/01 21:14:28 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/01 21:41:50 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,18 +50,23 @@ typedef struct s_ray
 }	t_ray;
 
 
-int	hit_sphere(t_ray ray, t_vector3 center, double radius)
+double	hit_sphere(t_ray ray, t_vector3 center, double radius)
 {
 	t_vector3	c_a;
 	double		a;
 	double		b;
 	double		c;
+	double		d;
 
 	c_a = subtract_vector3(ray.origin, center);
 	a = dot_product_vector3(ray.direction, ray.direction);
 	b = 2.0 * dot_product_vector3(c_a, ray.direction);
 	c = dot_product_vector3(c_a, c_a) - radius * radius;
-	return (b * b - 4 * a * c >= 0);
+	d = b * b - 4 * a * c;
+	if (d < 0)
+		return (-1);
+	else
+		return ((-b - sqrt(d)) / (2.0 * a));
 }
 
 t_vector3	get_color_vector3(t_ray ray)
@@ -69,11 +74,23 @@ t_vector3	get_color_vector3(t_ray ray)
 	t_vector3	color;
 	t_vector3	center; // sphere
 	double		radius;
+	double		t;
+
 
 	center = get_vector3(0, 0, -1);
 	radius = 0.5;
-	if (hit_sphere(ray, center, radius))
-		return (get_vector3(1, 0, 0));
+	t = hit_sphere(ray, center, radius);
+	if (t > 0.0)
+	{
+		// Origin + t * Direction : point on a sphere
+		// point - center of a sphere : normal vector
+		// so, unit{(origin + t * direction) - center}
+		t_vector3 normal = get_unit_vector3(\
+							subtract_vector3(\
+								add_vector3(ray.origin, \
+								multiple_vector3(t, ray.direction)), center));
+		return (multiple_vector3(0.5, add_vector3(normal, get_vector3(1, 1, 1))));
+	}
 	double a = 0.5 * (ray.direction.y + 1.0);
 	color = add_vector3(get_vector3(1 - a, 1 - a, 1 - a), get_vector3(0.5 * a, 0.7 * a, 1.0 * a));
 	return (color);
@@ -126,7 +143,7 @@ int	main(void)
 
 			t_vector3 color_vector = get_color_vector3(ray);
 			int color = convert_color_vector3(color_vector);
-			my_mlx_pixel_put(&img, i, j, color);
+			my_mlx_pixel_put(&img, i, 511 - j, color);
 		}
 	}
 

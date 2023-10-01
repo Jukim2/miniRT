@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 18:41:01 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/01 19:22:32 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/01 21:30:35 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ t_vector3	get_vector3(double x, double y, double z);
 
 t_vector3	add_vector3(t_vector3 i, t_vector3 j);
 t_vector3	subtract_vector3(t_vector3 i, t_vector3 j);
+t_vector3	multiple_vector3(double t, t_vector3 i);
 double		dot_product_vector3(t_vector3 i, t_vector3 j);
 
 #endif
