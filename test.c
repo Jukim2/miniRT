@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 14:55:15 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/01 21:12:37 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/01 21:14:28 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ t_vector3	get_color_vector3(t_ray ray)
 	return (color);
 }
 
+// convert (0, 0, 0) -> 0x000000
 int	convert_color_vector3(t_vector3 color_vec3)
 {
 	return (((int)(color_vec3.x * 255) << 16) | \
