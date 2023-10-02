@@ -57,7 +57,7 @@ dkms.conf
 
 # End of https://www.toptal.com/developers/gitignore/api/c
 
-.DS_Store
+*.DS_Store
 libmlx.a
 a.out
 minirt

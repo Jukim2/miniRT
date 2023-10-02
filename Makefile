@@ -39,3 +39,6 @@ re :
 
 test :
 	cc test.c -lmlx -Iincludes -framework OpenGL -framework Appkit srcs/vector3/*.c
+
+home : 
+	cc test.c -lmlx -Iincludes -framework OpenGL -framework Appkit libmlx.a srcs/vector3/*.c
