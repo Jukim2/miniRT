@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jukim2 <jukim2@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 00:59:00 by kjs               #+#    #+#             */
-/*   Updated: 2023/10/03 21:25:59 by jukim2           ###   ########.fr       */
+/*   Updated: 2023/10/03 21:31:32 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,24 +23,18 @@
 void	initialize_objects(t_objects *objects)
 {
 	ft_bzero(objects, sizeof(t_objects));
-	objects->cylinder = 0;
-	objects->plane = 0;
-	objects->sphere = 0;
 }
 
-// int	main(int argc, char **argv)
-// {
-// 	t_object	objects;
-	
-// 	initialize_objects(&objects);
-// 	// parse(&objects, argv[1]);
-// }
-
-int main()
+int main(int argc, char **argv)
 {
 	void	*mlx;
 	void	*win;
 	t_image	img;
+	t_objects	objects;
+
+
+	initialize_objects(&objects);
+	parse(&objects, argv[1]);
 
 	mlx = mlx_init();
 	win = mlx_new_window(mlx, WIN_WIDTH, WIN_HEIGHT, "miniRT");
@@ -68,7 +62,7 @@ int main()
 		{
 
 			pixel_center = add_vector3(top_left_pixel, get_vector3(i * pixel_delta_x, j * pixel_delta_y, 0));
-			ray.origin = get_vector3(0, 0, 0); // camera center;
+			ray.origin = ob; // camera center;
 			ray.direction = subtract_vector3(pixel_center, get_vector3(0, 0, 0));
 			ray.direction = get_unit_vector3(ray.direction); // get unit_vector
 
