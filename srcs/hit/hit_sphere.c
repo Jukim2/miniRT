@@ -2,6 +2,7 @@
 #include "vector3.h"
 #include <math.h>
 
+#include <stdio.h>
 double	hit_sphere(t_ray ray, t_vector3 center, double radius)
 {
 	t_vector3	oc;

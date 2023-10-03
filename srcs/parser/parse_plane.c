@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_plane.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jukim2 <jukim2@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kjs <kjs@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 13:13:52 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/03 21:25:59 by jukim2           ###   ########.fr       */
+/*   Updated: 2023/10/04 01:41:37 by kjs              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,5 @@ void	parse_plane(t_objects *objects, char *line)
 	check_misconfiguration(objects, line, idx);
 	idx = parse_doubles(&tmp->rgb, line, idx);
 	check_endconfiguration(objects, line, idx);
-	add_shape(objects->shape, tmp);
+	add_shape(&objects->shape, tmp);
 }

@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parse_cylinder.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jukim2 <jukim2@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kjs <kjs@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 13:13:46 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/03 21:35:24 by jukim2           ###   ########.fr       */
+/*   Updated: 2023/10/04 01:41:49 by kjs              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "object.h"
 #include "parse.h"
 #include "libft.h"
-#include <stdlib.h>
 
 void	parse_cylinder(t_objects *objects, char *line)
 {
@@ -34,5 +33,5 @@ void	parse_cylinder(t_objects *objects, char *line)
 	check_misconfiguration(objects, line, idx);
 	idx = parse_doubles(&tmp->rgb, line, idx);
 	check_endconfiguration(objects, line, idx);
-	add_shape(objects->shape, tmp);
+	add_shape(&objects->shape, tmp);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_engine.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: kjs <kjs@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 22:38:25 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/03 22:40:56 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/04 02:16:59 by kjs              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "ray.h"
 #include "vector3.h"
 
+#include <stdio.h>
 void	execute_engine(t_engine *engine)
 {
 	float	focal_length = 1.f; // 카메라의 초점거리
@@ -41,7 +42,8 @@ void	execute_engine(t_engine *engine)
 			ray.direction = subtract_vector3(pixel_center, get_vector3(0, 0, 0));
 			ray.direction = get_unit_vector3(ray.direction); // get unit_vector
 
-			t_vector3 color_vector = get_color_vector3(ray);
+			// t_vector3 color_vector = get_color_vector3(ray);
+			t_vector3 color_vector = get_color(ray, engine->objects.shape);
 			engine->img.addr[j * engine->img.line_length / 4 + i] = convert_color_vector3(color_vector); 
 		} 
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_module.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jukim2 <jukim2@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kjs <kjs@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 13:21:53 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/03 21:32:46 by jukim2           ###   ########.fr       */
+/*   Updated: 2023/10/04 02:11:05 by kjs              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	parse_id(t_objects *objects, char *line)
 int	parse_double(double *f, char *str, int i)
 {
 	long long	is_minus;
-	int			fraction;
+	double		fraction;
 
 	fraction = 1;
 	is_minus = 0;
@@ -71,11 +71,11 @@ int	parse_doubles(t_vector3 *vec, char *line, int idx)
 {
 	idx = parse_double(&(*vec).x, line, idx);
 	// printf("%f,",floats[0]);
-	if (line[idx] != ',' || ('0' > line[idx + 1] || line[idx + 1] > '9'))
+	if (line[idx] != ',' || (('0' > line[idx + 1] || line[idx + 1] > '9') && line[idx + 1] != '-' && line[idx + 1] != '+'))
 		return (0);
 	idx = parse_double(&(*vec).y, line, ++idx);
 	// printf("%f,",floats[1]);
-	if (line[idx] != ',' || ('0' > line[idx + 1] || line[idx + 1] > '9'))
+	if (line[idx] != ',' || (('0' > line[idx + 1] || line[idx + 1] > '9') && line[idx + 1] != '-' && line[idx + 1] != '+'))
 		return (0);
 	idx = parse_double(&(*vec).z, line, ++idx);
 	// printf("%f\n",floats[2]);
