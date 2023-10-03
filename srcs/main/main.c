@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jukim2 <jukim2@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 00:59:00 by kjs               #+#    #+#             */
-/*   Updated: 2023/10/03 21:31:32 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/03 21:34:26 by jukim2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int main(int argc, char **argv)
 		{
 
 			pixel_center = add_vector3(top_left_pixel, get_vector3(i * pixel_delta_x, j * pixel_delta_y, 0));
-			ray.origin = ob; // camera center;
+			ray.origin = get_vector3(0, 0, 0);; // camera center;
 			ray.direction = subtract_vector3(pixel_center, get_vector3(0, 0, 0));
 			ray.direction = get_unit_vector3(ray.direction); // get unit_vector
 

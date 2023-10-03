@@ -6,7 +6,7 @@
 /*   By: jukim2 <jukim2@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 13:21:53 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/03 21:25:59 by jukim2           ###   ########.fr       */
+/*   Updated: 2023/10/03 21:32:46 by jukim2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,39 +38,6 @@ int	parse_id(t_objects *objects, char *line)
 	else
 		return (ERROR);
 }
-
-// int	parse_rgb(t_vector3 *, char *line, int idx)
-// {
-// 	idx = parse_int(&rgb[0], line, idx);
-// 	if (line[idx] != ',' || !line[idx + 1])
-// 		return (0);
-// 	idx = parse_int(&rgb[1], line, ++idx);
-// 	if (line[idx] != ',' || !line[idx + 1])
-// 		return (0);
-// 	idx = parse_int(&rgb[2], line, ++idx);
-// 	return (idx);
-// }
-
-// int	parse_int(int *n, char *line, int idx)
-// {
-// 	int	is_minus;
-
-// 	*n = 0;
-// 	is_minus = 0;
-// 	while (line[idx] == ' ')
-// 		idx++;
-// 	if (line[idx] == '+' || line[idx] == '-')
-// 		is_minus = line[idx++] - '+';
-// 	while ('0' <= line[idx] && line[idx] <= '9')
-// 	{
-// 		*n *= 10;
-// 		*n += line[idx++] - '0';
-// 	}
-// 	if (is_minus)
-// 		*n *= -1;
-// 	return (idx);
-// }
-
 
 int	parse_double(double *f, char *str, int i)
 {
