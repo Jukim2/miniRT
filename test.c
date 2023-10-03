@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 14:55:15 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/03 12:46:38 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/03 13:24:33 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ typedef struct s_ray
 	t_vector3	direction;
 }	t_ray;
 
-
 double	hit_sphere(t_ray ray, t_vector3 center, double radius)
 {
 	t_vector3	c_a;
@@ -82,6 +81,12 @@ t_vector3	get_color_vector3(t_ray ray)
 	t = hit_sphere(ray, center, radius);
 	if (t > 0.0)
 	{
+
+
+		t_vector3 light = get_vector3(1.0, 1.0, 0.0);
+		t_vector3 light_color = get_vector3(1.0, 1.0, 1.0);
+
+
 		// Origin + t * Direction : point on a sphere
 		// point - center of a sphere : normal vector
 		// so, unit{(origin + t * direction) - center}
@@ -89,7 +94,15 @@ t_vector3	get_color_vector3(t_ray ray)
 							subtract_vector3(\
 								add_vector3(ray.origin, \
 								multiple_vector3(t, ray.direction)), center));
-		return (multiple_vector3(0.5, add_vector3(normal, get_vector3(1, 1, 1))));
+
+		t_vector3 light_to = subtract_vector3(add_vector3(ray.origin, multiple_vector3(t, ray.direction)), light);
+		double cosine = dot_product_vector3(get_unit_vector3(light_to), normal);
+		double lambert = cosine; // max(cosine, 0)
+		double distance = get_vector3_length(light_to);
+		double luminosity = 1 / (1 + (distance * distance)); // for distance == 0
+		double test = -luminosity * lambert;
+		return (multiple_vector3(test, light_color));
+		//return (multiple_vector3(0.5, add_vector3(normal, get_vector3(1, 1, 1))));
 	}
 	double a = 0.5 * (ray.direction.y + 1.0);
 	color = add_vector3(get_vector3(1 - a, 1 - a, 1 - a), get_vector3(0.5 * a, 0.7 * a, 1.0 * a));
