@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 22:17:55 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/03 22:30:46 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/03 22:41:22 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_engine
 	t_image		img;
 }	t_engine;
 
-int	init_engine(t_engine *engine, char *config);
+int		init_engine(t_engine *engine, char *config);
+void	execute_engine(t_engine *engine);
 
 #endif
