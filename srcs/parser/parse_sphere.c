@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_sphere.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jukim2 <jukim2@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 13:13:55 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/01 20:10:57 by jukim2           ###   ########.fr       */
+/*   Updated: 2023/10/03 12:54:53 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	parse_sphere(t_object *objects, char *line)
 {
 	t_sphere	*tmp;
 	int			idx;
-	
-	tmp= ft_calloc(1, sizeof(t_sphere));
+
+	tmp = ft_calloc(1, sizeof(t_sphere));
 	if (!tmp)
 		clean_program(objects, line);
 	idx = parse_floats(tmp->coord, line, 2);

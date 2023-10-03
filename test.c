@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 14:55:15 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/01 21:41:50 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/03 12:46:38 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,13 @@ double	hit_sphere(t_ray ray, t_vector3 center, double radius)
 
 	c_a = subtract_vector3(ray.origin, center);
 	a = dot_product_vector3(ray.direction, ray.direction);
-	b = 2.0 * dot_product_vector3(c_a, ray.direction);
+	b = dot_product_vector3(c_a, ray.direction);
 	c = dot_product_vector3(c_a, c_a) - radius * radius;
-	d = b * b - 4 * a * c;
+	d = b * b - a * c;
 	if (d < 0)
 		return (-1);
 	else
-		return ((-b - sqrt(d)) / (2.0 * a));
+		return ((-b - sqrt(d)) / a);
 }
 
 t_vector3	get_color_vector3(t_ray ray)

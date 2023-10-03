@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_plane.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jukim2 <jukim2@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 13:13:52 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/01 20:10:36 by jukim2           ###   ########.fr       */
+/*   Updated: 2023/10/03 12:54:45 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ void	parse_plane(t_object *objects, char *line)
 {
 	t_plane		*tmp;
 	int			idx;
-	
-	tmp= ft_calloc(1, sizeof(t_plane));
+
+	tmp = ft_calloc(1, sizeof(t_plane));
 	if (!tmp)
 		clean_program(objects, line);
 	idx = parse_floats(tmp->coord, line, 2);
 	check_misconfiguration(objects, line, idx);
-	idx = parse_floats(tmp->normal_vector, line , idx);
+	idx = parse_floats(tmp->normal_vector, line, idx);
 	check_misconfiguration(objects, line, idx);
 	idx = parse_rgb(tmp->rgb, line, idx);
 	check_endconfiguration(objects, line, idx);

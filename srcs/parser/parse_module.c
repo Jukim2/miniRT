@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_module.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jukim2 <jukim2@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 13:21:53 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/01 20:20:42 by jukim2           ###   ########.fr       */
+/*   Updated: 2023/10/03 12:54:30 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 int	parse_id(t_object *objects, char *line)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (line[i] && line[i] != ' ')
