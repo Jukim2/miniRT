@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jukim2 <jukim2@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kjs <kjs@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 16:44:45 by kjs               #+#    #+#             */
-/*   Updated: 2023/10/03 21:25:59 by jukim2           ###   ########.fr       */
+/*   Updated: 2023/10/04 00:59:56 by kjs              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 int	parse(t_objects *objects, char *file_name)
 {
 	int		fd;
-	void	(*parsers[6])(t_objects *, char *);
+	void	(*parsers[7])(t_objects *, char *);
 	char	*line;
 
 	initialize_parsers(parsers);
