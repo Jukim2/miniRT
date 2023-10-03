@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_sphere.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jukim2 <jukim2@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 13:13:55 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/03 12:54:53 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/03 21:25:59 by jukim2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,21 @@
 #include "parse.h"
 #include "libft.h"
 
-void	parse_sphere(t_object *objects, char *line)
+void	parse_sphere(t_objects *objects, char *line)
 {
-	t_sphere	*tmp;
-	int			idx;
+	t_shape	*tmp;
+	int		idx;
 
-	tmp = ft_calloc(1, sizeof(t_sphere));
+	tmp = ft_calloc(1, sizeof(t_shape));
 	if (!tmp)
 		clean_program(objects, line);
-	idx = parse_floats(tmp->coord, line, 2);
+	tmp->type = SPHERE;
+	idx = parse_doubles(&tmp->coord, line, 2);
 	check_misconfiguration(objects, line, idx);
-	idx = parse_float(&tmp->diameter, line , idx);
+	idx = parse_double(&tmp->diameter, line , idx);
 	check_misconfiguration(objects, line, idx);
-	idx = parse_rgb(tmp->rgb, line, idx);
+	idx = parse_doubles(&tmp->rgb, line, idx);
 	check_endconfiguration(objects, line, idx);
-	add_sphere(objects->sphere, tmp);
+	add_shape(objects->shape, tmp);
 }
 
-void	add_sphere(t_sphere *sphere, t_sphere *new)
-{
-	if (!sphere)
-		sphere = new;
-	else
-	{
-		while (sphere->next)
-			sphere = sphere->next;
-		sphere->next = new;
-	}
-}

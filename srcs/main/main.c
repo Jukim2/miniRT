@@ -6,7 +6,7 @@
 /*   By: jukim2 <jukim2@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 00:59:00 by kjs               #+#    #+#             */
-/*   Updated: 2023/10/03 19:34:47 by jukim2           ###   ########.fr       */
+/*   Updated: 2023/10/03 21:25:59 by jukim2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@
 #include <math.h>
 #include <stdio.h>
 
-void	initialize_objects(t_object *objects)
+void	initialize_objects(t_objects *objects)
 {
-	ft_bzero(objects, sizeof(t_object));
+	ft_bzero(objects, sizeof(t_objects));
 	objects->cylinder = 0;
 	objects->plane = 0;
 	objects->sphere = 0;

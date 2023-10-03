@@ -3,19 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   parse_module.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jukim2 <jukim2@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 13:21:53 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/03 12:54:30 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/03 21:25:59 by jukim2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "object.h"
 #include "parse.h"
 #include "libft.h"
+#include "vector3.h"
 #include <stdio.h> // test
 
-int	parse_id(t_object *objects, char *line)
+int	parse_id(t_objects *objects, char *line)
 {
 	int	i;
 
@@ -38,40 +39,40 @@ int	parse_id(t_object *objects, char *line)
 		return (ERROR);
 }
 
-int	parse_rgb(int rgb[3], char *line, int idx)
-{
-	idx = parse_int(&rgb[0], line, idx);
-	if (line[idx] != ',' || !line[idx + 1])
-		return (0);
-	idx = parse_int(&rgb[1], line, ++idx);
-	if (line[idx] != ',' || !line[idx + 1])
-		return (0);
-	idx = parse_int(&rgb[2], line, ++idx);
-	return (idx);
-}
+// int	parse_rgb(t_vector3 *, char *line, int idx)
+// {
+// 	idx = parse_int(&rgb[0], line, idx);
+// 	if (line[idx] != ',' || !line[idx + 1])
+// 		return (0);
+// 	idx = parse_int(&rgb[1], line, ++idx);
+// 	if (line[idx] != ',' || !line[idx + 1])
+// 		return (0);
+// 	idx = parse_int(&rgb[2], line, ++idx);
+// 	return (idx);
+// }
 
-int	parse_int(int *n, char *line, int idx)
-{
-	int	is_minus;
+// int	parse_int(int *n, char *line, int idx)
+// {
+// 	int	is_minus;
 
-	*n = 0;
-	is_minus = 0;
-	while (line[idx] == ' ')
-		idx++;
-	if (line[idx] == '+' || line[idx] == '-')
-		is_minus = line[idx++] - '+';
-	while ('0' <= line[idx] && line[idx] <= '9')
-	{
-		*n *= 10;
-		*n += line[idx++] - '0';
-	}
-	if (is_minus)
-		*n *= -1;
-	return (idx);
-}
+// 	*n = 0;
+// 	is_minus = 0;
+// 	while (line[idx] == ' ')
+// 		idx++;
+// 	if (line[idx] == '+' || line[idx] == '-')
+// 		is_minus = line[idx++] - '+';
+// 	while ('0' <= line[idx] && line[idx] <= '9')
+// 	{
+// 		*n *= 10;
+// 		*n += line[idx++] - '0';
+// 	}
+// 	if (is_minus)
+// 		*n *= -1;
+// 	return (idx);
+// }
 
 
-int	parse_float(float *f, char *str, int i)
+int	parse_double(double *f, char *str, int i)
 {
 	long long	is_minus;
 	int			fraction;
@@ -99,17 +100,17 @@ int	parse_float(float *f, char *str, int i)
 	return (i);
 }
 
-int	parse_floats(float floats[3], char *line, int idx)
+int	parse_doubles(t_vector3 *vec, char *line, int idx)
 {
-	idx = parse_float(&floats[0], line, idx);
+	idx = parse_double(&(*vec).x, line, idx);
 	// printf("%f,",floats[0]);
 	if (line[idx] != ',' || ('0' > line[idx + 1] || line[idx + 1] > '9'))
 		return (0);
-	idx = parse_float(&floats[1], line, ++idx);
+	idx = parse_double(&(*vec).y, line, ++idx);
 	// printf("%f,",floats[1]);
 	if (line[idx] != ',' || ('0' > line[idx + 1] || line[idx + 1] > '9'))
 		return (0);
-	idx = parse_float(&floats[2], line, ++idx);
+	idx = parse_double(&(*vec).z, line, ++idx);
 	// printf("%f\n",floats[2]);
 	return (idx);
 }
