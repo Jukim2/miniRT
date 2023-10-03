@@ -1,17 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   iter_shapes.c                                      :+:      :+:    :+:   */
+/*   engine.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/03 21:30:26 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/03 22:31:57 by gyoon            ###   ########.fr       */
+/*   Created: 2023/10/03 22:17:55 by gyoon             #+#    #+#             */
+/*   Updated: 2023/10/03 22:30:46 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vector3.h"
-#include "ray.h"
-#include "object.h"
+#ifndef ENGINE_H
+# define ENGINE_H
 
-t_vector3   iter_shapes(t_shape *shape_list);
+# include "mlx.h"
+# include "object.h"
+
+typedef struct s_image
+{
+	void			*ptr;
+	unsigned int	*addr;
+	int				bits_per_pixel;
+	int				line_length;
+	int				endian;
+}	t_image;
+
+typedef struct s_engine
+{
+	void		*mlx;
+	void		*win;
+	t_objects	objects;
+	t_image		img;
+}	t_engine;
+
+int	init_engine(t_engine *engine, char *config);
+
+#endif
