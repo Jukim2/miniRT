@@ -14,7 +14,7 @@ INCLUDES = -Iincludes
 all : $(NAME)
 
 $(NAME): $(LIBFT) $(OBJS)
-	$(CC) -o $(NAME) $(CPPFLAGS) $(OBJS) $(LIBFT)
+	$(CC) -o $(NAME) $(CPPFLAGS) $(OBJS) $(LIBFT) -lmlx -Iincludes -framework OpenGL -framework Appkit
 
 $(LIBFT) : 
 	make -C ./libft
@@ -39,3 +39,6 @@ re :
 
 test :
 	cc test.c -lmlx -Iincludes -framework OpenGL -framework Appkit srcs/vector3/*.c
+
+my : 
+	cc playplaytesttest.c -lmlx -Iincludes -framework OpenGL -framework Appkit srcs/vector3/*.c

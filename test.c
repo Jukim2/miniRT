@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jukim2 <jukim2@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 14:55:15 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/03 13:24:33 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/03 18:51:49 by jukim2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,7 +157,7 @@ int	main(void)
 			t_vector3 color_vector = get_color_vector3(ray);
 			int color = convert_color_vector3(color_vector);
 			my_mlx_pixel_put(&img, i, 511 - j, color);
-		}
+		} 
 	}
 
 	mlx_put_image_to_window(mlx, win, img.img, 0, 0);
