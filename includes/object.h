@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jukim2 <jukim2@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kjs <kjs@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 16:45:23 by kjs               #+#    #+#             */
-/*   Updated: 2023/10/03 21:35:08 by jukim2           ###   ########.fr       */
+/*   Updated: 2023/10/04 17:31:20 by kjs              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,13 @@
 # define OBJECT_H
 
 #include "vector3.h"
+
+enum e_face
+{
+	UNKNOWN = 0,
+	FRONT = 1,
+	BACK = 2
+};
 
 typedef struct s_ambient_light
 {
@@ -40,10 +47,12 @@ typedef struct s_shape
 {
 	struct s_shape	*next;
 	int				type;
+	int				face;
 	double			diameter;
 	double			height;
 	t_vector3		coord;
-	t_vector3		normal_vector;
+	t_vector3		surface_normal_vector;
+	t_vector3		form_vector;
 	t_vector3		rgb;
 }	t_shape;
 

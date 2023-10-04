@@ -20,14 +20,16 @@ typedef struct s_vector3
 	double	z;
 }	t_vector3;
 
-t_vector3	get_inverse_vector3(t_vector3 i);
-t_vector3	get_unit_vector3(t_vector3 i);
-double		get_vector3_length(t_vector3 i);
-t_vector3	get_vector3(double x, double y, double z);
+/* ===============srcs/vector3=============== */
 
-t_vector3	add_vector3(t_vector3 i, t_vector3 j);
-t_vector3	subtract_vector3(t_vector3 i, t_vector3 j);
-t_vector3	multiple_vector3(double t, t_vector3 i);
 double		dot_product_vector3(t_vector3 i, t_vector3 j);
+t_vector3	multiple_vector3(double t, t_vector3 i);
+double		get_vector3_length(t_vector3 i);
+t_vector3	subtract_vector3(t_vector3 i, t_vector3 j);
+t_vector3	add_vector3(t_vector3 i, t_vector3 j);
+t_vector3	get_vector3(double x, double y, double z);
+t_vector3	get_unit_vector3(t_vector3 i);
+t_vector3	get_random_vector3();
+t_vector3	get_inverse_vector3(t_vector3 i);
 
 #endif

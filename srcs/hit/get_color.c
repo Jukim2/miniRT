@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   iter_shapes.c                                      :+:      :+:    :+:   */
+/*   get_color.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kjs <kjs@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 21:30:26 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/04 12:03:48 by kjs              ###   ########.fr       */
+/*   Updated: 2023/10/04 17:37:00 by kjs              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,46 @@
 #include "ray.h"
 #include "object.h"
 
+
+#include <stdio.h>
+t_vector3	random_on_hemisphere(t_shape *shape);
+
 t_vector3	get_color(t_ray ray, t_shape *shape)
 {
 	const double	a = 0.5 * (ray.direction.y + 1.0);
-	const t_shape	*target = find_target(ray, shape);
+	double			t;
+	const t_shape	*nearest_shape = find_nearest_shape(ray, shape, &t);
 	
-	if (target)
+	if (nearest_shape)
 	{
-		return (get_vector3(target->rgb.x/255, target->rgb.y/255, target->rgb.z/255));	
+		t_ray new_ray;
+
+		new_ray.origin = add_vector3(ray.origin, multiple_vector3(t, ray.direction));
+		new_ray.direction = random_on_hemisphere(shape);
+		return (multiple_vector3(0.5, get_color(new_ray, shape)));
+		return (get_vector3(nearest_shape->rgb.x/255., nearest_shape->rgb.y/255., nearest_shape->rgb.z/255.));	
 	}
 	return add_vector3(get_vector3(1 - a, 1 - a, 1 - a), get_vector3(0.5 * a, 0.7 * a, 1.0 * a));
 }
 
-t_shape	*find_target(t_ray ray, t_shape *shape)
+t_vector3	random_on_hemisphere(t_shape *shape)
+{
+	const t_vector3 rand_vector = get_random_vector3();
+
+	if (dot_product_vector3(shape->surface_normal_vector, rand_vector) > 0)
+		return (rand_vector);
+	else
+		return (multiple_vector3(-1, rand_vector));
+}
+
+t_shape	*find_nearest_shape(t_ray ray, t_shape *shape, double *t)
 {
 	double	min_t;
 	double	tmp_t;
-	t_shape	*tmp;
-	t_shape	*target;
+	t_shape	*nearest_shape;
 
 	min_t = 1000000000;
-	target = 0;
+	nearest_shape = 0;
 	while (shape)
 	{
 		// if shape is sphere
@@ -43,12 +62,15 @@ t_shape	*find_target(t_ray ray, t_shape *shape)
 		if (tmp_t != -1 && tmp_t > 0)
 		{
 			if (tmp_t < min_t)
-			{
+			{	
 				min_t = tmp_t;
-				target = shape;
+				*t = min_t;
+				nearest_shape = shape;			
 			}
 		}
 		shape = shape->next;
 	}
-	return (target);
+	if (nearest_shape && nearest_shape->face == UNKNOWN)
+		set_surface_normal_vector(ray, nearest_shape, min_t);
+	return (nearest_shape);
 }
