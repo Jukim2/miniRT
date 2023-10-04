@@ -6,7 +6,7 @@
 /*   By: kjs <kjs@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 21:30:26 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/04 02:18:19 by kjs              ###   ########.fr       */
+/*   Updated: 2023/10/04 10:03:12 by kjs              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_vector3	get_color(t_ray ray, t_shape *shape)
 	
 	if (target)
 	{
-		return (target->rgb);
+		return (get_vector3(target->rgb.x/255, target->rgb.y/255, target->rgb.z/255));	
 	}
 	return add_vector3(get_vector3(1 - a, 1 - a, 1 - a), get_vector3(0.5 * a, 0.7 * a, 1.0 * a));
 }
@@ -34,7 +34,7 @@ t_shape	*find_target(t_ray ray, t_shape *shape)
 	t_shape	*tmp;
 	t_shape	*target;
 
-	min_t = 0;
+	min_t = 1000000000;
 	target = 0;
 	while (shape)
 	{
@@ -43,11 +43,14 @@ t_shape	*find_target(t_ray ray, t_shape *shape)
 		tmp_t = hit_sphere(ray, shape->coord, shape->diameter / 2.0);
 		if (tmp_t != -1)
 		{
-			min_t = tmp_t;
-			target = shape;
+			printf("%f\n", tmp_t);
+			if (tmp_t < min_t)
+			{
+				min_t = tmp_t;
+				target = shape;
+			}
 		}
 		shape = shape->next;
-		printf("%f\n", tmp_t);
 	}
 	return (target);
 }
