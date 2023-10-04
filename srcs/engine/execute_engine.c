@@ -6,7 +6,7 @@
 /*   By: kjs <kjs@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 22:38:25 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/04 02:16:59 by kjs              ###   ########.fr       */
+/*   Updated: 2023/10/04 12:02:05 by kjs              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ void	execute_engine(t_engine *engine)
 	t_vector3	pixel_center;
 	t_ray		ray;
 
-	for (int i = 0; i < 1024; i++)
+	for (int i = 0; i < WIN_WIDTH; i++)
 	{
-		for (int j = 0; j < 512; j++)
+		for (int j = 0; j < WIN_HEIGHT; j++)
 		{
 			pixel_center = add_vector3(top_left_pixel, get_vector3(i * pixel_delta_x, j * pixel_delta_y, 0));
 			ray.origin = get_vector3(0, 0, 0); // camera center;
@@ -44,7 +44,7 @@ void	execute_engine(t_engine *engine)
 
 			// t_vector3 color_vector = get_color_vector3(ray);
 			t_vector3 color_vector = get_color(ray, engine->objects.shape);
-			engine->img.addr[j * engine->img.line_length / 4 + i] = convert_color_vector3(color_vector); 
+			engine->img.addr[(WIN_HEIGHT - j) * engine->img.line_length / 4 + (WIN_WIDTH - i)] = convert_color_vector3(color_vector); 
 		} 
 	}
 	mlx_put_image_to_window(engine->mlx, engine->win, engine->img.ptr, 0, 0);

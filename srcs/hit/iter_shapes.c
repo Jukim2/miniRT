@@ -6,7 +6,7 @@
 /*   By: kjs <kjs@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 21:30:26 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/04 10:03:12 by kjs              ###   ########.fr       */
+/*   Updated: 2023/10/04 12:03:48 by kjs              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "ray.h"
 #include "object.h"
 
-#include <stdio.h>
 t_vector3	get_color(t_ray ray, t_shape *shape)
 {
 	const double	a = 0.5 * (ray.direction.y + 1.0);
@@ -41,9 +40,8 @@ t_shape	*find_target(t_ray ray, t_shape *shape)
 		// if shape is sphere
 		// 만약에 t값이 같으면 뭘 먼저
 		tmp_t = hit_sphere(ray, shape->coord, shape->diameter / 2.0);
-		if (tmp_t != -1)
+		if (tmp_t != -1 && tmp_t > 0)
 		{
-			printf("%f\n", tmp_t);
 			if (tmp_t < min_t)
 			{
 				min_t = tmp_t;
