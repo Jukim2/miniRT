@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 22:22:57 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/04 17:24:13 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/04 23:42:47 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int	init_display_settings(t_engine *engine)
 	engine->display.top_left_pixel = get_vector3(-engine->display.viewport[WIDTH] / 2. + engine->display.pixel_delta[WIDTH] * 0.5, \
 												-engine->display.viewport[HEIGHT] / 2. + engine->display.pixel_delta[HEIGHT] * 0.5, \
 												-1.0);
+	return (1);
 }
 
 int	init_engine(t_engine *engine, char *config)
