@@ -6,7 +6,7 @@
 /*   By: kjs <kjs@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 13:13:55 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/04 02:09:48 by kjs              ###   ########.fr       */
+/*   Updated: 2023/10/05 23:28:44 by kjs              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@ void	parse_sphere(t_objects *objects, char *line)
 	check_misconfiguration(objects, line, idx);
 	idx = parse_doubles(&tmp->rgb, line, idx);
 	check_endconfiguration(objects, line, idx);
+	tmp->rgb.x /= 255.;
+	tmp->rgb.y /= 255.;
+	tmp->rgb.z /= 255.;
 	add_shape(&objects->shape, tmp);
 }
 

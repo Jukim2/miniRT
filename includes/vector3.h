@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector3.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: kjs <kjs@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 18:41:01 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/01 21:30:35 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/05 23:14:19 by kjs              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,6 @@ t_vector3	get_vector3(double x, double y, double z);
 t_vector3	get_unit_vector3(t_vector3 i);
 t_vector3	get_random_vector3();
 t_vector3	get_inverse_vector3(t_vector3 i);
+t_vector3	cross_product_vector3(t_vector3 i, t_vector3 j);
 
 #endif

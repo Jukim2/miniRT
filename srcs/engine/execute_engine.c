@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_engine.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jukim2 <jukim2@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kjs <kjs@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 22:38:25 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/05 20:27:58 by jukim2           ###   ########.fr       */
+/*   Updated: 2023/10/06 00:13:02 by kjs              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,9 @@ void	execute_engine(t_engine *engine)
 
 	t_vector3	pixel_center;
 	t_ray		ray;
+
+    engine->objects.shape->next->next->material = MIRROR;
+    engine->objects.shape->next->next->next->material = MIRROR;
 
 	for (int i = 0; i < WIN_WIDTH; i++)
 	{

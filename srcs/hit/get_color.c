@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_color.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jukim2 <jukim2@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kjs <kjs@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 21:30:26 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/05 20:39:55 by jukim2           ###   ########.fr       */
+/*   Updated: 2023/10/06 00:12:47 by kjs              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,18 @@ t_vector3	get_color(t_ray ray, t_shape *shape, int depth)
 		t_ray new_ray;
 
 		new_ray.origin = add_vector3(ray.origin, multiple_vector3(t, ray.direction));
-		new_ray.direction = add_vector3(nearest_shape->surface_normal_vector, random_on_hemisphere(nearest_shape));
-		return (multiple_vector3(0.5, get_color(new_ray, shape, depth - 1)));
+		if (nearest_shape->material == SCATTER)
+        {
+            new_ray.direction = get_unit_vector3(add_vector3(nearest_shape->surface_normal_vector, random_on_hemisphere(nearest_shape)));
+            if (new_ray.direction.x < 0.000001 && new_ray.direction.y < 0.000001 && new_ray.direction.z < 0.000001)
+                new_ray.direction = nearest_shape->surface_normal_vector;
+            return (multiply_color_vector3(nearest_shape->rgb, get_color(new_ray, shape, depth -1)));
+        }
+        else
+        {
+            new_ray.direction = subtract_vector3(ray.direction, multiple_vector3(2, multiple_vector3(dot_product_vector3(ray.direction, nearest_shape->surface_normal_vector), nearest_shape->surface_normal_vector)));
+            return (multiply_color_vector3(nearest_shape->rgb, get_color(new_ray, shape, depth -1)));
+        }
 	}	
 	return add_vector3(get_vector3(1 - a, 1 - a, 1 - a), get_vector3(0.5 * a, 0.7 * a, 1.0 * a));
 }

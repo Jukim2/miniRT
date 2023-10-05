@@ -6,7 +6,7 @@
 /*   By: kjs <kjs@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 01:02:27 by kjs               #+#    #+#             */
-/*   Updated: 2023/10/04 23:41:46 by kjs              ###   ########.fr       */
+/*   Updated: 2023/10/05 23:18:08 by kjs              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,6 @@ t_shape	*find_nearest_shape(t_ray ray, t_shape *shape, double *t);
 void		set_surface_normal_vector(t_ray ray, t_shape *shape, double t);
 double		hit_sphere(t_ray ray, t_vector3 center, double radius);
 int			convert_color_vector3(t_vector3 color_vec3);
+t_vector3	multiply_color_vector3(t_vector3 i, t_vector3 j);
 
 #endif
