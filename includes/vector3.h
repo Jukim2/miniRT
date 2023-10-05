@@ -24,6 +24,7 @@ typedef struct s_vector3
 
 double		dot_product_vector3(t_vector3 i, t_vector3 j);
 t_vector3	multiple_vector3(double t, t_vector3 i);
+void		print_vector3(t_vector3 vec);
 double		get_vector3_length(t_vector3 i);
 t_vector3	subtract_vector3(t_vector3 i, t_vector3 j);
 t_vector3	add_vector3(t_vector3 i, t_vector3 j);

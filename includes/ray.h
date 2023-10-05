@@ -6,7 +6,7 @@
 /*   By: kjs <kjs@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 01:02:27 by kjs               #+#    #+#             */
-/*   Updated: 2023/10/04 17:38:45 by kjs              ###   ########.fr       */
+/*   Updated: 2023/10/04 23:41:46 by kjs              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ typedef struct s_ray
 /* ===============srcs/hit=============== */
 
 t_vector3	get_color_vector3(t_ray ray);
-t_vector3	get_color(t_ray ray, t_shape *shape);
+t_vector3	get_color(t_ray ray, t_shape *shape, int depth);
 t_shape	*find_nearest_shape(t_ray ray, t_shape *shape, double *t);
 void		set_surface_normal_vector(t_ray ray, t_shape *shape, double t);
 double		hit_sphere(t_ray ray, t_vector3 center, double radius);
