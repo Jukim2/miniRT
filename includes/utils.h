@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjs <kjs@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: jukim2 <jukim2@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 17:15:36 by kjs               #+#    #+#             */
-/*   Updated: 2023/10/04 17:15:36 by kjs              ###   ########.fr       */
+/*   Updated: 2023/10/05 17:51:55 by jukim2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 /* ===============srcs/utils=============== */
 
-double	random_double(); 
+double	random_double();
+double	random_double_zerone();
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_color.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjs <kjs@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: jukim2 <jukim2@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 21:30:26 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/05 14:02:44 by kjs              ###   ########.fr       */
+/*   Updated: 2023/10/05 20:39:55 by jukim2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 
 #include <stdio.h>
-t_vector3	random_on_hemisphere(t_shape *shape);
+t_vector3	random_on_hemisphere(const t_shape *shape);
 
 t_vector3	get_color(t_ray ray, t_shape *shape, int depth)
 {
@@ -32,20 +32,13 @@ t_vector3	get_color(t_ray ray, t_shape *shape, int depth)
 		t_ray new_ray;
 
 		new_ray.origin = add_vector3(ray.origin, multiple_vector3(t, ray.direction));
-		new_ray.direction = random_on_hemisphere(shape);
+		new_ray.direction = add_vector3(nearest_shape->surface_normal_vector, random_on_hemisphere(nearest_shape));
 		return (multiple_vector3(0.5, get_color(new_ray, shape, depth - 1)));
-		// return (get_vector3(nearest_shape->rgb.x/255., nearest_shape->rgb.y/255., nearest_shape->rgb.z/255.));	
 	}	
-	// if (depth <= 48)
-	// 	return (get_vector3(1, 0, 0));
-	// if (depth <= 49)
-	// 	return (get_vector3(0, 1, 0));
-	// else
-	// 	return (get_vector3(0, 0, 1));
 	return add_vector3(get_vector3(1 - a, 1 - a, 1 - a), get_vector3(0.5 * a, 0.7 * a, 1.0 * a));
 }
 
-t_vector3	random_on_hemisphere(t_shape *shape)
+t_vector3	random_on_hemisphere(const t_shape *shape)
 {
 	const t_vector3 rand_vector = get_random_vector3();
 
