@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   iter_shapes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjs <kjs@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 21:30:26 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/04 12:03:48 by kjs              ###   ########.fr       */
+/*   Updated: 2023/10/05 22:55:50 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vector3.h"
 #include "ray.h"
 #include "object.h"
+#include "parse.h"
 
 t_vector3	get_color(t_ray ray, t_shape *shape)
 {
@@ -39,7 +40,10 @@ t_shape	*find_target(t_ray ray, t_shape *shape)
 	{
 		// if shape is sphere
 		// 만약에 t값이 같으면 뭘 먼저
-		tmp_t = hit_sphere(ray, shape->coord, shape->diameter / 2.0);
+		if (shape->type == SPHERE)
+			tmp_t = hit_sphere(ray, shape->coord, shape->diameter / 2.0);
+		else if (shape->type == CYLINDER)
+			tmp_t = hit_cylinder(ray, *shape);
 		if (tmp_t != -1 && tmp_t > 0)
 		{
 			if (tmp_t < min_t)

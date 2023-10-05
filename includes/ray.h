@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjs <kjs@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 01:02:27 by kjs               #+#    #+#             */
-/*   Updated: 2023/10/04 01:17:37 by kjs              ###   ########.fr       */
+/*   Updated: 2023/10/05 22:52:46 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_ray
 
 int			convert_color_vector3(t_vector3 color_vec3);
 t_vector3	get_color_vector3(t_ray ray);
+double		hit_cylinder(t_ray ray, t_shape shape);
 double		hit_sphere(t_ray ray, t_vector3 center, double radius);
 t_vector3	get_color(t_ray ray, t_shape *shape);
 t_shape	*find_target(t_ray ray, t_shape *shape);
