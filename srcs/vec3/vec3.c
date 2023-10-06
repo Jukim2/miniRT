@@ -14,10 +14,10 @@
 
 t_vec3	vec3(double x, double y, double z)
 {
-	t_vec3	result;
+	t_vec3	v;
 
-	result.x = x;
-	result.y = y;
-	result.z = z;
-	return (result);
+	v.x = x;
+	v.y = y;
+	v.z = z;
+	return (v);
 }

@@ -15,7 +15,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-t_vec3	rand_vec3()
+t_vec3	rand_vec3(void)
 {
 	return (norm_vec3(vec3(random_double(), random_double(), random_double())));
 }

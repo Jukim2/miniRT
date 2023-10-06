@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 15:08:35 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/06 15:32:32 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/06 16:08:18 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,7 @@
 
 t_vec3	cross_vec3(t_vec3 u, t_vec3 v)
 {
-	return (vec3(u.y * v.z - u.z * v.y, u.z * v.x - u.x * v.z, u.x * v.y - u.y * v.x));
+	return (vec3(u.y * v.z - u.z * v.y, \
+				u.z * v.x - u.x * v.z, \
+				u.x * v.y - u.y * v.x));
 }
