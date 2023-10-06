@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 22:38:25 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/06 14:47:30 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/06 14:58:19 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,17 @@
 
 void	execute_engine(t_engine *engine)
 {
+	float	focal_length = 1.f; // 카메라의 초점거리
+	float	viewport_height = 5.f;
+	float	viewport_width = 10.f;
+	float	pixel_delta_x = viewport_width / 1024;
+	float	pixel_delta_y = viewport_height / 512;
+
+	t_vector3	top_left_pixel;
+	top_left_pixel.x = -viewport_width / 2. + pixel_delta_x * 0.5;
+	top_left_pixel.y = -viewport_height / 2. + pixel_delta_y * 0.5;
+	top_left_pixel.z = -focal_length;
+
 	t_vector3	pixel_center;
 	t_ray		ray;
 
@@ -33,19 +44,19 @@ void	execute_engine(t_engine *engine)
 
 	// end quaternion
 	
-	ray.origin = engine->objects.camera.coord;
+	// ray.origin = engine->objects.camera.coord;
 	for (int i = 0; i < WIN_WIDTH; i++)
 	{
 		for (int j = 0; j < WIN_HEIGHT; j++)
 		{
 			t_shape		*hitted = NULL;
-			pixel_center = add_vector3(engine->display.top_left_pixel, get_vector3(i * engine->display.pixel_delta[WIDTH], j * engine->display.pixel_delta[HEIGHT], 0));
+			pixel_center = add_vector3(top_left_pixel, get_vector3(i * pixel_delta_x, j * pixel_delta_y, 0));
 			ray.origin = get_vector3(0, 0, 0); // camera center;
 
 			t_vector3 color_vector_sum = get_vector3(0,0,0);
 			for (int i = 0; i < 10; i++)
 			{
-				t_vector3 sample_pixel = add_vector3(pixel_center, get_vector3((-0.5 + random_double_zerone()) * engine->display.pixel_delta[WIDTH], (-0.5 + random_double_zerone()) * engine->display.pixel_delta[HEIGHT], 0));
+				t_vector3 sample_pixel = add_vector3(pixel_center, get_vector3((-0.5 + random_double_zerone()) * pixel_delta_x, (-0.5 + random_double_zerone()) * pixel_delta_y, 0));
 				ray.direction = get_unit_vector3(subtract_vector3(sample_pixel, get_vector3(0, 0, 0)));			
 				color_vector_sum = add_vector3(color_vector_sum, raytrace(ray, engine->objects.shape, 50, &hitted));
 			}
