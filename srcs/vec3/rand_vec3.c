@@ -12,8 +12,6 @@
 
 #include "vec3.h"
 #include "utils.h"
-#include <stdlib.h>
-#include <time.h>
 
 t_vec3	rand_vec3(void)
 {
