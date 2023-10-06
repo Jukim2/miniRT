@@ -19,32 +19,32 @@
 #include <stdio.h>
 t_vector3	random_on_hemisphere(const t_shape *shape);
 
-t_vector3	get_color(t_engine *engine, t_vector3 pixel_center)
-{
-	int			sampling;
-	t_ray		ray;
-	t_vector3	color_vector_sum;
-	t_vector3	sample_pixel;
+// t_vector3	get_color(t_engine *engine, t_vector3 pixel_center)
+// {
+// 	int			sampling;
+// 	t_ray		ray;
+// 	t_vector3	color_vector_sum;
+// 	t_vector3	sample_pixel;
 
-	sampling = 0;
-	color_vector_sum = get_vector3(0, 0, 0);
-	// ray.origin = engine->objects.light.coord;
-	ray.origin = get_vector3(0, 0, 0);
-	while (sampling < 10)
-	{
-		sample_pixel = add_vector3(pixel_center, get_vector3((-0.5 + random_double_zerone()) * pixel_delta_x, (-0.5 + random_double_zerone()) * pixel_delta_y, 0));
-		ray.direction = get_unit_vector3(subtract_vector3(sample_pixel, get_vector3(0, 0, 0)));
-		color_vector_sum = add_vector3(color_vector_sum, raytrace(ray, engine->objects.shape, 50));
-		sampling++;
-	}
-	return (multiple_vector3(0.1, color_vector_sum));
-}
+// 	sampling = 0;
+// 	color_vector_sum = get_vector3(0, 0, 0);
+// 	// ray.origin = engine->objects.light.coord;
+// 	ray.origin = get_vector3(0, 0, 0);
+// 	while (sampling < 10)
+// 	{
+// 		sample_pixel = add_vector3(pixel_center, get_vector3((-0.5 + random_double_zerone()) * pixel_delta_x, (-0.5 + random_double_zerone()) * pixel_delta_y, 0));
+// 		ray.direction = get_unit_vector3(subtract_vector3(sample_pixel, get_vector3(0, 0, 0)));
+// 		color_vector_sum = add_vector3(color_vector_sum, raytrace(ray, engine->objects.shape, 50));
+// 		sampling++;
+// 	}
+// 	return (multiple_vector3(0.1, color_vector_sum));
+// }
 
-t_vector3	raytrace(t_ray ray, t_shape *shape, int depth)
+t_vector3	raytrace(t_ray ray, t_shape *shape, int depth, t_shape **hitted)
 {
 	const double	a = 0.5 * (ray.direction.y + 1.0);
 	double			t;
-	const t_shape	*nearest_shape = find_nearest_shape(ray, shape, &t);
+	t_shape	*nearest_shape = find_nearest_shape(ray, shape, &t);
 	
 	if (depth <= 0)
 		return (get_vector3(0, 0, 0));
@@ -54,6 +54,8 @@ t_vector3	raytrace(t_ray ray, t_shape *shape, int depth)
 		t_ray new_ray;
 		t_vector3 light = subtract_vector3(get_vector3(2, 2, 1), add_vector3(ray.origin, multiple_vector3(t, ray.direction)));
 
+		if (!(*hitted))
+			*hitted = nearest_shape;
 		new_ray.origin = add_vector3(ray.origin, multiple_vector3(t, ray.direction));
 		if (dot_product_vector3(nearest_shape->surface_normal_vector, light) < 0)
 		{
@@ -65,12 +67,12 @@ t_vector3	raytrace(t_ray ray, t_shape *shape, int depth)
             new_ray.direction = get_unit_vector3(add_vector3(nearest_shape->surface_normal_vector, random_on_hemisphere(nearest_shape)));
             if (new_ray.direction.x < 0.000001 && new_ray.direction.y < 0.000001 && new_ray.direction.z < 0.000001)
                 new_ray.direction = nearest_shape->surface_normal_vector;
-            return (multiple_vector3(dot_product_vector3(nearest_shape->surface_normal_vector, light) / (get_vector3_length(nearest_shape->surface_normal_vector) * get_vector3_length(light)), multiply_color_vector3(nearest_shape->rgb, raytrace(new_ray, shape, depth -1))));
+            return (multiple_vector3(dot_product_vector3(nearest_shape->surface_normal_vector, light) / (get_vector3_length(nearest_shape->surface_normal_vector) * get_vector3_length(light)), multiply_color_vector3(nearest_shape->rgb, raytrace(new_ray, shape, depth -1, hitted))));
         }
         else
         {
             new_ray.direction = subtract_vector3(ray.direction, multiple_vector3(2, multiple_vector3(dot_product_vector3(ray.direction, nearest_shape->surface_normal_vector), nearest_shape->surface_normal_vector)));
-            return (multiply_color_vector3(nearest_shape->rgb, raytrace(new_ray, shape, depth -1)));
+            return (multiply_color_vector3(nearest_shape->rgb, raytrace(new_ray, shape, depth -1, hitted)));
         }
 	}
 	return (get_vector3(1, 1, 1));

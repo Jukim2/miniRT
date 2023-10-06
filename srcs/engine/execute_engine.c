@@ -6,7 +6,7 @@
 /*   By: kjs <kjs@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 22:38:25 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/06 12:50:50 by kjs              ###   ########.fr       */
+/*   Updated: 2023/10/06 13:33:34 by kjs              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	execute_engine(t_engine *engine)
 	{
 		for (int j = 0; j < WIN_HEIGHT; j++)
 		{
+			t_shape		*hitted = NULL;
 			pixel_center = add_vector3(top_left_pixel, get_vector3(i * pixel_delta_x, j * pixel_delta_y, 0));
 			ray.origin = get_vector3(0, 0, 0); // camera center;
 
@@ -49,9 +50,19 @@ void	execute_engine(t_engine *engine)
 			{
 				t_vector3 sample_pixel = add_vector3(pixel_center, get_vector3((-0.5 + random_double_zerone()) * pixel_delta_x, (-0.5 + random_double_zerone()) * pixel_delta_y, 0));
 				ray.direction = get_unit_vector3(subtract_vector3(sample_pixel, get_vector3(0, 0, 0)));			
-				color_vector_sum = add_vector3(color_vector_sum, raytrace(ray, engine->objects.shape, 50));
+				color_vector_sum = add_vector3(color_vector_sum, raytrace(ray, engine->objects.shape, 50, &hitted));
 			}
 			color_vector_sum = multiple_vector3(0.1, color_vector_sum);
+			if (hitted)
+			{
+				color_vector_sum = add_vector3(color_vector_sum, multiple_vector3(0.2, hitted->rgb));
+				if (color_vector_sum.x > hitted->rgb.x)
+					color_vector_sum.x = hitted->rgb.x;
+				if (color_vector_sum.y > hitted->rgb.y)
+					color_vector_sum.y = hitted->rgb.y;
+				if (color_vector_sum.z > hitted->rgb.z)
+					color_vector_sum.z = hitted->rgb.z;
+			}
 			engine->img.addr[(WIN_HEIGHT - j - 1) * engine->img.line_length / 4 + (WIN_WIDTH - i)] = convert_color_vector3(color_vector_sum);
 		} 
 	}
