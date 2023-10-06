@@ -13,10 +13,32 @@
 #include "vector3.h"
 #include "ray.h"
 #include "object.h"
+#include "engine.h"
 
 
 #include <stdio.h>
 t_vector3	random_on_hemisphere(const t_shape *shape);
+
+t_vector3	get_color(t_engine *engine, t_vector3 pixel_center)
+{
+	int			sampling;
+	t_ray		ray;
+	t_vector3	color_vector_sum;
+	t_vector3	sample_pixel;
+
+	sampling = 0;
+	color_vector_sum = get_vector3(0, 0, 0);
+	// ray.origin = engine->objects.light.coord;
+	ray.origin = get_vector3(0, 0, 0);
+	while (sampling < 10)
+	{
+		sample_pixel = add_vector3(pixel_center, get_vector3((-0.5 + random_double_zerone()) * pixel_delta_x, (-0.5 + random_double_zerone()) * pixel_delta_y, 0));
+		ray.direction = get_unit_vector3(subtract_vector3(sample_pixel, get_vector3(0, 0, 0)));
+		color_vector_sum = add_vector3(color_vector_sum, raytrace(ray, engine->objects.shape, 50));
+		sampling++;
+	}
+	return (multiple_vector3(0.1, color_vector_sum));
+}
 
 t_vector3	raytrace(t_ray ray, t_shape *shape, int depth)
 {
