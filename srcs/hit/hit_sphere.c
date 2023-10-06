@@ -1,20 +1,21 @@
 #include "ray.h"
-#include "vector3.h"
+#include "vec3.h"
 #include <math.h>
 
 #include <stdio.h>
-double	hit_sphere(t_ray ray, t_vector3 center, double radius)
+
+double	hit_sphere(t_ray ray, t_vec3 center, double radius)
 {
-	t_vector3	oc;
+	t_vec3	oc;
 	double		a;
 	double		b;
 	double		c;
 	double		discriminant;
 
-	oc = subtract_vector3(ray.origin, center);
-	a = dot_product_vector3(ray.direction, ray.direction);
-	b = dot_product_vector3(oc, ray.direction);
-	c = dot_product_vector3(oc, oc) - radius * radius;
+	oc = sub_vec3(ray.origin, center);
+	a = dot_vec3(ray.direction, ray.direction);
+	b = dot_vec3(oc, ray.direction);
+	c = dot_vec3(oc, oc) - radius * radius;
 	discriminant = b * b - a * c;
 	if (discriminant < 0)
 		return (-1);

@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   parse_module.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjs <kjs@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 13:21:53 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/04 15:49:07 by kjs              ###   ########.fr       */
+/*   Updated: 2023/10/06 15:07:12 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "object.h"
 #include "parse.h"
 #include "libft.h"
-#include "vector3.h"
+#include "vec3.h"
 #include <stdio.h> // test
 
 int	parse_id(t_objects *objects, char *line)
@@ -67,7 +67,7 @@ int	parse_double(double *f, char *str, int i)
 	return (i);
 }
 
-int	parse_doubles(t_vector3 *vec, char *line, int idx)
+int	parse_doubles(t_vec3 *vec, char *line, int idx)
 {
 	idx = parse_double(&(*vec).x, line, idx);
 	// printf("%f,",floats[0]);

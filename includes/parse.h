@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjs <kjs@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 13:13:27 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/04 01:36:50 by kjs              ###   ########.fr       */
+/*   Updated: 2023/10/06 15:07:12 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	check_endconfiguration(t_objects *objects, char *line, int idx);
 void	add_shape(t_shape **shape, t_shape *new);
 int		parse_id(t_objects *objects, char *line);
 int		parse_double(double *f, char *str, int i);
-int		parse_doubles(t_vector3 *vec, char *line, int idx);
+int		parse_doubles(t_vec3 *vec, char *line, int idx);
 void	parse_ambient_light(t_objects *objects, char *line);
 void	parse_light(t_objects *objects, char *line);
 int		parse(t_objects *objects, char *file_name);

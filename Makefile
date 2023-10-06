@@ -38,7 +38,7 @@ re :
 	$(MAKE) all
 
 test :
-	cc test.c -lmlx -Iincludes -framework OpenGL -framework Appkit srcs/vector3/*.c
+	cc test.c -lmlx -Iincludes -framework OpenGL -framework Appkit srcs/vec3/*.c
 
 my : 
-	cc playplaytesttest.c -lmlx -Iincludes -framework OpenGL -framework Appkit srcs/vector3/*.c
+	cc playplaytesttest.c -lmlx -Iincludes -framework OpenGL -framework Appkit srcs/vec3/*.c

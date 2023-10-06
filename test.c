@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jukim2 <jukim2@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 14:55:15 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/03 18:51:49 by jukim2           ###   ########.fr       */
+/*   Updated: 2023/10/06 15:51:31 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mlx.h"
-#include "vector3.h"
+#include "vec3.h"
 #include <math.h>
 
 //printf
@@ -45,22 +45,22 @@ void	my_mlx_pixel_put(t_image *data, int x, int y, int color)
 // RAY
 typedef struct s_ray
 {
-	t_vector3	origin;
-	t_vector3	direction;
+	t_vec3	origin;
+	t_vec3	direction;
 }	t_ray;
 
-double	hit_sphere(t_ray ray, t_vector3 center, double radius)
+double	hit_sphere(t_ray ray, t_vec3 center, double radius)
 {
-	t_vector3	c_a;
+	t_vec3	c_a;
 	double		a;
 	double		b;
 	double		c;
 	double		d;
 
-	c_a = subtract_vector3(ray.origin, center);
-	a = dot_product_vector3(ray.direction, ray.direction);
-	b = dot_product_vector3(c_a, ray.direction);
-	c = dot_product_vector3(c_a, c_a) - radius * radius;
+	c_a = subtract_vec3(ray.origin, center);
+	a = dot_vec3(ray.direction, ray.direction);
+	b = dot_vec3(c_a, ray.direction);
+	c = dot_vec3(c_a, c_a) - radius * radius;
 	d = b * b - a * c;
 	if (d < 0)
 		return (-1);
@@ -68,49 +68,49 @@ double	hit_sphere(t_ray ray, t_vector3 center, double radius)
 		return ((-b - sqrt(d)) / a);
 }
 
-t_vector3	get_color_vector3(t_ray ray)
+t_vec3	get_color_vec3(t_ray ray)
 {
-	t_vector3	color;
-	t_vector3	center; // sphere
+	t_vec3	color;
+	t_vec3	center; // sphere
 	double		radius;
 	double		t;
 
 
-	center = get_vector3(0, 0, -1);
+	center = get_vec3(0, 0, -1);
 	radius = 0.5;
 	t = hit_sphere(ray, center, radius);
 	if (t > 0.0)
 	{
 
 
-		t_vector3 light = get_vector3(1.0, 1.0, 0.0);
-		t_vector3 light_color = get_vector3(1.0, 1.0, 1.0);
+		t_vec3 light = get_vec3(1.0, 1.0, 0.0);
+		t_vec3 light_color = get_vec3(1.0, 1.0, 1.0);
 
 
 		// Origin + t * Direction : point on a sphere
 		// point - center of a sphere : normal vector
 		// so, unit{(origin + t * direction) - center}
-		t_vector3 normal = get_unit_vector3(\
-							subtract_vector3(\
-								add_vector3(ray.origin, \
-								multiple_vector3(t, ray.direction)), center));
+		t_vec3 normal = get_unit_vec3(\
+							subtract_vec3(\
+								add_vec3(ray.origin, \
+								multiple_vec3(t, ray.direction)), center));
 
-		t_vector3 light_to = subtract_vector3(add_vector3(ray.origin, multiple_vector3(t, ray.direction)), light);
-		double cosine = dot_product_vector3(get_unit_vector3(light_to), normal);
+		t_vec3 light_to = subtract_vec3(add_vec3(ray.origin, multiple_vec3(t, ray.direction)), light);
+		double cosine = dot_product_vec3(get_unit_vec3(light_to), normal);
 		double lambert = cosine; // max(cosine, 0)
-		double distance = get_vector3_length(light_to);
+		double distance = get_vec3_length(light_to);
 		double luminosity = 1 / (1 + (distance * distance)); // for distance == 0
 		double test = -luminosity * lambert;
-		return (multiple_vector3(test, light_color));
-		//return (multiple_vector3(0.5, add_vector3(normal, get_vector3(1, 1, 1))));
+		return (multiple_vec3(test, light_color));
+		//return (multiple_vec3(0.5, add_vec3(normal, get_vec3(1, 1, 1))));
 	}
 	double a = 0.5 * (ray.direction.y + 1.0);
-	color = add_vector3(get_vector3(1 - a, 1 - a, 1 - a), get_vector3(0.5 * a, 0.7 * a, 1.0 * a));
+	color = add_vec3(get_vec3(1 - a, 1 - a, 1 - a), get_vec3(0.5 * a, 0.7 * a, 1.0 * a));
 	return (color);
 }
 
 // convert (0, 0, 0) -> 0x000000
-int	convert_color_vector3(t_vector3 color_vec3)
+int	convert_color_vec3(t_vec3 color_vec3)
 {
 	return (((int)(color_vec3.x * 255) << 16) | \
 			((int)(color_vec3.y * 255) << 8) | \
@@ -136,12 +136,12 @@ int	main(void)
 	float	pixel_delta_x = viewport_width / 1024;
 	float	pixel_delta_y = viewport_height / 512;
 
-	t_vector3	top_left_pixel;
+	t_vec3	top_left_pixel;
 	top_left_pixel.x = -viewport_width / 2. + pixel_delta_x * 0.5;
 	top_left_pixel.y = -viewport_height / 2. + pixel_delta_y * 0.5;
 	top_left_pixel.z = -focal_length;
 
-	t_vector3	pixel_center;
+	t_vec3	pixel_center;
 	t_ray		ray;
 
 	for (int i = 0; i < 1024; i++)
@@ -149,13 +149,13 @@ int	main(void)
 		for (int j = 0; j < 512; j++)
 		{
 
-			pixel_center = add_vector3(top_left_pixel, get_vector3(i * pixel_delta_x, j * pixel_delta_y, 0));
-			ray.origin = get_vector3(0, 0, 0); // camera center;
-			ray.direction = subtract_vector3(pixel_center, get_vector3(0, 0, 0));
-			ray.direction = get_unit_vector3(ray.direction); // get unit_vector
+			pixel_center = add_vec3(top_left_pixel, get_vec3(i * pixel_delta_x, j * pixel_delta_y, 0));
+			ray.origin = get_vec3(0, 0, 0); // camera center;
+			ray.direction = subtract_vec3(pixel_center, get_vec3(0, 0, 0));
+			ray.direction = get_unit_vec3(ray.direction); // get unit_vector
 
-			t_vector3 color_vector = get_color_vector3(ray);
-			int color = convert_color_vector3(color_vector);
+			t_vec3 color_vector = get_color_vec3(ray);
+			int color = convert_color_vec3(color_vector);
 			my_mlx_pixel_put(&img, i, 511 - j, color);
 		} 
 	}

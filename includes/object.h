@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   object.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjs <kjs@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 16:45:23 by kjs               #+#    #+#             */
-/*   Updated: 2023/10/06 00:10:29 by kjs              ###   ########.fr       */
+/*   Updated: 2023/10/06 15:07:12 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef OBJECT_H
 # define OBJECT_H
 
-#include "vector3.h"
+#include "vec3.h"
 
 enum e_face
 {
@@ -31,13 +31,13 @@ enum e_material
 typedef struct s_ambient_light
 {
 	double		light_ratio;
-	t_vector3	rgb;
+	t_vec3	rgb;
 } t_ambient_light;
 
 typedef struct s_camera
 {
-	t_vector3	coord;
-	t_vector3	forward_vector;
+	t_vec3	coord;
+	t_vec3	forward_vector;
 	double		fov;
 	// Not sure fov is double or int
 } t_camera;
@@ -45,8 +45,8 @@ typedef struct s_camera
 typedef struct s_light
 {
 	double		light_ratio;
-	t_vector3	coord;
-	t_vector3	rgb;
+	t_vec3	coord;
+	t_vec3	rgb;
 } t_light;
 
 typedef struct s_shape
@@ -57,10 +57,10 @@ typedef struct s_shape
 	int				material;
 	double			diameter;
 	double			height;
-	t_vector3		coord;
-	t_vector3		surface_normal_vector;
-	t_vector3		form_vector;
-	t_vector3		rgb;
+	t_vec3		coord;
+	t_vec3		surface_normal_vector;
+	t_vec3		form_vector;
+	t_vec3		rgb;
 }	t_shape;
 
 typedef struct s_objects

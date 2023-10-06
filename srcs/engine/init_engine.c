@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 22:22:57 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/04 23:42:47 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/06 15:50:04 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ int	init_display_settings(t_engine *engine)
 	engine->display.viewport[HEIGHT] = engine->display.viewport[WIDTH] / WIN_WIDTH * WIN_HEIGHT;
 	engine->display.pixel_delta[WIDTH] = engine->display.viewport[WIDTH] / WIN_WIDTH;
 	engine->display.pixel_delta[HEIGHT] = engine->display.viewport[HEIGHT] / WIN_HEIGHT;
-	engine->display.top_left_pixel = get_vector3(-engine->display.viewport[WIDTH] / 2. + engine->display.pixel_delta[WIDTH] * 0.5, \
-												-engine->display.viewport[HEIGHT] / 2. + engine->display.pixel_delta[HEIGHT] * 0.5, \
-												-1.0);
+	engine->display.top_left_pixel = vec3(-engine->display.viewport[WIDTH] / 2. + engine->display.pixel_delta[WIDTH] * 0.5, \
+										-engine->display.viewport[HEIGHT] / 2. + engine->display.pixel_delta[HEIGHT] * 0.5, \
+										-1.0);
 	return (1);
 }
 

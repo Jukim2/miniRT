@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 22:17:55 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/06 14:40:05 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/06 15:35:14 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "mlx.h"
 # include "object.h"
-# include "quaternion.h"
+# include "quat.h"
 
 # define WIN_WIDTH 1280
 # define WIN_HEIGHT 720
@@ -32,7 +32,7 @@ typedef struct s_display
 	double			viewport[2];
 	double			pixel_delta[2];
 	double			aspect_ratio;
-	t_vector3		top_left_pixel;
+	t_vec3		top_left_pixel;
 }	t_display;
 
 typedef struct s_image
