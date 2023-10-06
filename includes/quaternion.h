@@ -1,18 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cross_product_vector3.c                            :+:      :+:    :+:   */
+/*   quaternion.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/06 14:42:44 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/06 14:42:50 by gyoon            ###   ########.fr       */
+/*   Created: 2023/10/04 23:23:23 by gyoon             #+#    #+#             */
+/*   Updated: 2023/10/05 00:27:38 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef QUATERNION_H
+# define QUATERNION_H
+
 #include "vector3.h"
 
-t_vector3	cross_product_vector3(t_vector3 i, t_vector3 j)
+typedef struct s_quaternion
 {
-	return (get_vector3(i.y * j.z - i.z * j.y, i.z * j.x - i.x * j.z, i.x * j.y - i.y * j.x));
-}
+	double		w;
+	t_vector3	v;
+}	t_quaternion;
+
+t_quaternion	get_conjugate_quaternion(t_quaternion q);
+t_quaternion	get_quaternion(double w, double x, double y, double z);
+double			get_quaternion_length(t_quaternion q);
+t_quaternion	normalize_quaternion(t_quaternion q);
+t_quaternion	product_quaternion(t_quaternion q1, t_quaternion q2);
+
+#endif

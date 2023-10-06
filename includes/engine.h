@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   engine.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjs <kjs@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 22:17:55 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/04 23:02:38 by kjs              ###   ########.fr       */
+/*   Updated: 2023/10/06 14:40:05 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,25 @@
 
 # include "mlx.h"
 # include "object.h"
+# include "quaternion.h"
 
-# define WIN_WIDTH 1024
-# define WIN_HEIGHT 512
+# define WIN_WIDTH 1280
+# define WIN_HEIGHT 720
+
+enum e_display
+{
+	WIDTH = 0,
+	HEIGHT = 1
+};
+
+typedef struct s_display
+{
+	int				resolution[2];
+	double			viewport[2];
+	double			pixel_delta[2];
+	double			aspect_ratio;
+	t_vector3		top_left_pixel;
+}	t_display;
 
 typedef struct s_image
 {
@@ -32,8 +48,9 @@ typedef struct s_engine
 {
 	void		*mlx;
 	void		*win;
-	t_objects	objects;
+	t_display	display;
 	t_image		img;
+	t_objects	objects;
 }	t_engine;
 
 int		init_engine(t_engine *engine, char *config);

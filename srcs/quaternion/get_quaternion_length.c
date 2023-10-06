@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cross_product_vector3.c                            :+:      :+:    :+:   */
+/*   get_quaternion_length.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/06 14:42:44 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/06 14:42:50 by gyoon            ###   ########.fr       */
+/*   Created: 2023/10/05 00:01:48 by gyoon             #+#    #+#             */
+/*   Updated: 2023/10/05 00:03:10 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vector3.h"
+#include "quaternion.h"
+#include <math.h>
 
-t_vector3	cross_product_vector3(t_vector3 i, t_vector3 j)
+double	get_quaternion_length(t_quaternion q)
 {
-	return (get_vector3(i.y * j.z - i.z * j.y, i.z * j.x - i.x * j.z, i.x * j.y - i.y * j.x));
+	return (sqrt(q.w * q.w + q.v.x * q.v.x + q.v.y * q.v.y + q.v.z * q.v.z));
 }
