@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 22:38:25 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/06 16:27:31 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/06 16:30:02 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	execute_engine(t_engine *engine)
 			t_quat temp = mult_quat(q, a);
 			t_quat conjugate = get_conj_quat(q);
 			t_quat rotated = mult_quat(temp, conjugate);
-			ray.direction = vec3(rotated.v.x, rotated.v.y, rotated.v.z);
+			ray.direction = norm_vec3(vec3(rotated.v.x, rotated.v.y, rotated.v.z));
 
 			// jukim2
 			t_shape		*hitted = NULL;
@@ -82,12 +82,8 @@ void	execute_engine(t_engine *engine)
 			}
 			engine->img.addr[(WIN_HEIGHT - j - 1) * engine->img.line_length / 4 + (WIN_WIDTH - i)] = convert_color_vec3(color_vector_sum);
 
-			
-
-			/* end q */
-			// ray.direction = get_unit_vec3(ray.direction); // get unit_vector
+			// previous version
 			// t_vec3 color_vector = get_color_vec3(ray);
-
 			// t_vec3 color_vector = get_color(ray, engine->objects.shape);
 			// engine->img.addr[(WIN_HEIGHT - 1 - j) * engine->img.line_length / 4 + (i)] = convert_color_vec3(color_vector); 
 		} 
