@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_color.c                                        :+:      :+:    :+:   */
+/*   raytrace.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kjs <kjs@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 21:30:26 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/06 00:12:47 by kjs              ###   ########.fr       */
+/*   Updated: 2023/10/06 12:33:39 by kjs              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include <stdio.h>
 t_vector3	random_on_hemisphere(const t_shape *shape);
 
-t_vector3	get_color(t_ray ray, t_shape *shape, int depth)
+t_vector3	raytrace(t_ray ray, t_shape *shape, int depth)
 {
 	const double	a = 0.5 * (ray.direction.y + 1.0);
 	double			t;
@@ -30,21 +30,28 @@ t_vector3	get_color(t_ray ray, t_shape *shape, int depth)
 	if (nearest_shape)
 	{
 		t_ray new_ray;
+		t_vector3 light = subtract_vector3(get_vector3(2, 2, 1), add_vector3(ray.origin, multiple_vector3(t, ray.direction)));
 
 		new_ray.origin = add_vector3(ray.origin, multiple_vector3(t, ray.direction));
+		if (dot_product_vector3(nearest_shape->surface_normal_vector, light) < 0)
+		{
+			// return (multiple_vector3(0.2, nearest_shape->rgb));
+			return (get_vector3(0, 0, 0));
+		}
 		if (nearest_shape->material == SCATTER)
         {
             new_ray.direction = get_unit_vector3(add_vector3(nearest_shape->surface_normal_vector, random_on_hemisphere(nearest_shape)));
             if (new_ray.direction.x < 0.000001 && new_ray.direction.y < 0.000001 && new_ray.direction.z < 0.000001)
                 new_ray.direction = nearest_shape->surface_normal_vector;
-            return (multiply_color_vector3(nearest_shape->rgb, get_color(new_ray, shape, depth -1)));
+            return (multiple_vector3(dot_product_vector3(nearest_shape->surface_normal_vector, light) / (get_vector3_length(nearest_shape->surface_normal_vector) * get_vector3_length(light)), multiply_color_vector3(nearest_shape->rgb, raytrace(new_ray, shape, depth -1))));
         }
         else
         {
             new_ray.direction = subtract_vector3(ray.direction, multiple_vector3(2, multiple_vector3(dot_product_vector3(ray.direction, nearest_shape->surface_normal_vector), nearest_shape->surface_normal_vector)));
-            return (multiply_color_vector3(nearest_shape->rgb, get_color(new_ray, shape, depth -1)));
+            return (multiply_color_vector3(nearest_shape->rgb, raytrace(new_ray, shape, depth -1)));
         }
-	}	
+	}
+	return (get_vector3(1, 1, 1));
 	return add_vector3(get_vector3(1 - a, 1 - a, 1 - a), get_vector3(0.5 * a, 0.7 * a, 1.0 * a));
 }
 
