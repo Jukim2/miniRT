@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   engine.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jukim2 <jukim2@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kjs <kjs@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 22:17:55 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/07 20:37:27 by jukim2           ###   ########.fr       */
+/*   Updated: 2023/10/07 23:02:11 by kjs              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ res			: resolution
 vport		: viewport
 px_dt		: pixel_delta
 ar			: aspect_ratio
-top_lt_px	: top_left_pixel
+bot_lt_px	: top_left_pixel
 */
 typedef struct s_display
 {
@@ -41,7 +41,7 @@ typedef struct s_display
 	double			vport[2];
 	double			px_dt[2];
 	double			ar;
-	t_vec3			top_lt_px;
+	t_vec3			bot_lt_px;
 }	t_display;
 
 /*
