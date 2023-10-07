@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   hit_sphere.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/07 16:42:43 by gyoon             #+#    #+#             */
+/*   Updated: 2023/10/07 16:42:44 by gyoon            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "raytrace.h"
 #include "vec3.h"
 #include <math.h>
@@ -6,7 +18,7 @@
 
 double	hit_sphere(t_ray ray, t_vec3 center, double radius)
 {
-	t_vec3	oc;
+	t_vec3		oc;
 	double		a;
 	double		b;
 	double		c;
