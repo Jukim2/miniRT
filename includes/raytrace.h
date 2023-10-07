@@ -29,5 +29,6 @@ t_vec3	raytrace(t_ray ray, t_shape *shape, int depth, t_shape **hitted);
 t_shape	*find_hitted_shape(t_ray ray, t_shape *shape, double *t);
 t_vec3	random_on_hemisphere(const t_shape *shape);
 t_vec3	get_reflected_direction(t_ray ray, t_shape *hitted_shape);
+int		is_shadowed(t_shape *shape, t_ray reflected_ray, t_vec3 light);
 
 #endif
