@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 22:22:57 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/07 16:35:09 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/07 17:29:33 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	init_display_settings(t_engine *e)
 {
 	double	fov;
 
-	fov = get_radian(e->objs.camera.fov);
+	fov = get_radian(e->objs.camera.fov) / 2.;
 	e->display.res[WD] = WIN_W;
 	e->display.res[HT] = WIN_H;
 	e->display.ar = WIN_W / WIN_H;

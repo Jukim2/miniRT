@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 11:24:23 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/07 16:37:53 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/07 17:33:29 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #include "vec3.h"
 #include "object.h"
 #include "engine.h"
+
+#define SAMPLE_CNT 1
 
 /* ===============srcs/color=============== */
 

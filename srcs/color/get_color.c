@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 11:13:05 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/07 16:39:57 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/07 17:33:24 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_vec3	get_color(t_engine *e, t_vec3 px_center)
 
 	/* end rotation quaternion */
 
-	while (sampling < 50)
+	while (sampling < SAMPLE_CNT)
 	{
 		sample_pixel = add_vec3(px_center, vec3((-0.5 + random_double_zerone()) * e->display.px_dt[WD], (-0.5 + random_double_zerone()) * e->display.px_dt[HT], 0));
 		ray.direction = norm_vec3(sub_vec3(sample_pixel, ray.origin));
@@ -63,7 +63,7 @@ t_vec3	get_color(t_engine *e, t_vec3 px_center)
 		color_vector_sum = add_vec3(color_vector_sum, raytrace(ray, e->objs.shape, 50, &hitted_shape));
 		sampling++;
 	}
-	color_vector_sum = scale_vec3(0.02, color_vector_sum);
+	color_vector_sum = scale_vec3(1 / SAMPLE_CNT, color_vector_sum);
 	if (hitted_shape)
 	{
 		color_vector_sum = add_vec3(color_vector_sum, scale_vec3(0.2, hitted_shape->rgb));
