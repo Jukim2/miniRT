@@ -40,7 +40,7 @@ t_vec3	raytrace(t_ray ray, t_shape *shape, int depth, t_shape **hitted)
 			return (vec3(0, 0, 0));
 		return (scale_vec3(dot_vec3(hitted_shape->surface_normal_vector, light), multiply_color_vec3(hitted_shape->rgb, raytrace(reflected_ray, shape, depth -1, hitted))));
 	}
-	return add_vec3(vec3(1 - a, 1 - a, 1 - a), vec3(0.5 * a, 0.7 * a, 1.0 * a));
+	return (vec3(1, 1, 1));
 }
 
 t_shape	*find_hitted_shape(t_ray ray, t_shape *shape, double *t)
