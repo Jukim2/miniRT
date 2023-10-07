@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 22:17:55 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/07 16:34:23 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/07 21:03:07 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ res			: resolution
 vport		: viewport
 px_dt		: pixel_delta
 ar			: aspect_ratio
-top_lt_px	: top_left_pixel
+bot_lt_px	: top_left_pixel
 */
 typedef struct s_display
 {
@@ -39,7 +39,7 @@ typedef struct s_display
 	double			vport[2];
 	double			px_dt[2];
 	double			ar;
-	t_vec3			top_lt_px;
+	t_vec3			bot_lt_px;
 }	t_display;
 
 /*

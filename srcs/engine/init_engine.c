@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 22:22:57 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/07 17:29:33 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/07 21:03:07 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	init_display_settings(t_engine *e)
 	e->display.vport[HT] = e->display.vport[WD] / WIN_W * WIN_H;
 	e->display.px_dt[WD] = e->display.vport[WD] / WIN_W;
 	e->display.px_dt[HT] = e->display.vport[HT] / WIN_H;
-	e->display.top_lt_px = vec3(-e->display.vport[WD] / 2. \
+	e->display.bot_lt_px = vec3(-e->display.vport[WD] / 2. \
 								+e->display.px_dt[WD] * 0.5, \
 								-e->display.vport[HT] / 2. \
 								+e->display.px_dt[HT] * 0.5, \
