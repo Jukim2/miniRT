@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 22:38:25 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/07 16:37:46 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/07 21:03:07 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	execute_engine(t_engine *e)
 		{
 			offset = vec3(i * e->display.px_dt[WD], \
 							j * e->display.px_dt[HT], 0);
-			px_center = add_vec3(e->display.top_lt_px, offset);
+			px_center = add_vec3(e->display.bot_lt_px, offset);
 			e->img.addr[(WIN_H - j - 1) * e->img.line_len / 4 + (WIN_W - i)] = \
 								convert_color_vec3(get_color(e, px_center));
 			j++;
