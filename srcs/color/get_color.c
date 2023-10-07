@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 11:13:05 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/07 17:33:24 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/07 20:14:16 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_vec3	get_color(t_engine *e, t_vec3 px_center)
 	while (sampling < SAMPLE_CNT)
 	{
 		sample_pixel = add_vec3(px_center, vec3((-0.5 + random_double_zerone()) * e->display.px_dt[WD], (-0.5 + random_double_zerone()) * e->display.px_dt[HT], 0));
-		ray.direction = norm_vec3(sub_vec3(sample_pixel, ray.origin));
+		ray.direction = norm_vec3(sub_vec3(sample_pixel, vec3(0, 0, 0)));
 
 
 		t_quat a = quat(0, ray.direction.x, ray.direction.y, ray.direction.z);

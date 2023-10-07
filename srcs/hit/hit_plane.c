@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color.h                                            :+:      :+:    :+:   */
+/*   hit_plane.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/07 11:24:23 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/07 20:17:29 by gyoon            ###   ########.fr       */
+/*   Created: 2023/10/07 19:02:19 by gyoon             #+#    #+#             */
+/*   Updated: 2023/10/07 20:09:02 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COLOR_H
-# define COLOR_H
+#include "hit.h"
 
-#include "vec3.h"
-#include "object.h"
-#include "engine.h"
-
-#define SAMPLE_CNT 1
-
-/* ===============srcs/color=============== */
-
-void	correct_color(t_vec3 *color_vector_sum, t_shape *hitted_shape);
-int		convert_color_vec3(t_vec3 color_vec3);
-t_vec3	multiply_color_vec3(t_vec3 i, t_vec3 j);
-t_vec3	get_color(t_engine *e, t_vec3 px_center);
-
-#endif
+// normal : n
+// center : c (plane point)
+// ray origin : o
+// ray direction : d
+// t = ((N dot C) - (N dot O)) / (N dot D)
+double	hit_plane(t_ray ray, t_shape *shape)
+{
+	double tmp1 = dot_vec3(shape->form_vector, shape->coord);
+	double tmp2 = dot_vec3(shape->form_vector, ray.origin);
+	double tmp3 = dot_vec3(shape->form_vector, ray.direction);
+	
+	return ((tmp1 - tmp2) / tmp3);
+}

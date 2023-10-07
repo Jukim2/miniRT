@@ -17,6 +17,7 @@
 #include "utils.h"
 #include "color.h"
 #include "hit.h"
+#include "parse.h"
 
 t_vec3	raytrace(t_ray ray, t_shape *shape, int depth, t_shape **hitted)
 {
@@ -55,7 +56,12 @@ t_shape	*find_hitted_shape(t_ray ray, t_shape *shape, double *t)
 	{
 		// if shape is sphere
 		// 만약에 t값이 같으면 뭘 먼저
-		tmp_t = hit_sphere(ray, shape->coord, shape->diameter / 2.0);
+		if (shape->type == SPHERE)
+			tmp_t = hit_sphere(ray, shape->coord, shape->diameter / 2.0);
+		else if (shape->type == CYLINDER)
+			tmp_t = hit_cylinder(ray, *shape);
+		else if (shape->type == PLANE)
+			tmp_t = hit_plane(ray, shape);
 		if (tmp_t != -1 && tmp_t > 0.001)
 		{
 			if (tmp_t < min_t)
