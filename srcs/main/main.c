@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjs <kjs@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 00:59:00 by kjs               #+#    #+#             */
-/*   Updated: 2023/10/04 01:46:46 by kjs              ###   ########.fr       */
+/*   Updated: 2023/10/07 16:36:44 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	main(int argc, char **argv)
 {
-	t_engine	engine;
+	t_engine	e;
 
-	init_engine(&engine, argv[1]);
-	execute_engine(&engine);
+	init_engine(&e, argv[1]);
+	execute_engine(&e);
 	return (0);
 }

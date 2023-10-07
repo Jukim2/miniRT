@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 22:17:55 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/06 15:35:14 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/07 16:34:23 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,30 +17,41 @@
 # include "object.h"
 # include "quat.h"
 
-# define WIN_WIDTH 1280
-# define WIN_HEIGHT 720
+# define WIN_W 1280
+# define WIN_H 720
 
 enum e_display
 {
-	WIDTH = 0,
-	HEIGHT = 1
+	WD = 0,
+	HT = 1
 };
 
+/*
+res			: resolution
+vport		: viewport
+px_dt		: pixel_delta
+ar			: aspect_ratio
+top_lt_px	: top_left_pixel
+*/
 typedef struct s_display
 {
-	int				resolution[2];
-	double			viewport[2];
-	double			pixel_delta[2];
-	double			aspect_ratio;
-	t_vec3		top_left_pixel;
+	int				res[2];
+	double			vport[2];
+	double			px_dt[2];
+	double			ar;
+	t_vec3			top_lt_px;
 }	t_display;
+
+/*
+bpp		: bits_per_pixel
+*/
 
 typedef struct s_image
 {
 	void			*ptr;
 	unsigned int	*addr;
-	int				bits_per_pixel;
-	int				line_length;
+	int				bpp;
+	int				line_len;
 	int				endian;
 }	t_image;
 
@@ -50,10 +61,10 @@ typedef struct s_engine
 	void		*win;
 	t_display	display;
 	t_image		img;
-	t_objects	objects;
+	t_objects	objs;
 }	t_engine;
 
-int		init_engine(t_engine *engine, char *config);
-void	execute_engine(t_engine *engine);
+int		init_engine(t_engine *e, char *conf);
+void	execute_engine(t_engine *e);
 
 #endif
