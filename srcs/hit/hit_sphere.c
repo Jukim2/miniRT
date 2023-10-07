@@ -1,4 +1,4 @@
-#include "ray.h"
+#include "raytrace.h"
 #include "vec3.h"
 #include <math.h>
 
