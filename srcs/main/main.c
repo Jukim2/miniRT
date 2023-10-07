@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jukim2 <jukim2@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kjs <kjs@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 00:59:00 by kjs               #+#    #+#             */
-/*   Updated: 2023/10/07 20:40:25 by jukim2           ###   ########.fr       */
+/*   Updated: 2023/10/08 01:11:33 by kjs              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,26 @@ int	main(int argc, char **argv)
 													&earth.bpp, \
 													&earth.line_len, \
 													&earth.endian);
-	// execute_engine(&e);
-	printf("w : %d h : %d\n", w, h);
-	for (int i = 0; i < 100; i++)
-		printf("%d\n", earth.addr[i]);
-		// earth.addr[i] = 0;
-	mlx_put_image_to_window(e.mlx, e.win, earth.ptr, 0, 0);
-	mlx_loop(e.mlx);
+	execute_engine(&e);
+	// printf("w : %d h : %d\n", w, h);
+	// t_image new_img;
+	// new_img.ptr = mlx_new_image(e.mlx, w, h);
+	// new_img.addr = (unsigned int*)mlx_get_data_addr(new_img.ptr, \
+	// 									&new_img.bpp, \
+	// 									&new_img.line_len, \
+	// 									&new_img.endian);
+	// for (int i = 0; i < w; i++)
+	// {
+	// 	for (int j = 0; j < h; j++)
+	// 	{
+	// 		new_img.addr[j * new_img.line_len /4  + i] = earth.addr[j * earth.line_len/4 + i];
+	// 		unsigned int color = new_img.addr[j * new_img.line_len /4  + i];
+	// 		int r = (color >> 16) & 0xff;
+	// 		int g = (color >> 8) & 0xff;
+	// 		int b = color & 0xff;
+	// 	}
+	// }
+	// mlx_put_image_to_window(e.mlx, e.win, new_img.ptr, 0, 0);
+	// mlx_loop(e.mlx);
 	return (0);
 }

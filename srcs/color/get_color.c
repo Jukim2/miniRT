@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_color.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: kjs <kjs@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 11:13:05 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/07 17:33:24 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/08 02:14:18 by kjs              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ t_vec3	get_color(t_engine *e, t_vec3 px_center)
 	sampling = 0;
 	hitted_shape = 0;
 	color_vector_sum = vec3(0, 0, 0);
-	ray.origin = e->objs.camera.coord;
+	// ray.origin = e->objs.camera.coord;
+	ray.origin = vec3(0, 0, 0);
 
 	/* start rotation quaternion */
 	t_vec3 c = cross_vec3(vec3(0, 0, -1), e->objs.camera.forward_vector);
@@ -48,7 +49,7 @@ t_vec3	get_color(t_engine *e, t_vec3 px_center)
 	while (sampling < SAMPLE_CNT)
 	{
 		sample_pixel = add_vec3(px_center, vec3((-0.5 + random_double_zerone()) * e->display.px_dt[WD], (-0.5 + random_double_zerone()) * e->display.px_dt[HT], 0));
-		ray.direction = norm_vec3(sub_vec3(sample_pixel, ray.origin));
+		ray.direction = norm_vec3(sub_vec3(px_center, ray.origin));
 
 
 		t_quat a = quat(0, ray.direction.x, ray.direction.y, ray.direction.z);
@@ -56,7 +57,7 @@ t_vec3	get_color(t_engine *e, t_vec3 px_center)
 		t_quat temp = mult_quat(q, a);
 		t_quat conjugate = get_conj_quat(q);
 		t_quat rotated = mult_quat(temp, conjugate);
-		ray.direction = norm_vec3(vec3(rotated.v.x, rotated.v.y, rotated.v.z));
+		// ray.direction = norm_vec3(vec3(rotated.v.x, rotated.v.y, rotated.v.z));
 
 
 
@@ -64,10 +65,10 @@ t_vec3	get_color(t_engine *e, t_vec3 px_center)
 		sampling++;
 	}
 	color_vector_sum = scale_vec3(1 / SAMPLE_CNT, color_vector_sum);
-	if (hitted_shape)
-	{
-		color_vector_sum = add_vec3(color_vector_sum, scale_vec3(0.2, hitted_shape->rgb));
-		correct_color(&color_vector_sum, hitted_shape); // 이게 맞나
-	}
+	// if (hitted_shape)
+	// {
+	// 	color_vector_sum = add_vec3(color_vector_sum, scale_vec3(0.2, hitted_shape->rgb));
+	// 	correct_color(&color_vector_sum, hitted_shape); // 이게 맞나
+	// }
 	return (color_vector_sum);
 }

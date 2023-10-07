@@ -19,7 +19,7 @@
 #include "hit.h"
 
 #include <math.h>
-
+#include <stdio.h>
 t_vec3	raytrace(t_ray ray, t_shape *shape, int depth, t_shape **hitted)
 {
 	const double	a = 0.5 * (ray.direction.y + 1.0);
@@ -29,7 +29,8 @@ t_vec3	raytrace(t_ray ray, t_shape *shape, int depth, t_shape **hitted)
 	if (depth <= 0)
 		return (vec3(0, 0, 0));
 	if (hitted_shape)
-	{
+	{		
+		return (hitted_shape->rgb);
 		t_ray	reflected_ray;
 		t_vec3	light;
 
@@ -74,20 +75,22 @@ t_shape	*find_hitted_shape(t_ray ray, t_shape *shape, double *t)
 		set_surface_normal_vector(ray, hitted_shape, min_t);
 		// set color by coordinate
 		t_vec3 hitpoint = add_vec3(ray.origin, scale_vec3(min_t, ray.direction));
-		// hitted_shape->rgb = vec3(0, 1, 0);
-		t_vec3 e1 = vec3(0, 0, 1);
-		t_vec3 e2 = vec3(0, 1, 0);
-		t_vec3 point = sub_vec3(hitpoint, hitted_shape->coord);
-		t_vec3 point_no_y = hitpoint;
-		t_vec3 point_no_z = hitpoint;
-		point_no_y.y = 0;
-		point_no_y = norm_vec3(point_no_y);
-		point_no_z.z = 0;
-		point_no_z = norm_vec3(point_no_z);
-		double vert_angle = acos(dot_vec3(point_no_z, e2));
-		double hort_angle = acos(dot_vec3(point_no_y, e1));
-		// hitted_shape->rgb = earth
-		
+		t_vec3 ez = vec3(0, 0, 1);
+		t_vec3 ey = vec3(0, 1, 0);
+		// t_vec3 point = norm_vec3(sub_vec3(hitpoint, hitted_shape->coord));
+		t_vec3 point = hitted_shape->surface_normal_vector;
+		t_vec3 point_no_y = norm_vec3(vec3(point.x, 0, point.z));
+
+		double y_angle = acos(dot_vec3(point, ey)) * 180. / 3.14;
+		double x_angle = acos(dot_vec3(point_no_y, ez)) * 180. / 3.14;
+		unsigned int color = earth.addr[(int)((y_angle/180. * 1024. * (double)earth.line_len / 4.) + (int)(x_angle/360. * 2048.))];
+		// printf("dot : %f | y : %f ", dot_vec3(point, ey), acos(dot_vec3(point, ey)));
+		// printf("세로 : %f 가로 : %f\n", y_angle, x_angle);
+		// printf("%d\n",  (int)(y_angle/180. * 1024. * (double)earth.line_len / 4. + x_angle/360. * 2048.));
+		int r = (color >> 16) & 0xff;
+		int g = (color >> 8) & 0xff;
+		int b = color & 0xff;
+		hitted_shape->rgb = vec3((double)r/255., (double)g/255., (double)b/255.);
 	}
 	return (hitted_shape);
 }

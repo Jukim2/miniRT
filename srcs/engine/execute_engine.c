@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_engine.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: kjs <kjs@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 22:38:25 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/07 21:03:07 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/08 01:54:01 by kjs              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,20 @@ void	execute_engine(t_engine *e)
 	t_vec3	px_center;
 	t_vec3	offset;
 
-	i = 0;
-	while (i < WIN_W)
+	j = 0;
+	while (j < WIN_H)
 	{
-		j = 0;
-		while (j < WIN_H)
+		i = 0;
+		while (i < WIN_W)
 		{
 			offset = vec3(i * e->display.px_dt[WD], \
 							j * e->display.px_dt[HT], 0);
 			px_center = add_vec3(e->display.bot_lt_px, offset);
-			e->img.addr[(WIN_H - j - 1) * e->img.line_len / 4 + (WIN_W - i)] = \
+			e->img.addr[(WIN_H - j - 1) * e->img.line_len / 4 + i] = \
 								convert_color_vec3(get_color(e, px_center));
-			j++;
+			i++;
 		}
-		i++;
+		j++;
 	}
 	mlx_put_image_to_window(e->mlx, e->win, e->img.ptr, 0, 0);
 	mlx_loop(e->mlx);
