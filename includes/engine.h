@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   engine.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jukim2 <jukim2@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 22:17:55 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/07 16:34:23 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/07 20:37:27 by jukim2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@
 # include "object.h"
 # include "quat.h"
 
-# define WIN_W 1280
-# define WIN_H 720
+# define WIN_W 2048
+# define WIN_H 1024
+
+struct s_image earth;
 
 enum e_display
 {

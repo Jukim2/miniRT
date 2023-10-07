@@ -18,6 +18,8 @@
 #include "color.h"
 #include "hit.h"
 
+#include <math.h>
+
 t_vec3	raytrace(t_ray ray, t_shape *shape, int depth, t_shape **hitted)
 {
 	const double	a = 0.5 * (ray.direction.y + 1.0);
@@ -68,6 +70,24 @@ t_shape	*find_hitted_shape(t_ray ray, t_shape *shape, double *t)
 		shape = shape->next;
 	}
 	if (hitted_shape)
+	{
 		set_surface_normal_vector(ray, hitted_shape, min_t);
+		// set color by coordinate
+		t_vec3 hitpoint = add_vec3(ray.origin, scale_vec3(min_t, ray.direction));
+		// hitted_shape->rgb = vec3(0, 1, 0);
+		t_vec3 e1 = vec3(0, 0, 1);
+		t_vec3 e2 = vec3(0, 1, 0);
+		t_vec3 point = sub_vec3(hitpoint, hitted_shape->coord);
+		t_vec3 point_no_y = hitpoint;
+		t_vec3 point_no_z = hitpoint;
+		point_no_y.y = 0;
+		point_no_y = norm_vec3(point_no_y);
+		point_no_z.z = 0;
+		point_no_z = norm_vec3(point_no_z);
+		double vert_angle = acos(dot_vec3(point_no_z, e2));
+		double hort_angle = acos(dot_vec3(point_no_y, e1));
+		// hitted_shape->rgb = earth
+		
+	}
 	return (hitted_shape);
 }
