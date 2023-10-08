@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 22:38:25 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/08 15:08:54 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/08 17:23:19 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,20 @@
 
 /* TODO: error handling when fov == 0 or 180 */
 /* TODO: handle window ratio */
+
+int	press_key(int keycode, void *ptr)
+{
+	(void) ptr;
+	if (keycode == KEY_ESC)
+		terminate_engine(ptr);
+	return (0);	
+}
+
+int	exit_(void)
+{
+	exit(0);
+	return (0);
+}
 
 void	execute_engine(t_engine *e)
 {
@@ -42,6 +56,8 @@ void	execute_engine(t_engine *e)
 		}
 		i++;
 	}
+	mlx_key_hook(e->win, press_key, e);
+	mlx_hook(e->win, BTN_EXIT, 0, &exit_, 0);
 	mlx_put_image_to_window(e->mlx, e->win, e->img.ptr, 0, 0);
 	mlx_loop(e->mlx);
 }
