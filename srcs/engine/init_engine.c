@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 22:22:57 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/07 21:03:07 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/08 17:42:20 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	init_display_settings(t_engine *e)
 								+e->display.px_dt[WD] * 0.5, \
 								-e->display.vport[HT] / 2. \
 								+e->display.px_dt[HT] * 0.5, \
-								-1.0);
+								-1.);
 	return (1);
 }
 

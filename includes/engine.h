@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 22:17:55 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/07 21:03:07 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/08 17:17:11 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@
 
 # define WIN_W 1280
 # define WIN_H 720
+
+# define KEY_ESC 53
+# define BTN_EXIT 17
 
 enum e_display
 {
@@ -66,5 +69,6 @@ typedef struct s_engine
 
 int		init_engine(t_engine *e, char *conf);
 void	execute_engine(t_engine *e);
+void	terminate_engine(t_engine *e);
 
 #endif

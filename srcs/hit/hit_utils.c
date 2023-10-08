@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 14:05:54 by kjs               #+#    #+#             */
-/*   Updated: 2023/10/08 17:05:45 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/08 17:42:04 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	set_surface_normal_vector(t_ray ray, t_shape *shape, double t)
 {
 	if (shape->type == PLANE)
 	{
-		shape->surface_normal_vector = shape->form_vector;
+		shape->surface_normal_vector = vec3(-shape->form_vector.x, -shape->form_vector.y, -shape->form_vector.z);
 		return ;
 	}
 	const t_vec3 contact_point = add_vec3(ray.origin, scale_vec3(t, ray.direction));
