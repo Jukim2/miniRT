@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_color.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjs <kjs@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: jukim2 <jukim2@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 11:13:05 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/08 02:14:18 by kjs              ###   ########.fr       */
+/*   Updated: 2023/10/08 12:03:23 by jukim2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,10 @@ t_vec3	get_color(t_engine *e, t_vec3 px_center)
 		sampling++;
 	}
 	color_vector_sum = scale_vec3(1 / SAMPLE_CNT, color_vector_sum);
-	// if (hitted_shape)
-	// {
-	// 	color_vector_sum = add_vec3(color_vector_sum, scale_vec3(0.2, hitted_shape->rgb));
-	// 	correct_color(&color_vector_sum, hitted_shape); // 이게 맞나
-	// }
+	if (hitted_shape)
+	{
+		color_vector_sum = add_vec3(color_vector_sum, scale_vec3(0.2, hitted_shape->rgb));
+		correct_color(&color_vector_sum, hitted_shape); // 이게 맞나
+	}
 	return (color_vector_sum);
 }

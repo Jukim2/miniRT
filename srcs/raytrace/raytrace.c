@@ -30,7 +30,7 @@ t_vec3	raytrace(t_ray ray, t_shape *shape, int depth, t_shape **hitted)
 		return (vec3(0, 0, 0));
 	if (hitted_shape)
 	{		
-		return (hitted_shape->rgb);
+		// return (hitted_shape->rgb);
 		t_ray	reflected_ray;
 		t_vec3	light;
 
@@ -78,19 +78,24 @@ t_shape	*find_hitted_shape(t_ray ray, t_shape *shape, double *t)
 		t_vec3 ez = vec3(0, 0, 1);
 		t_vec3 ey = vec3(0, 1, 0);
 		// t_vec3 point = norm_vec3(sub_vec3(hitpoint, hitted_shape->coord));
+		// print_vec3()
 		t_vec3 point = hitted_shape->surface_normal_vector;
 		t_vec3 point_no_y = norm_vec3(vec3(point.x, 0, point.z));
 
 		double y_angle = acos(dot_vec3(point, ey)) * 180. / 3.14;
 		double x_angle = acos(dot_vec3(point_no_y, ez)) * 180. / 3.14;
-		unsigned int color = earth.addr[(int)((y_angle/180. * 1024. * (double)earth.line_len / 4.) + (int)(x_angle/360. * 2048.))];
+		if (point_no_y.x < 0)
+			x_angle *= -1;
+		unsigned int color = earth.addr[(int)(y_angle/180. * 1024.) * earth.line_len / 4 + (int)(x_angle/180. * 2048.) + 1024];
+
 		// printf("dot : %f | y : %f ", dot_vec3(point, ey), acos(dot_vec3(point, ey)));
 		// printf("세로 : %f 가로 : %f\n", y_angle, x_angle);
-		// printf("%d\n",  (int)(y_angle/180. * 1024. * (double)earth.line_len / 4. + x_angle/360. * 2048.));
+		// printf("%d ,%d\n",  (int)(y_angle/180. * 1024.) , (int)(x_angle/180. * 2048.));
 		int r = (color >> 16) & 0xff;
 		int g = (color >> 8) & 0xff;
 		int b = color & 0xff;
 		hitted_shape->rgb = vec3((double)r/255., (double)g/255., (double)b/255.);
+		// hitted_shape->rgb = vec3(x_angle / 180, y_angle / 180, 0);
 	}
 	return (hitted_shape);
 }
