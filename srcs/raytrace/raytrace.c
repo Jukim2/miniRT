@@ -59,7 +59,7 @@ t_shape	*find_hitted_shape(t_ray ray, t_shape *shape, double *t)
 		if (shape->type == SPHERE)
 			tmp_t = hit_sphere(ray, shape->coord, shape->diameter / 2.0);
 		else if (shape->type == CYLINDER)
-			tmp_t = hit_cylinder(ray, *shape);
+			tmp_t = hit_cylinder(ray, shape);
 		else if (shape->type == PLANE)
 			tmp_t = hit_plane(ray, shape);
 		if (tmp_t != -1 && tmp_t > 0.001)
