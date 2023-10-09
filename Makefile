@@ -6,7 +6,7 @@
 #    By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/16 16:53:40 by gyoon             #+#    #+#              #
-#    Updated: 2023/10/09 15:02:08 by gyoon            ###   ########.fr        #
+#    Updated: 2023/10/09 15:07:30 by gyoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,15 +34,15 @@ endif
 #                                                                              #
 # **************************************************************************** #
 
-SRCS		= $(wildcard ./srcs/*/*.c)  
+SRCS		= $(wildcard ./src/*/*.c)  
 OBJS		= $(SRCS:.c=.o)
 
-MLX_PATH	= ./minilibx
-FT_PATH		= ./libft
-MLX			= ./minilibx/libmlx.a
-LIBFT		= ./libft/libft.a
+MLX_PATH	= ./lib/minilibx
+FT_PATH		= ./lib/libft
+MLX			= ./lib/minilibx/libmlx.a
+LIBFT		= ./lib/libft/libft.a
 
-INCLUDE		= ./includes
+INCLUDE		= ./include
 
 # **************************************************************************** #
 #                                                                              #
@@ -100,12 +100,12 @@ bonus :
 
 $(LIBFT) :
 	@printf "Build ${bold}[LIBFT]${end}\n"
-	@make -C libft -s
+	@make -C $(FT_PATH) -s
 	@printf "${grn}BUILD SUCCESSFUL${end}\n\n"
 
 $(MLX) :
 	@printf "Build ${bold}[MINILIBX]${end}\n"
-	@make re -C minilibx -s
+	@make re -C $(MLX_PATH) -s
 	@printf "${grn}BUILD SUCCESSFUL${end}\n\n"
 
 %.o : %.c
@@ -124,14 +124,16 @@ $(MLX) :
 clean :
 	@$(RM) $(OBJS)
 	@$(RM) $(B_OBJS)
-	@make -C libft clean
-	@make -C minilibx clean
+	@make -C $(FT_PATH) clean
+	@make -C $(MLX_PATH) clean
 	@printf "make clean ${bold}${NAME}.${end}\n"
 
 fclean :
 	@make clean
 	@$(RM) $(NAME)
-	@make -C libft fclean
+	@make -C $(FT_PATH) fclean
+	@make -C $(MLX_PATH) clean
+	@$(RM) $(MLX)
 	@printf "make fclean ${bold}${NAME}.${end}\n"
 
 re :
