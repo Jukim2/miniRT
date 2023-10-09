@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 11:22:24 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/09 18:52:06 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/09 19:28:12 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,13 @@ typedef struct s_ray
 	t_vec3	origin;
 	t_vec3	direction;
 }	t_ray;
+
+typedef struct s_hit
+{
+	double	t;
+	t_vec3	p;
+	t_vec3	n;
+}	t_hit;
 
 /* ===============srcs/raytrace=============== */
 
