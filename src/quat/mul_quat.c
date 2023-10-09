@@ -12,7 +12,7 @@
 
 #include "quat.h"
 
-t_quat	mult_quat(t_quat q1, t_quat q2)
+t_quat	mul_quat(t_quat q1, t_quat q2)
 {
 	t_quat	q;
 
