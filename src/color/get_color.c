@@ -6,14 +6,14 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 11:13:05 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/07 20:14:16 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/09 15:54:30 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vec3.h"
 #include "engine.h"
 #include "object.h"
-#include "raytrace.h"
+#include "ray.h"
 #include "color.h"
 #include "utils.h"
 #include <math.h>
@@ -53,9 +53,9 @@ t_vec3	get_color(t_engine *e, t_vec3 px_center)
 
 		t_quat a = quat(0, ray.direction.x, ray.direction.y, ray.direction.z);
 		// t_quat rotated = q * a * q-1;
-		t_quat temp = mult_quat(q, a);
+		t_quat temp = mul_quat(q, a);
 		t_quat conjugate = get_conj_quat(q);
-		t_quat rotated = mult_quat(temp, conjugate);
+		t_quat rotated = mul_quat(temp, conjugate);
 		ray.direction = norm_vec3(vec3(rotated.v.x, rotated.v.y, rotated.v.z));
 
 

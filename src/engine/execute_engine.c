@@ -6,14 +6,14 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 22:38:25 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/08 17:23:19 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/09 15:51:36 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "engine.h"
 #include "parse.h"
 #include "libft.h"
-#include "raytrace.h"
+#include "ray.h"
 #include "color.h"
 #include "vec3.h"
 

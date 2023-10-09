@@ -6,13 +6,12 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 22:36:40 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/08 16:56:53 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/09 15:51:42 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "hit.h"
 #include "object.h"
-#include "raytrace.h"
+#include "ray.h"
 #include "vec3.h"
 #include <math.h>
 
@@ -47,15 +46,20 @@ double	hit_cylinder(t_ray ray, t_shape *shape)
 			return (-1);
 		else if (a + b == 1)
 		{
-			t_shape s;
-			s.form_vector = shape->form_vector;
-			s.coord = add_vec3(shape->coord, scale_vec3(shape->height / 2., shape->form_vector));
+			t_shape upper_plane;
+			upper_plane.form_vector = shape->form_vector;
+			upper_plane.coord = add_vec3(shape->coord, scale_vec3(shape->height / 2., shape->form_vector));
 
-			double tp = hit_plane(ray, &s);
-			if (tp < t2)
+			t_shape lower_plane;
+			lower_plane.form_vector = invert_vec3(shape->form_vector);
+			lower_plane.coord = add_vec3(shape->coord, scale_vec3(shape->height /2., lower_plane.form_vector));
+
+			double tup = hit_plane(ray, &upper_plane);
+			double t_low = hit_plane(ray, &lower_plane);
+			if (tup < t2)
 			{
-				shape->surface_normal_vector = shape->form_vector;				
-				return (tp);
+				shape->surface_normal_vector = shape->form_vector;
+				return (tup);
 			}
 			return (t2);
 		}

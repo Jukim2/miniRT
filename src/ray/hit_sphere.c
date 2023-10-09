@@ -6,11 +6,11 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 16:42:43 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/07 16:42:44 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/09 15:51:46 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "raytrace.h"
+#include "ray.h"
 #include "vec3.h"
 #include <math.h>
 

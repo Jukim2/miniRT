@@ -11,19 +11,18 @@
 /* ************************************************************************** */
 
 #include "vec3.h"
-#include "raytrace.h"
+#include "ray.h"
 #include "object.h"
 #include "engine.h"
 #include "utils.h"
 #include "color.h"
-#include "hit.h"
 #include "parse.h"
 
 t_vec3	raytrace(t_ray ray, t_shape *shape, int depth, t_shape **hitted)
 {
 	const double	a = 0.5 * (ray.direction.y + 1.0);
 	double			t;
-	t_shape			*hitted_shape = find_hitted_shape(ray, shape, &t);
+	t_shape			*hitted_shape = get_hit_shape(ray, shape, &t);
 	
 	if (depth <= 0)
 		return (vec3(0, 0, 0));
@@ -44,7 +43,8 @@ t_vec3	raytrace(t_ray ray, t_shape *shape, int depth, t_shape **hitted)
 	return add_vec3(vec3(1 - a, 1 - a, 1 - a), vec3(0.5 * a, 0.7 * a, 1.0 * a));
 }
 
-t_shape	*find_hitted_shape(t_ray ray, t_shape *shape, double *t)
+// 만약에 t값이 같으면 뭘 먼저
+t_shape	*get_hit_shape(t_ray ray, t_shape *shape, double *t)
 {
 	double	min_t;
 	double	tmp_t;
@@ -54,8 +54,6 @@ t_shape	*find_hitted_shape(t_ray ray, t_shape *shape, double *t)
 	hitted_shape = 0;
 	while (shape)
 	{
-		// if shape is sphere
-		// 만약에 t값이 같으면 뭘 먼저
 		if (shape->type == SPHERE)
 			tmp_t = hit_sphere(ray, shape->coord, shape->diameter / 2.0);
 		else if (shape->type == CYLINDER)

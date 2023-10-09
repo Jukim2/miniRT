@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   raytrace_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jukim2 <jukim2@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 11:08:02 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/07 13:14:36 by jukim2           ###   ########.fr       */
+/*   Updated: 2023/10/09 15:53:25 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vec3.h"
 #include "object.h"
-#include "raytrace.h"
+#include "ray.h"
 
 t_vec3	random_on_hemisphere(const t_shape *shape)
 {
@@ -48,5 +48,5 @@ int	is_shadowed(t_shape *shape, t_ray reflected_ray, t_vec3 light)
 
 	tolight.origin = reflected_ray.origin;
 	tolight.direction = light;
-	return (find_hitted_shape(tolight, shape, &t) != 0);
+	return (get_hit_shape(tolight, shape, &t) != 0);
 }
