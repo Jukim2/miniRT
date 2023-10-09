@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 13:13:27 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/06 15:07:12 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/09 17:57:43 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,6 @@
 # define PARSE_H
 
 #include "object.h"
-
-enum e_object
-{
-    SPHERE = 0,
-    PLANE = 1,
-    CYLINDER = 2,
-    AMBIENT_LIGHT = 3,
-    CAMERA = 4,
-    LIGHT = 5,
-    ERROR = 6
-};
 
 /* ===============srcs/parser=============== */
 

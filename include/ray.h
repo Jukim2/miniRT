@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 11:22:24 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/09 15:53:00 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/09 18:52:06 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_shape	*get_hit_shape(t_ray ray, t_shape *shape, double *t);
 t_vec3	random_on_hemisphere(const t_shape *shape);
 t_vec3	get_reflected_direction(t_ray ray, t_shape *hitted_shape);
 int		is_shadowed(t_shape *shape, t_ray reflected_ray, t_vec3 light);
-
+double	hit_circle(t_ray ray, t_shape *shape);
 double	hit_cylinder(t_ray ray, t_shape *shape);
 double	hit_plane(t_ray ray, t_shape *shape);
 double	hit_sphere(t_ray ray, t_vec3 center, double radius);

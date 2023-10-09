@@ -1,22 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cross_vec3.c                                       :+:      :+:    :+:   */
+/*   hit_circle.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/06 15:08:35 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/09 17:24:48 by gyoon            ###   ########.fr       */
+/*   Created: 2023/10/09 17:56:31 by gyoon             #+#    #+#             */
+/*   Updated: 2023/10/09 18:52:16 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ray.h"
 #include "vec3.h"
 
-#include <stdio.h>
+// double	hit_circle(t_ray ray, t_shape *shape)
+// {
+// 	double	t;
+// 	t_vec3	inter_point;
 
-t_vec3	cross_vec3(t_vec3 u, t_vec3 v)
-{
-	return (vec3(u.y * v.z - u.z * v.y, \
-				u.z * v.x - u.x * v.z, \
-				u.x * v.y - u.y * v.x));
-}
+// 	t = hit_plane(ray, shape);
+// 	if (t == -1)
+// 		return (t);
+// 	else
+// 	{
+// 		inter_point = add_vec3(shape.coord, scale_vec3(t, shape.form_vector));
+// 		if (vec3len(sub_vec3(shape.origin, inter_point) < shape.diameter / 2.);
+// 			return (t);
+// 		else
+// 			return (-1);
+// 	}
+// }

@@ -1,22 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   print_quat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/01 00:59:00 by kjs               #+#    #+#             */
-/*   Updated: 2023/10/09 18:50:02 by gyoon            ###   ########.fr       */
+/*   Created: 2023/10/09 17:12:50 by gyoon             #+#    #+#             */
+/*   Updated: 2023/10/09 17:14:06 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "engine.h"
+#include "quat.h"
+#include <stdio.h>
 
-int	main(int argc, char **argv)
+void	print_quat(t_quat q)
 {
-	t_engine	e;
-
-	init_engine(&e, argv[1]);
-	execute_engine(&e);
-	return (0);
+	printf("w: %f | x: %f | y: %f | z: %f \n", q.w, q.v.x, q.v.y, q.v.z);
 }

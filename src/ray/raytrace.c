@@ -47,7 +47,7 @@ t_vec3	raytrace(t_ray ray, t_shape *shape, int depth, t_shape **hitted)
 t_shape	*get_hit_shape(t_ray ray, t_shape *shape, double *t)
 {
 	double	min_t;
-	double	tmp_t;
+	double	curr_t;
 	t_shape	*hitted_shape;
 
 	min_t = 1000000000;
@@ -55,16 +55,16 @@ t_shape	*get_hit_shape(t_ray ray, t_shape *shape, double *t)
 	while (shape)
 	{
 		if (shape->type == SPHERE)
-			tmp_t = hit_sphere(ray, shape->coord, shape->diameter / 2.0);
+			curr_t = hit_sphere(ray, shape->coord, shape->diameter / 2.0);
 		else if (shape->type == CYLINDER)
-			tmp_t = hit_cylinder(ray, shape);
+			curr_t = hit_cylinder(ray, shape);
 		else if (shape->type == PLANE)
-			tmp_t = hit_plane(ray, shape);
-		if (tmp_t != -1 && tmp_t > 0.001)
+			curr_t = hit_plane(ray, shape);
+		if (curr_t != -1 && curr_t > 0.001)
 		{
-			if (tmp_t < min_t)
+			if (curr_t < min_t)
 			{	
-				min_t = tmp_t;
+				min_t = curr_t;
 				*t = min_t;
 				hitted_shape = shape;				
 			}

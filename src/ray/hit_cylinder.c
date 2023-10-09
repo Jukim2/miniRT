@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 22:36:40 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/09 15:51:42 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/09 18:50:10 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,14 @@ double	hit_cylinder(t_ray ray, t_shape *shape)
 	c = dot_vec3(temp, temp) - (shape->diameter / 2.0) * (shape->diameter / 2.0);
 	d = b * b - a * c;
 	if (d < 0)
+	{	
+		t_shape	up;
+		t_shape	down;
+
+		
+
 		return (-1);
+	}
 	else
 	{
 		double t1 = (-b - sqrt(d)) / a;

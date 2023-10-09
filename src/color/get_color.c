@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 11:13:05 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/09 15:54:30 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/09 17:31:15 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ t_vec3	get_color(t_engine *e, t_vec3 px_center)
 
 	/* start rotation quaternion */
 	t_vec3 c = cross_vec3(vec3(0, 0, -1), e->objs.camera.forward_vector);
-	c = norm_vec3(c);
+	if (vec3len(c) > 0.0001 || vec3len(c) < -0.0001)
+		c = norm_vec3(c);
 
 	double cosine = dot_vec3(vec3(0, 0, -1), e->objs.camera.forward_vector);
 	double s_half = sqrt((1.0 - cosine) / 2.0);
@@ -41,6 +42,7 @@ t_vec3	get_color(t_engine *e, t_vec3 px_center)
 	
 	// q = cos(θ/2) + (x * sin(θ/2), y * sin(θ/2), z * sin(θ/2))
 	t_quat q = quat(c_half, c.x * s_half, c.y * s_half, c.z * s_half);
+	// print_quat(q);
 	q = norm_quat(q);
 
 	/* end rotation quaternion */
