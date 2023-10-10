@@ -14,5 +14,5 @@
 
 t_vec3	rand_vec3(void)
 {
-	return (norm_vec3(vec3(random_double(), random_double(), random_double())));
+	return (norm_vec3(vec3(rand_double(-1, 1), rand_double(-1, 1), rand_double(-1, 1))));
 }

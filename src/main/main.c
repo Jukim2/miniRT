@@ -6,11 +6,14 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 00:59:00 by kjs               #+#    #+#             */
-/*   Updated: 2023/10/09 18:50:02 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/10 17:00:03 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "engine.h"
+
+#include "numft.h"
+#include <stdio.h>
 
 int	main(int argc, char **argv)
 {
