@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 11:13:05 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/10 17:15:05 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/10 21:03:46 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,18 @@
 
 int	get_color(t_engine *e, int x, int y)
 {
-	int		sampling;
 	t_ray	ray;
+	int		sampling;
 	t_vec3	color_vector_sum;
 	t_shape	*hitted_shape;
 
 	sampling = 0;
 	hitted_shape = 0;
 	color_vector_sum = vec3(0, 0, 0);
-	
 	ray.origin = e->objs.camera.coord;
 	while (sampling < SAMPLE_CNT)
 	{
-		t_vec3 offset = add_vec3(scale_vec3(x + -0.5 + rand_double(0, 1), e->display.px_dt[WD]), scale_vec3(y -0.5 + rand_double(0, 1), e->display.px_dt[HT]));
+		t_vec3 offset = add_vec3(scale_vec3(x + rand_double(-0.5, 0.5), e->display.px_dt[WD]), scale_vec3(y + rand_double(-0.5, 0.5), e->display.px_dt[HT]));
 		ray.direction = norm_vec3(add_vec3(e->display.bot_lt_px, offset));
 		color_vector_sum = add_vec3(color_vector_sum, raytrace(ray, e->objs.shape, 50, &hitted_shape));
 		sampling++;

@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 11:22:24 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/10 16:47:22 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/10 21:12:33 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,20 @@ typedef struct s_ray
 	t_vec3	direction;
 }	t_ray;
 
-typedef struct s_hit
+typedef struct s_hit_record
 {
+	int		is_hit;
+	t_shape	*hit_shape;
 	double	t;
-	t_vec3	p;
-	t_vec3	n;
-}	t_hit;
+	t_vec3	point;
+	t_vec3	normal;
+	t_vec3	color;
+}	t_hit_record;
 
 /* ===============srcs/raytrace=============== */
 
 t_vec3	raytrace(t_ray ray, t_shape *shape, int depth, t_shape **hitted);
-t_shape	*get_hit_shape(t_ray ray, t_shape *shape, double *t);
+t_hit_record	get_hit_record(t_ray ray, t_shape *shape);
 t_vec3	random_on_hemisphere(const t_shape *shape);
 t_vec3	get_reflected_direction(t_ray ray, t_shape *hitted_shape);
 int		is_shadowed(t_shape *shape, t_ray reflected_ray, t_vec3 light);

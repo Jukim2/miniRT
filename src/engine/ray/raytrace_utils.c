@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 11:08:02 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/10 16:46:35 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/10 21:14:48 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,6 @@ int	is_shadowed(t_shape *shape, t_ray reflected_ray, t_vec3 light)
 
 	tolight.origin = reflected_ray.origin;
 	tolight.direction = light;
-	return (get_hit_shape(tolight, shape, &t) != 0);
+	t_hit_record r = get_hit_record(tolight, shape);
+	return (r.hit_shape != 0);
 }
