@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_inverse_vec3.c                              :+:      :+:    :+:   */
+/*   add_vec3.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/01 18:48:03 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/01 18:48:57 by gyoon            ###   ########.fr       */
+/*   Created: 2023/10/06 15:08:43 by gyoon             #+#    #+#             */
+/*   Updated: 2023/10/10 16:44:23 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vec3.h"
+#include "numft/vec3.h"
 
-t_vec3	invert_vec3(t_vec3 v)
+t_vec3	add_vec3(t_vec3 u, t_vec3 v)
 {
-	return (vec3(-v.x, -v.y, -v.z));
+	return (vec3(u.x + v.x, u.y + v.y, u.z + v.z));
 }

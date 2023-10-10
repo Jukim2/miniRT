@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   rot_vec3.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/04 17:15:36 by kjs               #+#    #+#             */
-/*   Updated: 2023/10/07 16:27:30 by gyoon            ###   ########.fr       */
+/*   Created: 2023/10/10 15:14:50 by gyoon             #+#    #+#             */
+/*   Updated: 2023/10/10 16:45:17 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#include "numft.h"
 
-# define PI 3.141592
+t_vec3	rot_vec3(t_vec3 v, t_quat rot_quat)
+{
+	t_quat	a;
+	t_quat	result;
 
-/* ===============srcs/utils=============== */
-
-double	get_radian(double degrees);
-double	random_double(void);
-double	random_double_zerone(void);
-
-#endif
+	a = vec3_to_quat(v);
+	result = mul_quat(mul_quat(rot_quat, a), get_conj_quat(rot_quat));
+	return (result.v);
+}

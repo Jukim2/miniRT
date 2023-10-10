@@ -6,11 +6,11 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 11:08:02 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/09 15:53:25 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/10 16:46:35 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vec3.h"
+#include "numft.h"
 #include "object.h"
 #include "ray.h"
 

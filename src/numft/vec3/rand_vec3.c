@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   multiple_vec3.c                                 :+:      :+:    :+:   */
+/*   get_random_vec3.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jukim2 <jukim2@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/01 21:24:08 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/01 21:30:28 by gyoon            ###   ########.fr       */
+/*   Created: 2023/10/04 17:14:01 by kjs               #+#    #+#             */
+/*   Updated: 2023/10/05 19:25:36 by jukim2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vec3.h"
+#include "numft.h"
 
-t_vec3	scale_vec3(double c, t_vec3 v)
+t_vec3	rand_vec3(void)
 {
-	return (vec3(c * v.x, c * v.y, c * v.z));
+	return (norm_vec3(vec3(random_double(), random_double(), random_double())));
 }

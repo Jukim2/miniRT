@@ -6,14 +6,14 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 11:22:24 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/09 19:28:12 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/10 16:47:22 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RAY_H
 # define RAY_H
 
-#include "vec3.h"
+#include "numft.h"
 #include "object.h"
 #include "engine.h"
 

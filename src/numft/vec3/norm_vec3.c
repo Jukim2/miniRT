@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vec3_to_quat.c                                     :+:      :+:    :+:   */
+/*   normalize_vec3.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/10 15:03:02 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/10 15:28:10 by gyoon            ###   ########.fr       */
+/*   Created: 2023/10/01 18:49:05 by gyoon             #+#    #+#             */
+/*   Updated: 2023/10/01 18:57:41 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "quat.h"
-#include "vec3.h"
+#include "numft/vec3.h"
 
-t_quat	vec3_to_quat(t_vec3 v)
+t_vec3	norm_vec3(t_vec3 v)
 {
-	t_quat	q;
+	double	len;
 
-	q.w = 0;
-	q.v = v;
-	return (q);
+	len = vec3len(v);
+	return (vec3(v.x / len, v.y / len, v.z / len));
 }

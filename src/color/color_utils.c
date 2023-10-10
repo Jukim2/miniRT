@@ -6,12 +6,12 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 19:33:12 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/10 15:37:01 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/10 16:46:03 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "object.h"
-#include "vec3.h"
+#include "numft.h"
 #include <math.h>
 
 void	correct_color(t_vec3 *color_vector_sum, t_shape *hitted_shape)

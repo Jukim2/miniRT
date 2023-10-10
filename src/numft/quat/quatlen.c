@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   add_vec3.c                                         :+:      :+:    :+:   */
+/*   get_quat_length.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/06 15:08:43 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/06 15:32:54 by gyoon            ###   ########.fr       */
+/*   Created: 2023/10/05 00:01:48 by gyoon             #+#    #+#             */
+/*   Updated: 2023/10/05 00:03:10 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vec3.h"
+#include "numft/quat.h"
+#include <math.h>
 
-t_vec3	add_vec3(t_vec3 u, t_vec3 v)
+double	quatlen(t_quat q)
 {
-	return (vec3(u.x + v.x, u.y + v.y, u.z + v.z));
+	return (sqrt(q.w * q.w + q.v.x * q.v.x + q.v.y * q.v.y + q.v.z * q.v.z));
 }

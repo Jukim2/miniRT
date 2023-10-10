@@ -1,23 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_vec3.c                                      :+:      :+:    :+:   */
+/*   print_vec3.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: kjs <kjs@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/01 19:22:40 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/01 19:23:35 by gyoon            ###   ########.fr       */
+/*   Created: 2023/10/05 10:19:05 by kjs               #+#    #+#             */
+/*   Updated: 2023/10/05 10:19:39 by kjs              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vec3.h"
+#include "numft/vec3.h"
+#include <stdio.h>
 
-t_vec3	vec3(double x, double y, double z)
+void	print_vec3(t_vec3 v)
 {
-	t_vec3	v;
-
-	v.x = x;
-	v.y = y;
-	v.z = z;
-	return (v);
+	printf("vector : %f %f %f\n", v.x, v.y, v.z);
 }

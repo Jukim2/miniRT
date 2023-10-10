@@ -6,15 +6,14 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 22:22:57 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/10 16:06:40 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/10 16:45:43 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "engine.h"
 #include "parse.h"
 #include "libft.h"
-#include "utils.h"
-#include "vec3.h"
+#include "numft.h"
 #include <math.h>
 #include <stdio.h>
 

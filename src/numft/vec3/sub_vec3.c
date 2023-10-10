@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dot_vec3.c                                         :+:      :+:    :+:   */
+/*   subtract_vec3.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/06 15:09:24 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/06 15:19:04 by gyoon            ###   ########.fr       */
+/*   Created: 2023/10/01 18:44:50 by gyoon             #+#    #+#             */
+/*   Updated: 2023/10/01 19:00:38 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vec3.h"
+#include "numft/vec3.h"
 
-double	dot_vec3(t_vec3 u, t_vec3 v)
+t_vec3	sub_vec3(t_vec3 u, t_vec3 v)
 {
-	return (u.x * v.x + u.y * v.y + u.z * v.z);
+	return (add_vec3(u, invert_vec3(v)));
 }

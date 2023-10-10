@@ -6,17 +6,15 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 11:13:05 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/10 16:10:49 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/10 16:48:55 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "quat.h"
-#include "vec3.h"
+#include "numft.h"
 #include "engine.h"
 #include "object.h"
 #include "ray.h"
 #include "color.h"
-#include "utils.h"
 #include <math.h>
 
 int	get_color(t_engine *e, int x, int y)

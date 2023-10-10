@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 22:38:25 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/10 14:55:40 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/10 16:45:48 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 #include "libft.h"
 #include "ray.h"
 #include "color.h"
-#include "vec3.h"
+#include "numft.h"
+
 
 /* TODO: error handling when fov == 0 or 180 */
 /* TODO: handle window ratio */

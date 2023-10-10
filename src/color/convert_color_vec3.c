@@ -6,11 +6,11 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 14:35:51 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/10 14:36:35 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/10 16:45:58 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vec3.h"
+#include "numft.h"
 #include <math.h>
 
 int	convert_color_vec3(t_vec3 color_vec3)

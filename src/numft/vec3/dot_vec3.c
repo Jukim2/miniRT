@@ -1,24 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rot_vec3.c                                         :+:      :+:    :+:   */
+/*   dot_vec3.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/10 15:14:50 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/10 16:07:48 by gyoon            ###   ########.fr       */
+/*   Created: 2023/10/06 15:09:24 by gyoon             #+#    #+#             */
+/*   Updated: 2023/10/10 16:44:33 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vec3.h"
-#include "quat.h"
+#include "numft/vec3.h"
 
-t_vec3	rot_vec3(t_vec3 v, t_quat rot_quat)
+double	dot_vec3(t_vec3 u, t_vec3 v)
 {
-	t_quat	a;
-	t_quat	result;
-
-	a = vec3_to_quat(v);
-	result = mul_quat(mul_quat(rot_quat, a), get_conj_quat(rot_quat));
-	return (result.v);
+	return (u.x * v.x + u.y * v.y + u.z * v.z);
 }

@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_quat_length.c                            :+:      :+:    :+:   */
+/*   get_conj_quat.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/05 00:01:48 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/05 00:03:10 by gyoon            ###   ########.fr       */
+/*   Created: 2023/10/05 00:22:37 by gyoon             #+#    #+#             */
+/*   Updated: 2023/10/05 00:27:40 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "quat.h"
-#include <math.h>
+#include "numft/quat.h"
 
-double	quatlen(t_quat q)
+t_quat	get_conj_quat(t_quat q)
 {
-	return (sqrt(q.w * q.w + q.v.x * q.v.x + q.v.y * q.v.y + q.v.z * q.v.z));
+	return (quat(q.w, -q.v.x, -q.v.y, -q.v.z));
 }

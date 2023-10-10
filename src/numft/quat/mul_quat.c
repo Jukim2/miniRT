@@ -1,18 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_radian.c                                       :+:      :+:    :+:   */
+/*   product_quat.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/07 16:24:38 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/07 16:25:02 by gyoon            ###   ########.fr       */
+/*   Created: 2023/10/05 00:08:31 by gyoon             #+#    #+#             */
+/*   Updated: 2023/10/05 14:50:19 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include "numft/quat.h"
 
-double	get_radian(double degrees)
+t_quat	mul_quat(t_quat q1, t_quat q2)
 {
-	return (degrees * PI / 180.0);
+	t_quat	q;
+
+	q.w = q1.w * q2.w - (q1.v.x * q2.v.x + q1.v.y * q2.v.y + q1.v.z * q2.v.z);
+	q.v.x = q1.w * q2.v.x + q1.v.x * q2.w + q1.v.y * q2.v.z - q1.v.z * q2.v.y;
+	q.v.y = q1.w * q2.v.y + q1.v.y * q2.w + q1.v.z * q2.v.x - q1.v.x * q2.v.z;
+	q.v.z = q1.w * q2.v.z + q1.v.z * q2.w + q1.v.x * q2.v.y - q1.v.y * q2.v.x;
+	return (q);
 }

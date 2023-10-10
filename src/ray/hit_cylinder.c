@@ -6,13 +6,13 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 22:36:40 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/09 18:50:10 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/10 16:46:18 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "object.h"
 #include "ray.h"
-#include "vec3.h"
+#include "numft.h"
 #include <math.h>
 
 #include <stdio.h>

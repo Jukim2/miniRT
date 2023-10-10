@@ -6,14 +6,14 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 16:45:23 by kjs               #+#    #+#             */
-/*   Updated: 2023/10/09 18:01:45 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/10 16:47:33 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef OBJECT_H
 # define OBJECT_H
 
-#include "vec3.h"
+#include "numft.h"
 
 enum e_object
 {

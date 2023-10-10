@@ -6,16 +6,16 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 11:24:23 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/10 14:55:55 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/10 16:47:06 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef COLOR_H
 # define COLOR_H
 
-#include "vec3.h"
-#include "object.h"
-#include "engine.h"
+# include "numft.h"
+# include "object.h"
+# include "engine.h"
 
 #define SAMPLE_CNT 1
 

@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_vec3.c                                    :+:      :+:    :+:   */
+/*   multiple_vec3.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjs <kjs@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/05 10:19:05 by kjs               #+#    #+#             */
-/*   Updated: 2023/10/05 10:19:39 by kjs              ###   ########.fr       */
+/*   Created: 2023/10/01 21:24:08 by gyoon             #+#    #+#             */
+/*   Updated: 2023/10/01 21:30:28 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vec3.h"
-#include <stdio.h>
+#include "numft/vec3.h"
 
-void	print_vec3(t_vec3 v)
+t_vec3	scale_vec3(double c, t_vec3 v)
 {
-	printf("vector : %f %f %f\n", v.x, v.y, v.z);
+	return (vec3(c * v.x, c * v.y, c * v.z));
 }

@@ -6,14 +6,14 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 13:21:53 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/06 15:07:12 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/10 16:49:10 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "object.h"
 #include "parse.h"
 #include "libft.h"
-#include "vec3.h"
+#include "numft.h"
 #include <stdio.h> // test
 
 int	parse_id(t_objects *objects, char *line)

@@ -10,11 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vec3.h"
+#include "numft.h"
 #include "ray.h"
 #include "object.h"
 #include "engine.h"
-#include "utils.h"
 #include "color.h"
 #include "parse.h"
 

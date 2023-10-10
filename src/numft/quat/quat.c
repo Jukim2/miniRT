@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "quat.h"
+#include "numft/quat.h"
 
 t_quat	quat(double w, double x, double y, double z)
 {

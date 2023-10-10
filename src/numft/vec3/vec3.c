@@ -1,19 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_random_vec3.c                               :+:      :+:    :+:   */
+/*   get_vec3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jukim2 <jukim2@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/04 17:14:01 by kjs               #+#    #+#             */
-/*   Updated: 2023/10/05 19:25:36 by jukim2           ###   ########.fr       */
+/*   Created: 2023/10/01 19:22:40 by gyoon             #+#    #+#             */
+/*   Updated: 2023/10/01 19:23:35 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vec3.h"
-#include "utils.h"
+#include "numft/vec3.h"
 
-t_vec3	rand_vec3(void)
+t_vec3	vec3(double x, double y, double z)
 {
-	return (norm_vec3(vec3(random_double(), random_double(), random_double())));
+	t_vec3	v;
+
+	v.x = x;
+	v.y = y;
+	v.z = z;
+	return (v);
 }

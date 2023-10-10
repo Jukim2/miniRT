@@ -6,12 +6,12 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 14:05:54 by kjs               #+#    #+#             */
-/*   Updated: 2023/10/09 15:51:51 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/10 16:46:31 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ray.h"
-#include "vec3.h"
+#include "numft.h"
 #include "object.h"
 #include "parse.h"
 #include <math.h>

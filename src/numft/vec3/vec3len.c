@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_quat.c                                       :+:      :+:    :+:   */
+/*   get_vec3_length.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/09 17:12:50 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/09 17:14:06 by gyoon            ###   ########.fr       */
+/*   Created: 2023/10/01 18:50:55 by gyoon             #+#    #+#             */
+/*   Updated: 2023/10/01 18:52:52 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "quat.h"
-#include <stdio.h>
+#include "numft/vec3.h"
+#include <math.h>
 
-void	print_quat(t_quat q)
+double	vec3len(t_vec3 v)
 {
-	printf("w: %f | x: %f | y: %f | z: %f \n", q.w, q.v.x, q.v.y, q.v.z);
+	return (sqrt(v.x * v.x + v.y * v.y + v.z * v.z));
 }

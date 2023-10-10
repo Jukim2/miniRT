@@ -6,12 +6,13 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 17:56:31 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/09 18:52:16 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/10 16:49:23 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ray.h"
-#include "vec3.h"
+#include "numft.h"
+
 
 // double	hit_circle(t_ray ray, t_shape *shape)
 // {
