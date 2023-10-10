@@ -6,10 +6,11 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 11:13:05 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/09 17:31:15 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/10 16:10:49 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "quat.h"
 #include "vec3.h"
 #include "engine.h"
 #include "object.h"
@@ -18,50 +19,22 @@
 #include "utils.h"
 #include <math.h>
 
-t_vec3	get_color(t_engine *e, t_vec3 px_center)
+int	get_color(t_engine *e, int x, int y)
 {
 	int		sampling;
 	t_ray	ray;
-	t_vec3	sample_pixel;
 	t_vec3	color_vector_sum;
 	t_shape	*hitted_shape;
 
 	sampling = 0;
 	hitted_shape = 0;
 	color_vector_sum = vec3(0, 0, 0);
-	ray.origin = e->objs.camera.coord;
-
-	/* start rotation quaternion */
-	t_vec3 c = cross_vec3(vec3(0, 0, -1), e->objs.camera.forward_vector);
-	if (vec3len(c) > 0.0001 || vec3len(c) < -0.0001)
-		c = norm_vec3(c);
-
-	double cosine = dot_vec3(vec3(0, 0, -1), e->objs.camera.forward_vector);
-	double s_half = sqrt((1.0 - cosine) / 2.0);
-	double c_half = sqrt((1.0 + cosine) / 2.0);
 	
-	// q = cos(θ/2) + (x * sin(θ/2), y * sin(θ/2), z * sin(θ/2))
-	t_quat q = quat(c_half, c.x * s_half, c.y * s_half, c.z * s_half);
-	// print_quat(q);
-	q = norm_quat(q);
-
-	/* end rotation quaternion */
-
+	ray.origin = e->objs.camera.coord;
 	while (sampling < SAMPLE_CNT)
 	{
-		sample_pixel = add_vec3(px_center, vec3((-0.5 + random_double_zerone()) * e->display.px_dt[WD], (-0.5 + random_double_zerone()) * e->display.px_dt[HT], 0));
-		ray.direction = norm_vec3(sub_vec3(sample_pixel, vec3(0, 0, 0)));
-
-
-		t_quat a = quat(0, ray.direction.x, ray.direction.y, ray.direction.z);
-		// t_quat rotated = q * a * q-1;
-		t_quat temp = mul_quat(q, a);
-		t_quat conjugate = get_conj_quat(q);
-		t_quat rotated = mul_quat(temp, conjugate);
-		ray.direction = norm_vec3(vec3(rotated.v.x, rotated.v.y, rotated.v.z));
-
-
-
+		t_vec3 offset = add_vec3(scale_vec3(x + -0.5 + random_double_zerone(), e->display.px_dt[WD]), scale_vec3(y -0.5 + random_double_zerone(), e->display.px_dt[HT]));
+		ray.direction = norm_vec3(add_vec3(e->display.bot_lt_px, offset));
 		color_vector_sum = add_vec3(color_vector_sum, raytrace(ray, e->objs.shape, 50, &hitted_shape));
 		sampling++;
 	}
@@ -71,5 +44,5 @@ t_vec3	get_color(t_engine *e, t_vec3 px_center)
 		color_vector_sum = add_vec3(color_vector_sum, scale_vec3(0.2, hitted_shape->rgb));
 		correct_color(&color_vector_sum, hitted_shape); // 이게 맞나
 	}
-	return (color_vector_sum);
+	return (convert_color_vec3(color_vector_sum));
 }

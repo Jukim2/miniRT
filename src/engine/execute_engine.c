@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 22:38:25 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/09 18:51:41 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/10 14:55:40 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,28 +34,29 @@ int	exit_(void)
 	return (0);
 }
 
+static void	set_vport_img(t_engine *e)
+{
+	int		x;
+	int		y;
+	int		width;
+
+	width = e->img.line_len / 4;
+	x = 0;
+	while (x < WIN_W)
+	{
+		y = 0;
+		while (y < WIN_H)
+		{
+			e->img.addr[(WIN_H - y - 1) * width + x] = get_color(e, x, y);
+			y++;
+		}
+		x++;
+	}
+}
+
 void	execute_engine(t_engine *e)
 {
-	int		i;
-	int		j;
-	t_vec3	px_center;
-	t_vec3	offset;
-
-	i = 0;
-	while (i < WIN_W)
-	{
-		j = 0;
-		while (j < WIN_H)
-		{
-			offset = vec3(i * e->display.px_dt[WD], \
-							j * e->display.px_dt[HT], 0);
-			px_center = add_vec3(e->display.bot_lt_px, offset);
-			e->img.addr[(WIN_H - j - 1) * e->img.line_len / 4 + i] = \
-								convert_color_vec3(get_color(e, px_center));
-			j++;
-		}
-		i++;
-	}
+	set_vport_img(e);
 	mlx_key_hook(e->win, press_key, e);
 	mlx_hook(e->win, BTN_EXIT, 0, &exit_, 0);
 	mlx_put_image_to_window(e->mlx, e->win, e->img.ptr, 0, 0);

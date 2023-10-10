@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 22:17:55 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/08 17:17:11 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/10 15:57:45 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "mlx.h"
 # include "object.h"
 # include "quat.h"
+// # include "quat.h"
 
 # define WIN_W 1280
 # define WIN_H 720
@@ -38,11 +39,12 @@ bot_lt_px	: top_left_pixel
 */
 typedef struct s_display
 {
-	int				res[2];
-	double			vport[2];
-	double			px_dt[2];
-	double			ar;
-	t_vec3			bot_lt_px;
+	int		res[2];
+	double	vport[2];
+	double	ar;
+	t_vec3	bot_lt_px;
+	t_vec3	px_dt[2];
+	t_quat	rot_quat;
 }	t_display;
 
 /*

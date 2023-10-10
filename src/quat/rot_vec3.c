@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color.h                                            :+:      :+:    :+:   */
+/*   rot_vec3.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/07 11:24:23 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/10 14:55:55 by gyoon            ###   ########.fr       */
+/*   Created: 2023/10/10 15:14:50 by gyoon             #+#    #+#             */
+/*   Updated: 2023/10/10 16:07:48 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COLOR_H
-# define COLOR_H
-
 #include "vec3.h"
-#include "object.h"
-#include "engine.h"
+#include "quat.h"
 
-#define SAMPLE_CNT 1
+t_vec3	rot_vec3(t_vec3 v, t_quat rot_quat)
+{
+	t_quat	a;
+	t_quat	result;
 
-/* ===============srcs/color=============== */
-
-void	correct_color(t_vec3 *color_vector_sum, t_shape *hitted_shape);
-int		convert_color_vec3(t_vec3 color_vec3);
-t_vec3	multiply_color_vec3(t_vec3 i, t_vec3 j);
-int		get_color(t_engine *e, int x, int y);
-
-#endif
+	a = vec3_to_quat(v);
+	result = mul_quat(mul_quat(rot_quat, a), get_conj_quat(rot_quat));
+	return (result.v);
+}
