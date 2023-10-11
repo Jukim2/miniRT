@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 11:22:24 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/11 14:11:20 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/11 15:05:41 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,6 @@ t_hit_record	hit_circle(t_ray ray, t_shape *shape);
 t_hit_record	hit_cylinder(t_ray ray, t_shape *shape);
 t_hit_record	hit_plane(t_ray ray, t_shape *shape);
 t_hit_record	hit_sphere(t_ray ray, t_shape *shape);
+void	set_surface_normal_vector(t_ray ray, t_shape *shape, double t);
+
 #endif

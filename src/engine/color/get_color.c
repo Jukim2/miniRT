@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 11:13:05 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/10 21:03:46 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/11 15:09:12 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	get_color(t_engine *e, int x, int y)
 		color_vector_sum = add_vec3(color_vector_sum, raytrace(ray, e->objs.shape, 50, &hitted_shape));
 		sampling++;
 	}
-	color_vector_sum = scale_vec3(1 / SAMPLE_CNT, color_vector_sum);
+	color_vector_sum = scale_vec3(1. / SAMPLE_CNT, color_vector_sum);
 	if (hitted_shape)
 	{
 		color_vector_sum = add_vec3(color_vector_sum, scale_vec3(0.2, hitted_shape->rgb));
