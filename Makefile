@@ -6,7 +6,7 @@
 #    By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/16 16:53:40 by gyoon             #+#    #+#              #
-#    Updated: 2023/10/10 17:38:18 by gyoon            ###   ########.fr        #
+#    Updated: 2023/10/11 01:27:32 by gyoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ endif
 #                                                                              #
 # **************************************************************************** #
 
-SRCS		= ./src/main.c $(wildcard ./src/*/*.c) $(wildcard ./src/*/*/*.c) 
+SRCS		= ./src/main.c $(wildcard ./src/*/*.c) $(wildcard ./src/*/*/*.c) $(wildcard ./src/*/*/*/*.c) 
 OBJS		= $(SRCS:.c=.o)
 
 MLX_PATH	= ./lib/minilibx

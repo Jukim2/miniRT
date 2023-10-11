@@ -39,36 +39,3 @@ t_vec3	raytrace(t_ray ray, t_shape *shape, int depth, t_shape **hitted)
 	}
 	return (vec3(1, 1, 1));
 }
-
-// 만약에 t값이 같으면 뭘 먼저
-t_hit_record	get_hit_record(t_ray ray, t_shape *shape)
-{
-	t_hit_record	record;
-	double			t;
-
-	record.is_hit = 0;
-	record.t = 1000000000;
-	record.hit_shape = 0;
-	while (shape)
-	{
-		if (shape->type == SPHERE)
-			t = hit_sphere(ray, shape->coord, shape->diameter / 2.0);
-		else if (shape->type == CYLINDER)
-			t = hit_cylinder(ray, shape);
-		else if (shape->type == PLANE)
-			t = hit_plane(ray, shape);
-		if (t != -1 && t > 0.001)
-		{
-			if (t < record.t)
-			{	
-				record.is_hit = 1;
-				record.t = t;
-				record.hit_shape = shape;		
-			}
-		}
-		shape = shape->next;
-	}
-	if (record.is_hit)
-		set_surface_normal_vector(ray, record.hit_shape, record.t);
-	return (record);
-}

@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 11:08:02 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/10 21:14:48 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/10 21:55:17 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,12 @@
 #include "object.h"
 #include "ray.h"
 
-t_vec3	random_on_hemisphere(const t_shape *shape)
-{
-	const t_vec3 rand_vector = rand_vec3();
-
-	if (dot_vec3(shape->surface_normal_vector, rand_vector) > 0.)
-		return (rand_vector);
-	else
-		return (scale_vec3(-1.0, rand_vector));
-}
-
 t_vec3	get_reflected_direction(t_ray ray, t_shape *hitted_shape)
 {
 	t_vec3	direction;
 	if (hitted_shape->material == SCATTER)
 	{
-		direction = add_vec3(hitted_shape->surface_normal_vector, random_on_hemisphere(hitted_shape));
+		direction = add_vec3(hitted_shape->surface_normal_vector, rand_vec3_hemisphere(hitted_shape->surface_normal_vector));
 	}
 	else
 	{

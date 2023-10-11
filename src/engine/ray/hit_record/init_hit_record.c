@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color.h                                            :+:      :+:    :+:   */
+/*   init_hit_record.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/07 11:24:23 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/11 01:27:57 by gyoon            ###   ########.fr       */
+/*   Created: 2023/10/10 21:59:44 by gyoon             #+#    #+#             */
+/*   Updated: 2023/10/11 01:26:54 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COLOR_H
-# define COLOR_H
+#include "ray.h"
 
-# include "numft.h"
-# include "object.h"
-# include "engine.h"
-
-#define SAMPLE_CNT 1
-
-/* ===============srcs/color=============== */
-
-void	correct_color(t_vec3 *color_vector_sum, t_shape *hitted_shape);
-int		convert_color_vec3(t_vec3 color_vec3);
-t_vec3	multiply_color_vec3(t_vec3 i, t_vec3 j);
-int		get_color(t_engine *e, int x, int y);
-
-#endif
+void	init_hit_record(t_hit_record *record)
+{
+	record->is_hit = FALSE;
+	record->t = 1000000000;
+	record->hit_shape = 0;
+	record->color = vec3(0, 0, 0);
+	record->point = vec3(0, 0, 0);
+	record->normal = vec3(0, 0, 0);
+}
