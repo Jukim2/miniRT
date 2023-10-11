@@ -35,7 +35,7 @@ t_vec3	raytrace(t_ray ray, t_shape *shape, int depth, t_shape **hitted)
 		light = norm_vec3(sub_vec3(vec3(2, 2, 1), reflected_ray.origin));
 		if (is_shadowed(shape, reflected_ray, light) || dot_vec3(record.normal, light) <= 0)
 			return (vec3(0, 0, 0));
-		return (scale_vec3(dot_vec3(record.normal, light), multiply_color_vec3(record.hit_shape->rgb, raytrace(reflected_ray, shape, depth -1, hitted))));
+		return (scale_vec3(dot_vec3(record.normal, light), multiply_color_vec3(record.color, raytrace(reflected_ray, shape, depth -1, hitted))));
 	}
 	return (vec3(1, 1, 1));
 }

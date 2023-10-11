@@ -1,29 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color.h                                            :+:      :+:    :+:   */
+/*   proj_vec3_to_plane.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/07 11:24:23 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/11 15:21:22 by gyoon            ###   ########.fr       */
+/*   Created: 2023/10/11 15:27:55 by gyoon             #+#    #+#             */
+/*   Updated: 2023/10/11 15:29:53 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COLOR_H
-# define COLOR_H
+#include "numft.h"
 
-# include "numft.h"
-# include "object.h"
-# include "engine.h"
+t_vec3	proj_vec3_to_plane(t_vec3 v, t_vec3 plane_normal)
+{
+	t_vec3	result;
 
-# define SAMPLE_CNT 1
-
-/* ===============srcs/color=============== */
-
-void	correct_color(t_vec3 *color_vector_sum, t_shape *hitted_shape);
-int		convert_color_vec3(t_vec3 color_vec3);
-t_vec3	multiply_color_vec3(t_vec3 i, t_vec3 j);
-int		get_color(t_engine *e, int x, int y);
-
-#endif
+	result = sub_vec3(v, scale_vec3(dot_vec3(v, plane_normal), plane_normal));
+	return (result);
+}
