@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 11:22:24 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/11 15:05:41 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/11 20:38:23 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct s_hit_record
 
 /* ===============srcs/raytrace=============== */
 
-t_vec3	raytrace(t_ray ray, t_shape *shape, int depth, t_shape **hitted);
+t_vec3	raytrace(t_ray ray, t_shape *shape, int depth);
 t_hit_record	get_hit_record(t_ray ray, t_shape *shape);
 void	init_hit_record(t_hit_record *record);
 t_vec3	get_reflected_direction(t_ray ray, t_shape *hitted_shape);
