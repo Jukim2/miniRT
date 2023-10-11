@@ -19,18 +19,18 @@
 
 t_vec3	raytrace(t_ray ray, t_shape *shape, int depth, t_shape **hitted)
 {
-	t_hit_record	record = get_hit_record(ray, shape);
+	t_hit_record	record;
+	t_ray			reflected_ray;
+	t_vec3			light;
 	
 	if (depth <= 0)
 		return (vec3(0, 0, 0));
+	record = get_hit_record(ray, shape);
 	if (record.hit_shape)
 	{
-		t_ray	reflected_ray;
-		t_vec3	light;
-
 		if (!(*hitted))
 			*hitted = record.hit_shape;
-		reflected_ray.origin = add_vec3(ray.origin, scale_vec3(record.t, ray.direction));
+		reflected_ray.origin = record.point;
 		reflected_ray.direction = get_reflected_direction(ray, record.hit_shape);
 		light = norm_vec3(sub_vec3(vec3(2, 2, 1), reflected_ray.origin));
 		if (is_shadowed(shape, reflected_ray, light) || dot_vec3(record.hit_shape->surface_normal_vector, light) <= 0)

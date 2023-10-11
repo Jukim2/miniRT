@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 11:22:24 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/11 01:16:22 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/11 14:11:20 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,10 @@ typedef struct s_ray
 
 typedef struct s_hit_record
 {
-	int		is_hit;
-	t_shape	*hit_shape;
+	t_bool	is_hit;
+	t_bool	is_front;
 	double	t;
+	t_shape	*hit_shape;
 	t_vec3	point;
 	t_vec3	normal;
 	t_vec3	color;
@@ -40,10 +41,8 @@ t_hit_record	get_hit_record(t_ray ray, t_shape *shape);
 void	init_hit_record(t_hit_record *record);
 t_vec3	get_reflected_direction(t_ray ray, t_shape *hitted_shape);
 int		is_shadowed(t_shape *shape, t_ray reflected_ray, t_vec3 light);
-double	hit_circle(t_ray ray, t_shape *shape);
-double	hit_cylinder(t_ray ray, t_shape *shape);
-double	hit_plane(t_ray ray, t_shape *shape);
-double	hit_sphere(t_ray ray, t_vec3 center, double radius);
-void	set_surface_normal_vector(t_ray ray, t_shape *shape, double t);
-
+t_hit_record	hit_circle(t_ray ray, t_shape *shape);
+t_hit_record	hit_cylinder(t_ray ray, t_shape *shape);
+t_hit_record	hit_plane(t_ray ray, t_shape *shape);
+t_hit_record	hit_sphere(t_ray ray, t_shape *shape);
 #endif

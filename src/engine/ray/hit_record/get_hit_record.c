@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 21:50:07 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/11 01:28:50 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/11 14:24:00 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,30 +15,24 @@
 
 t_hit_record	get_hit_record(t_ray ray, t_shape *shape)
 {
-	t_hit_record	record;
-	double			t;
+	t_hit_record	nearest;
+	t_hit_record	curr;
 
-	init_hit_record(&record);
+	init_hit_record(&nearest);
 	while (shape)
 	{
 		if (shape->type == SPHERE)
-			t = hit_sphere(ray, shape->coord, shape->diameter / 2.0); // hit function returns hit record
-		else if (shape->type == CYLINDER)
-			t = hit_cylinder(ray, shape);
+			curr = hit_sphere(ray, shape);
+		// else if (shape->type == CYLINDER)
+		// 	curr = hit_cylinder(ray, shape);
 		else if (shape->type == PLANE)
-			t = hit_plane(ray, shape);
-		if (t != -1 && t > 0.001)
+			curr = hit_plane(ray, shape);
+		if (curr.t != -1 && curr.t > 0.001)
 		{
-			if (t < record.t)
-			{	
-				record.is_hit = 1;
-				record.t = t;
-				record.hit_shape = shape;		
-			}
+			if (curr.t < nearest.t)
+				nearest = curr;
 		}
 		shape = shape->next;
 	}
-	if (record.is_hit)
-		set_surface_normal_vector(ray, record.hit_shape, record.t);
-	return (record);
+	return (nearest);
 }
