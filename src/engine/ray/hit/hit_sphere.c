@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 16:42:43 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/24 17:27:41 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/26 22:58:58 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "numft.h"
 #include <math.h>
 
-static double	get_minimum_t(double a, double b, double c)
+static double	get_minimum_root(double a, double b, double c)
 {
 	double	t1;
 	double	t2;
@@ -45,7 +45,7 @@ t_hit_record	hit_sphere(t_ray ray, t_shape *shape)
 	else if (compare_double((-b + sqrt(b * b - a * c)) / a, 0.) < 0)
 		return (record);
 	record.is_hit = TRUE;
-	record.t = get_minimum_t(a, b, c);
+	record.t = get_minimum_root(a, b, c);
 	record.hit_shape = shape;
 	record.point = add_vec3(ray.origin, scale_vec3(record.t, ray.direction));
 	record.normal = norm_vec3(sub_vec3(record.point, shape->coord));

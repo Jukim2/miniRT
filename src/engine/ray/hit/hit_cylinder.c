@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 22:36:40 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/11 15:37:28 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/26 23:55:19 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,25 @@
 
 #include <stdio.h>
 
-t_hit_record	hit_cylinder(t_ray ray, t_shape *shape)
+static double	get_minimum_root(double a, double b, double c)
+{
+	double	t1;
+	double	t2;
+
+	t1 = (-b + sqrt(b * b - a * c)) / a;
+	t2 = (-b - sqrt(b * b - a * c)) / a;
+	if (compare_double(t2, 0.) <= 0)
+		return t1;
+	else
+		return t2;
+}
+
+static t_hit_record	hit_cylinder_side(t_ray ray, t_shape *shape)
 {
 	t_hit_record	record;
 	double			a;
 	double			b;
 	double			c;
-	double			d;
 
 	init_hit_record(&record);
 	t_vec3	proj = proj_vec3_to_plane(ray.direction, shape->form_vector);
@@ -31,69 +43,87 @@ t_hit_record	hit_cylinder(t_ray ray, t_shape *shape)
 	a = dot_vec3(proj, proj);
 	b = dot_vec3(temp, proj);
 	c = dot_vec3(temp, temp) - (shape->diameter / 2.0) * (shape->diameter / 2.0);
-	d = b * b - a * c;
-	if (d < 0)
-	{
-		t_shape	up;
-		t_shape	down;
+	if (compare_double((b * b - a * c), 0.) <= 0)
 		return (record);
-	}
-	// else if d == 0
+	else if (compare_double((-b + sqrt(b * b - a * c)) / a, 0.) < 0)
+		return (record);
+	double t1 = get_minimum_root(a, b, c);
+	t_vec3 cp = add_vec3(ray.origin, scale_vec3(t1, ray.direction));
+	if (vec3len(sub_vec3(cp, shape->coord)) * vec3len(sub_vec3(cp, shape->coord)) - (shape->diameter / 2.) * (shape->diameter / 2.) > (shape->height / 2) * (shape->height / 2))
+		return (record);
+	record.is_hit = TRUE;
+	record.t = get_minimum_root(a, b, c);
+	record.hit_shape = shape;
+	record.point = add_vec3(ray.origin, scale_vec3(record.t, ray.direction));
+	record.normal = proj_vec3_to_plane(sub_vec3(record.point, shape->coord), shape->form_vector);
+	record.color = shape->rgb;
+	record.is_front = dot_vec3(ray.direction, record.normal) > 0.;
+	return (record);
+}
+
+double	min_double2(double a, double b)
+{
+	if (compare_double(a, b) <= 0)
+		return (0);
 	else
+		return (1);
+}
+
+double	min_double3(double a, double b, double c)
+{
+	double	min;
+
+	min = min_double2(a, b);
+	min = min_double2(min, c);
+	return (min);
+}
+
+t_hit_record	hit_cylinder(t_ray ray, t_shape *shape)
+{
+	t_hit_record	side;
+	t_hit_record	up;
+	t_hit_record	down;
+
+	side = hit_cylinder_side(ray, shape);
+	up = hit_circle(ray, \
+					add_vec3(shape->coord, scale_vec3(shape->height / 2, shape->form_vector)), \
+					shape->form_vector, \
+					shape->diameter / 2, \
+					shape->rgb);
+	down = hit_circle(ray, \
+		add_vec3(shape->coord, scale_vec3(-shape->height / 2, invert_vec3(shape->form_vector))), \
+		invert_vec3(shape->form_vector), \
+		shape->diameter / 2, \
+		shape->rgb);
+	if (side.is_hit && up.is_hit)
 	{
-		double t1 = (-b - sqrt(d)) / a;
-		double t2 = (-b + sqrt(d)) / a;
-		t_vec3 contact_point1 = add_vec3(ray.origin, scale_vec3(t1, ray.direction));
-		t_vec3 contact_point2 = add_vec3(ray.origin, scale_vec3(t2, ray.direction));
-
-		int a = vec3len(sub_vec3(contact_point1, shape->coord)) * vec3len(sub_vec3(contact_point1, shape->coord)) - (shape->diameter / 2.) *(shape->diameter / 2.) <= (shape->height / 2)* (shape->height / 2);
-		int b = vec3len(sub_vec3(contact_point2, shape->coord)) * vec3len(sub_vec3(contact_point2, shape->coord)) - (shape->diameter / 2.) *(shape->diameter / 2.) <= (shape->height / 2) * (shape->height / 2);
-		
-		if (a == 0 && b == 0)
-			return (record);
-		else if (a + b == 1)
-		{
-			t_shape upper_plane;
-			upper_plane.form_vector = shape->form_vector;
-			upper_plane.coord = add_vec3(shape->coord, scale_vec3(shape->height / 2., shape->form_vector));
-
-			t_shape lower_plane;
-			lower_plane.form_vector = invert_vec3(shape->form_vector);
-			lower_plane.coord = add_vec3(shape->coord, scale_vec3(shape->height /2., lower_plane.form_vector));
-
-			t_hit_record up = hit_plane(ray, &upper_plane);
-			t_hit_record down = hit_plane(ray, &lower_plane);
-			if (up.t < t2)
-			{
-				record.hit_shape = shape;
-				record.is_hit = TRUE;
-				record.t = up.t;
-				record.point = add_vec3(ray.origin, scale_vec3(record.t, ray.direction));
-				record.normal = shape->form_vector;
-				record.color = shape->rgb;
-
-				return (record);
-			}
-			else
-			{
-				record.hit_shape = shape;
-				record.is_hit = TRUE;
-				record.t = t2;
-				record.point = add_vec3(ray.origin, scale_vec3(record.t, ray.direction));
-				record.normal = proj_vec3_to_plane(sub_vec3(record.point, shape->coord), shape->form_vector);
-				record.color = shape->rgb;
-			}
-			return (record);
-		}
+		if (min_double2(side.t, up.t) == 0)
+			return (side);
 		else
-		{
-			record.hit_shape = shape;
-			record.is_hit = TRUE;
-			record.t = t1;
-			record.point = add_vec3(ray.origin, scale_vec3(record.t, ray.direction));
-			record.normal = proj_vec3_to_plane(sub_vec3(record.point, shape->coord), shape->form_vector);
-			record.color = shape->rgb;
-			return (record);
-		}
+			return (up);
+
 	}
+	else if (up.is_hit && down.is_hit)
+	{
+		// printf("?\n");
+		if (min_double2(up.t, down.t) == 0)
+			return (up);
+		else
+			return (down);
+	}
+	else if (side.is_hit && down.is_hit)
+	{
+		if (min_double2(side.t, down.t) == 0)
+			return (side);
+		else
+			return (down);
+	}
+	else if (side.is_hit)
+		return (side);
+	else if (up.is_hit)
+		return (up);
+	else if (down.is_hit)
+		return (down);
+	else
+		return (side);
 }
