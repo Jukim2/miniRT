@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_module.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: kjs <kjs@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 13:21:53 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/10 16:49:10 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/26 16:42:20 by kjs              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,19 @@ int	parse_id(t_objects *objects, char *line)
 	while (line[i] && line[i] != ' ')
 		i++;
 	if (ft_strncmp(line, "A", i) == 0)
-		return (AMBIENT_LIGHT);
+		return (PARSE_AMBIENT_LIGHT);
 	else if (ft_strncmp(line, "C", i) == 0)
-		return (CAMERA);
+		return (PARSE_CAMERA);
 	else if (ft_strncmp(line, "L", i) == 0)
-		return (LIGHT);
+		return (PARSE_LIGHT);
 	else if (ft_strncmp(line, "pl", i) == 0)
-		return (PLANE);
+		return (PARSE_PLANE);
 	else if (ft_strncmp(line, "sp", i) == 0)
-		return (SPHERE);
+		return (PARSE_SPHERE);
 	else if (ft_strncmp(line, "cy", i) == 0)
-		return (CYLINDER);
-	else
-		return (ERROR);
+		return (PARSE_CYLINDER);
+	printf("Error\nWrong Character\n");
+	return (PARSE_ERROR);
 }
 
 int	parse_double(double *f, char *str, int i)
@@ -70,14 +70,14 @@ int	parse_double(double *f, char *str, int i)
 int	parse_doubles(t_vec3 *vec, char *line, int idx)
 {
 	idx = parse_double(&(*vec).x, line, idx);
-	// printf("%f,",floats[0]);
+	// printf("%f,",(*vec).x);
 	if (line[idx] != ',' || (('0' > line[idx + 1] || line[idx + 1] > '9') && line[idx + 1] != '-' && line[idx + 1] != '+'))
 		return (0);
 	idx = parse_double(&(*vec).y, line, ++idx);
-	// printf("%f,",floats[1]);
+	// printf("%f,",(*vec).y);
 	if (line[idx] != ',' || (('0' > line[idx + 1] || line[idx + 1] > '9') && line[idx + 1] != '-' && line[idx + 1] != '+'))
 		return (0);
 	idx = parse_double(&(*vec).z, line, ++idx);
-	// printf("%f\n",floats[2]);
+	// printf("%f\n",(*vec).z);
 	return (idx);
 }

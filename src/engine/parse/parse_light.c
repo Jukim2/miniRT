@@ -6,7 +6,7 @@
 /*   By: kjs <kjs@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 13:13:48 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/04 01:34:14 by kjs              ###   ########.fr       */
+/*   Updated: 2023/10/26 14:35:42 by kjs              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,8 @@ void	parse_light(t_objects *objects, char *line)
 {
 	int	idx;
 
-	idx = parse_doubles(&objects->light.coord, line, 1);
-	check_misconfiguration(objects, line, idx);
-	idx = parse_double(&objects->light.light_ratio, line, idx);
-	check_misconfiguration(objects, line, idx);
-	idx = parse_doubles(&objects->light.rgb, line, idx);
+	idx = parse_doubles(&objects->light.coord, line, check_misconfiguration(objects, line, 1));
+	idx = parse_double(&objects->light.light_ratio, line, check_misconfiguration(objects, line, idx));
+	idx = parse_doubles(&objects->light.rgb, line, check_misconfiguration(objects, line, idx));
 	check_endconfiguration(objects, line, idx);
 }
