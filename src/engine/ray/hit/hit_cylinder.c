@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 22:36:40 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/26 23:55:19 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/27 00:12:57 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ t_hit_record	hit_cylinder(t_ray ray, t_shape *shape)
 					shape->diameter / 2, \
 					shape->rgb);
 	down = hit_circle(ray, \
-		add_vec3(shape->coord, scale_vec3(-shape->height / 2, invert_vec3(shape->form_vector))), \
+		add_vec3(shape->coord, scale_vec3(-shape->height / 2, shape->form_vector)), \
 		invert_vec3(shape->form_vector), \
 		shape->diameter / 2, \
 		shape->rgb);
