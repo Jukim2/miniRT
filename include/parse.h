@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: kjs <kjs@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 13:13:27 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/10 17:37:56 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/26 15:57:31 by kjs              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,23 @@
 
 #include "object.h"
 
+enum e_parse
+{
+    PARSE_AMBIENT_LIGHT = 0,
+    PARSE_CAMERA = 1,
+    PARSE_LIGHT = 2,
+    PARSE_SPHERE = 3,
+    PARSE_PLANE = 4,
+    PARSE_CYLINDER = 5,
+    PARSE_ERROR = 6
+};
+
 /* ===============srcs/parser=============== */
 
 void	parse_camera(t_objects *objects, char *line);
 void	parse_sphere(t_objects *objects, char *line);
 void	clean_program(t_objects *objects, char *line);
-void	check_misconfiguration(t_objects *objects, char *line, int idx);
+int		check_misconfiguration(t_objects *objects, char *line, int idx);
 void	check_endconfiguration(t_objects *objects, char *line, int idx);
 void	add_shape(t_shape **shape, t_shape *new);
 int		parse_id(t_objects *objects, char *line);
@@ -33,5 +44,6 @@ void	initialize_parsers(void (*parsers[])(t_objects *, char *));
 void	parse_line(void (*parsers[])(t_objects *, char *), t_objects *objects, char *line);
 void	parse_cylinder(t_objects *objects, char *line);
 void	parse_plane(t_objects *objects, char *line);
+int		is_wrong_file_name(char *file_name);
 
 #endif

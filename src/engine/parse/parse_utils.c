@@ -6,27 +6,45 @@
 /*   By: kjs <kjs@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 14:52:57 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/04 01:41:30 by kjs              ###   ########.fr       */
+/*   Updated: 2023/10/26 22:46:10 by kjs              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "object.h"
+#include "libft.h"
+#include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
 
 void	clean_program(t_objects *objects, char *line)
 {
-    // ~
+	t_shape	*iter;
+	t_shape	*tmp;
+
+	iter = objects->shape;
+    while (iter)
+	{
+		tmp = iter;
+		iter = iter->next;
+		free(iter);
+	}
 	exit (0);
 }
 
-void	check_misconfiguration(t_objects *objects, char *line, int idx)
+int	check_misconfiguration(t_objects *objects, char *line, int idx)
 {
-	if (line[idx] != ' ' && line[idx] != '\n' && line[idx] != '\0')
+	char	ch;
+	
+	while (line[idx] == ' ')
+		idx++;
+	ch = line[idx];
+	if (ch != '\n' && ch != '\0' && ch != '+'
+		&& ch != '-' && (ch < '0' || ch > '9'))
 	{
-		perror("Error: Argument Error");
+		printf("Error\nFile misconfiguration\n");
 		clean_program(objects, line);
 	}
+	return (idx);
 }
 
 void	check_endconfiguration(t_objects *objects, char *line, int idx)
@@ -35,7 +53,7 @@ void	check_endconfiguration(t_objects *objects, char *line, int idx)
 	{
 		if (line[idx] != ' ' && line[idx] != '\n')
 		{
-			perror("Error: line end error");
+			printf("Error\nFile misconfiguration\n");
 			clean_program(objects, line);
 		}
 		idx++;
@@ -55,4 +73,21 @@ void	add_shape(t_shape **shape, t_shape *new)
 			tmp = tmp->next;
 		tmp->next = new;
 	}
+}
+
+int	is_wrong_file_name(char *file_name)
+{
+	const int	len = ft_strlen(file_name);
+	const int	fd = open(file_name, O_DIRECTORY);
+	
+	if (len < 3)
+		return (1);
+	else if (fd >= 0)
+	{
+		close(fd);
+		return (1);
+	}
+	else
+		return (ft_strncmp(&file_name[len - 3], ".rt", 3));
+	
 }

@@ -6,7 +6,7 @@
 /*   By: kjs <kjs@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 13:13:52 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/04 13:50:04 by kjs              ###   ########.fr       */
+/*   Updated: 2023/10/26 14:35:58 by kjs              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,9 @@ void	parse_plane(t_objects *objects, char *line)
 	if (!tmp)
 		clean_program(objects, line);
 	tmp->type = PLANE;
-	idx = parse_doubles(&tmp->coord, line, 2);
-	check_misconfiguration(objects, line, idx);
-	idx = parse_doubles(&tmp->form_vector, line, idx);
-	check_misconfiguration(objects, line, idx);
-	idx = parse_doubles(&tmp->rgb, line, idx);
+	idx = parse_doubles(&tmp->coord, line, check_misconfiguration(objects, line, 2));
+	idx = parse_doubles(&tmp->form_vector, line, check_misconfiguration(objects, line, idx));
+	idx = parse_doubles(&tmp->rgb, line, check_misconfiguration(objects, line, idx));
 	check_endconfiguration(objects, line, idx);
 	add_shape(&objects->shape, tmp);
 }
