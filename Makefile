@@ -1,7 +1,7 @@
 # FILES = HumanA.cpp HumanB.cpp Weapon.cpp main.cpp
 # SRCS = $(addprefix srcs/, $(FILES))
 # SRCS = parse.c get_next_line.c get_next_line_utils.c main.c
-SRCS = $(wildcard */*/*.c)  
+SRCS = $(wildcard srcs/*/*.c)  
 OBJS = $(SRCS:.c=.o)
 NAME = miniRT
 LIBFT = libft.a

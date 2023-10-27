@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jukim2 <jukim2@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kjs <kjs@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 00:59:00 by kjs               #+#    #+#             */
-/*   Updated: 2023/10/08 11:51:12 by jukim2           ###   ########.fr       */
+/*   Updated: 2023/10/28 01:22:18 by kjs              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,20 @@ int	main(int argc, char **argv)
 
 	init_engine(&e, argv[1]);
 	int		w, h;
-	earth.ptr = mlx_xpm_file_to_image(e.mlx, "earth.xpm", &w, &h);
+	earth.ptr = mlx_xpm_file_to_image(e.mlx, "earthmap.xpm", &w, &h);
 	earth.addr = (unsigned int *)mlx_get_data_addr(earth.ptr, \
 													&earth.bpp, \
 													&earth.line_len, \
 													&earth.endian);
+	int		w2, h2;												
+	earth_bump.ptr = mlx_xpm_file_to_image(e.mlx, "bump.xpm", &w2, &h2);
+	earth_bump.addr = (unsigned int *)mlx_get_data_addr(earth_bump.ptr, \
+													&earth_bump.bpp, \
+													&earth_bump.line_len, \
+													&earth_bump.endian);
+											
+	printf("w : %d h : %d\n", w, h);
 	execute_engine(&e);
-	// printf("w : %d h : %d\n", w, h);
 	// t_image new_img;
 	// new_img.ptr = mlx_new_image(e.mlx, w, h);
 	// new_img.addr = (unsigned int*)mlx_get_data_addr(new_img.ptr, \

@@ -42,6 +42,7 @@ t_vec3	raytrace(t_ray ray, t_shape *shape, int depth, t_shape **hitted)
 		if (is_shadowed(shape, reflected_ray, light) || dot_vec3(hitted_shape->surface_normal_vector, light) <= 0)
 			return (vec3(0, 0, 0));
 		return (scale_vec3(dot_vec3(hitted_shape->surface_normal_vector, light), multiply_color_vec3(hitted_shape->rgb, raytrace(reflected_ray, shape, depth -1, hitted))));
+		// return (scale_vec3(dot_vec3(hitted_shape->bump_normal_vector, light), multiply_color_vec3(hitted_shape->rgb, raytrace(reflected_ray, shape, depth -1, hitted))));
 	}
 	return (vec3(1, 1, 1));
 }
@@ -82,11 +83,24 @@ t_shape	*find_hitted_shape(t_ray ray, t_shape *shape, double *t)
 		t_vec3 point = hitted_shape->surface_normal_vector;
 		t_vec3 point_no_y = norm_vec3(vec3(point.x, 0, point.z));
 
-		double y_angle = acos(dot_vec3(point, ey)) * 180. / 3.14;
-		double x_angle = acos(dot_vec3(point_no_y, ez)) * 180. / 3.14;
+		double y_angle = acos(dot_vec3(point, ey)) * 180. / 3.141592;
+		double x_angle = acos(dot_vec3(point_no_y, ez)) * 180. / 3.141592;
 		if (point_no_y.x < 0)
 			x_angle *= -1;
-		unsigned int color = earth.addr[(int)(y_angle/180. * 1024.) * earth.line_len / 4 + (int)(x_angle/180. * 2048.) + 1024];
+		hitpoint = sub_vec3(hitpoint, hitted_shape->coord);
+		double theta = acos(hitpoint.y/(hitted_shape->diameter/2.));
+		double phi = atan2(-hitpoint.x, -hitpoint.z) + 3.141592;
+		unsigned int color = earth.addr[(int)(theta/3.141592 * 500.) * earth.line_len / 4 + (int)(phi/3.141592/2 * 1000.) + 500];
+		// unsigned int color = earth.addr[(int)(y_angle/180. * 500.) * earth.line_len / 4 + (int)(x_angle/180. * 1000.) + 500];
+		
+		unsigned int normal = earth_bump.addr[(int)(theta/3.141592 * 2048.) * earth_bump.line_len / 4 + (int)(phi/3.141592/2 * 4096.) + 2048];
+		int x = (normal >> 16) & 0xff;
+		int y = (normal >> 8) & 0xff;
+		int z = normal & 0xff;
+		// printf(" %d %d %d\n", x, y, z);
+		// t_vec3 normal_vec = norm_vec3(vec3(x, y, z));
+		t_vec3 normal_vec = norm_vec3(sub_vec3(scale_vec3(2, vec3((double)x/255., (double)y/255., (double)z/255.)), vec3(1,1,1)));
+		hitted_shape->bump_normal_vector = normal_vec;
 
 		// printf("dot : %f | y : %f ", dot_vec3(point, ey), acos(dot_vec3(point, ey)));
 		// printf("세로 : %f 가로 : %f\n", y_angle, x_angle);

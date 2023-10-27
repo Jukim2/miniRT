@@ -6,7 +6,7 @@
 /*   By: kjs <kjs@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 22:17:55 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/07 23:02:11 by kjs              ###   ########.fr       */
+/*   Updated: 2023/10/27 22:44:19 by kjs              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # define WIN_H 1024
 
 struct s_image earth;
+struct s_image earth_bump;
 
 enum e_display
 {

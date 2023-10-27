@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_color.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jukim2 <jukim2@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kjs <kjs@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 11:13:05 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/08 12:03:23 by jukim2           ###   ########.fr       */
+/*   Updated: 2023/10/28 01:25:29 by kjs              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ t_vec3	get_color(t_engine *e, t_vec3 px_center)
 		color_vector_sum = add_vec3(color_vector_sum, raytrace(ray, e->objs.shape, 50, &hitted_shape));
 		sampling++;
 	}
-	color_vector_sum = scale_vec3(1 / SAMPLE_CNT, color_vector_sum);
+	color_vector_sum = scale_vec3(1. / SAMPLE_CNT, color_vector_sum);
 	if (hitted_shape)
 	{
 		color_vector_sum = add_vec3(color_vector_sum, scale_vec3(0.2, hitted_shape->rgb));

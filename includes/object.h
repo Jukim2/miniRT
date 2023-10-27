@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: kjs <kjs@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 16:45:23 by kjs               #+#    #+#             */
-/*   Updated: 2023/10/06 15:07:12 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/28 01:16:36 by kjs              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct s_shape
 	double			height;
 	t_vec3		coord;
 	t_vec3		surface_normal_vector;
+	t_vec3		bump_normal_vector;
 	t_vec3		form_vector;
 	t_vec3		rgb;
 }	t_shape;
