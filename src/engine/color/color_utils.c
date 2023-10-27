@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: kjs <kjs@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 19:33:12 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/10 16:46:03 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/27 12:45:58 by kjs              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@
 
 void	correct_color(t_vec3 *color_vector_sum, t_shape *hitted_shape)
 {
-	if (color_vector_sum->x > hitted_shape->rgb.x)
-		color_vector_sum->x = hitted_shape->rgb.x;
-	if (color_vector_sum->y > hitted_shape->rgb.y)
-		color_vector_sum->y = hitted_shape->rgb.y;
-	if (color_vector_sum->z > hitted_shape->rgb.z)
-		color_vector_sum->z = hitted_shape->rgb.z;
+	if (color_vector_sum->x > 1)
+		color_vector_sum->x = 1;
+	if (color_vector_sum->y > 1)
+		color_vector_sum->y = 1;
+	if (color_vector_sum->z > 1)
+		color_vector_sum->z = 1;
 }
 
 t_vec3	multiply_color_vec3(t_vec3 i, t_vec3 j)
