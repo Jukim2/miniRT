@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 22:36:40 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/27 00:12:57 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/27 17:44:02 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,13 +78,23 @@ double	min_double3(double a, double b, double c)
 	return (min);
 }
 
-t_hit_record	hit_cylinder(t_ray ray, t_shape *shape)
+static int	min_idx_double3(double a, double b, double c)
 {
-	t_hit_record	side;
+	if (compare_double(a, b) <= 0 && compare_double(a, c) <= 0)
+		return (a);
+	else if (compare_double(b, a) <= 0 && compare_double(b, c) <= 0)
+		return (b);
+	else
+		return (c);
+}
+
+t_hit_record	hit_cylinder_base(t_ray ray, t_shape *shape)
+{
+	// t_hit_record	record;
 	t_hit_record	up;
 	t_hit_record	down;
 
-	side = hit_cylinder_side(ray, shape);
+	// init_hit_record(&record);
 	up = hit_circle(ray, \
 					add_vec3(shape->coord, scale_vec3(shape->height / 2, shape->form_vector)), \
 					shape->form_vector, \
@@ -95,35 +105,30 @@ t_hit_record	hit_cylinder(t_ray ray, t_shape *shape)
 		invert_vec3(shape->form_vector), \
 		shape->diameter / 2, \
 		shape->rgb);
-	if (side.is_hit && up.is_hit)
-	{
-		if (min_double2(side.t, up.t) == 0)
-			return (side);
-		else
-			return (up);
+	if (up.is_hit)
+		return (up);
+	else
+		return (down);
+}
 
-	}
-	else if (up.is_hit && down.is_hit)
+t_hit_record	hit_cylinder(t_ray ray, t_shape *shape)
+{
+	t_hit_record	side;
+	t_hit_record	base;
+	
+	side = hit_cylinder_side(ray, shape);
+	base = hit_cylinder_base(ray, shape);
+	if (side.is_hit && base.is_hit)
 	{
-		// printf("?\n");
-		if (min_double2(up.t, down.t) == 0)
-			return (up);
-		else
-			return (down);
-	}
-	else if (side.is_hit && down.is_hit)
-	{
-		if (min_double2(side.t, down.t) == 0)
+		if (compare_double(side.t, base.t) <= 0)
 			return (side);
 		else
-			return (down);
+			return (base);
 	}
 	else if (side.is_hit)
 		return (side);
-	else if (up.is_hit)
-		return (up);
-	else if (down.is_hit)
-		return (down);
+	else if (base.is_hit)
+		return (base);
 	else
 		return (side);
 }
