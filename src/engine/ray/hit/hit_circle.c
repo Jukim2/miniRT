@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 17:56:31 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/26 23:54:46 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/27 00:23:57 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_hit_record	hit_circle(t_ray ray, t_vec3 c, t_vec3 n, double r, t_vec3 rgb)
 	circle.height = 0;
 	circle.coord = c;
 	circle.form_vector = n;
-	circle.rgb = vec3(255, 0, 0);
+	circle.rgb = rgb;
 	record = hit_plane(ray, &circle);
 	if (!record.is_hit)
 	{
@@ -46,7 +46,7 @@ t_hit_record	hit_circle(t_ray ray, t_vec3 c, t_vec3 n, double r, t_vec3 rgb)
 		else
 		{
 			// printf("t : %f \n", record.t);
-			record.color = vec3(255, 0, 0);
+			record.color = rgb;
 			return (record);
 		}
 	}
