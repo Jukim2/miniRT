@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 11:13:05 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/30 13:51:59 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/30 15:39:54 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,20 @@
 #include "ray.h"
 #include "color.h"
 #include <math.h>
+
+t_vec3	get_specular_color(t_vec3 light_coord, t_hit_record r)
+{
+	t_vec3	light_vector;
+	t_vec3	reflected_vector;
+	t_vec3	view_vector;
+	t_vec3	specular_color;
+
+	light_vector = norm_vec3(sub_vec3(r.point, light_coord));
+	reflected_vector = norm_vec3(add_vec3(light_vector, scale_vec3(2, r.normal)));
+	view_vector = norm_vec3(sub_vec3(vec3(0, 0, 1), r.point));
+	specular_color = scale_vec3(pow(dot_vec3(view_vector, reflected_vector), 15), vec3(1, 1, 1));
+	return (specular_color);
+}
 
 int	get_color(t_engine *e, int x, int y)
 {
@@ -38,8 +52,11 @@ int	get_color(t_engine *e, int x, int y)
 	t_hit_record r = get_hit_record(ray, e->objs.shape);
 	if (r.is_hit)
 	{
-		color_vector_sum = add_vec3(color_vector_sum, scale_vec3(0.2, r.rgb));
+		color_vector_sum = add_vec3(color_vector_sum, scale_vec3(e->objs.ambient_light.light_ratio, r.rgb));
+		color_vector_sum = add_vec3(color_vector_sum, get_specular_color(e->objs.light.coord, r));
+		// color_vector_sum = add_vec3(color_vector_sum, scale_vec3(0.2, r.rgb));
 		correct_color(&color_vector_sum, r.rgb); // 이게 맞나
+		
 	}
 	return (convert_color_vec3(color_vector_sum));
 }
