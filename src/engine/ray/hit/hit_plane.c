@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 19:02:19 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/24 17:10:57 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/30 13:55:21 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,8 @@ t_hit_record	hit_plane(t_ray ray, t_shape *shape)
 	record.is_hit = TRUE;
 	record.is_front = TRUE;
 	record.t = t;
-	record.hit_shape = shape;
 	record.point = add_vec3(ray.origin, scale_vec3(record.t, ray.direction));
-	record.color = shape->rgb;
+	record.rgb = shape->rgb;
 	if (dot_vec3(ray.direction, shape->form_vector) > 0.)
 		record.normal = shape->form_vector;
 	else

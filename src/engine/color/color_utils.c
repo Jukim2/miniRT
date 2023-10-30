@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 19:33:12 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/10 16:46:03 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/30 13:51:39 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 #include "numft.h"
 #include <math.h>
 
-void	correct_color(t_vec3 *color_vector_sum, t_shape *hitted_shape)
+void	correct_color(t_vec3 *color_vector_sum, t_vec3 rgb)
 {
-	if (color_vector_sum->x > hitted_shape->rgb.x)
-		color_vector_sum->x = hitted_shape->rgb.x;
-	if (color_vector_sum->y > hitted_shape->rgb.y)
-		color_vector_sum->y = hitted_shape->rgb.y;
-	if (color_vector_sum->z > hitted_shape->rgb.z)
-		color_vector_sum->z = hitted_shape->rgb.z;
+	if (color_vector_sum->x > rgb.x)
+		color_vector_sum->x = rgb.x;
+	if (color_vector_sum->y > rgb.y)
+		color_vector_sum->y = rgb.y;
+	if (color_vector_sum->z > rgb.z)
+		color_vector_sum->z = rgb.z;
 }
 
 t_vec3	multiply_color_vec3(t_vec3 i, t_vec3 j)

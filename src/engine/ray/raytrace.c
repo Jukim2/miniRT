@@ -26,14 +26,14 @@ t_vec3	raytrace(t_ray ray, t_shape *shape, int depth)
 	if (depth <= 0)
 		return (vec3(0, 0, 0));
 	record = get_hit_record(ray, shape);
-	if (record.hit_shape)
+	if (record.is_hit)
 	{
 		reflected_ray.origin = record.point;
-		reflected_ray.direction = get_reflected_direction(ray, record.hit_shape);
+		reflected_ray.direction = get_reflected_direction(ray, record);
 		light = norm_vec3(sub_vec3(vec3(2, 2, 1), reflected_ray.origin));
 		if (is_shadowed(shape, reflected_ray, light) || dot_vec3(record.normal, light) <= 0)
 			return (vec3(0, 0, 0));
-		return (scale_vec3(dot_vec3(record.normal, light), multiply_color_vec3(record.color, raytrace(reflected_ray, shape, depth -1))));
+		return (scale_vec3(dot_vec3(record.normal, light), multiply_color_vec3(record.rgb, raytrace(reflected_ray, shape, depth -1))));
 	}
 	return (vec3(1, 1, 1));
 }

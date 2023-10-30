@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 17:56:31 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/27 00:23:57 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/30 13:55:40 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_hit_record	hit_circle(t_ray ray, t_vec3 c, t_vec3 n, double r, t_vec3 rgb)
 		else
 		{
 			// printf("t : %f \n", record.t);
-			record.color = rgb;
+			record.rgb = rgb;
 			return (record);
 		}
 	}

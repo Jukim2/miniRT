@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 11:22:24 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/26 23:54:53 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/30 13:54:37 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,9 @@ typedef struct s_hit_record
 	t_bool	is_hit;
 	t_bool	is_front;
 	double	t;
-	t_shape	*hit_shape;
 	t_vec3	point;
 	t_vec3	normal;
-	t_vec3	color;
+	t_vec3	rgb;
 }	t_hit_record;
 
 /* ===============srcs/raytrace=============== */
@@ -39,7 +38,7 @@ typedef struct s_hit_record
 t_vec3	raytrace(t_ray ray, t_shape *shape, int depth);
 t_hit_record	get_hit_record(t_ray ray, t_shape *shape);
 void	init_hit_record(t_hit_record *record);
-t_vec3	get_reflected_direction(t_ray ray, t_shape *hitted_shape);
+t_vec3	get_reflected_direction(t_ray ray, t_hit_record record);
 int		is_shadowed(t_shape *shape, t_ray reflected_ray, t_vec3 light);
 t_hit_record	hit_circle(t_ray ray, t_vec3 c, t_vec3 n, double r, t_vec3 rgb);
 t_hit_record	hit_cylinder(t_ray ray, t_shape *shape);

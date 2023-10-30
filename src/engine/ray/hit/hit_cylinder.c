@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 22:36:40 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/30 13:47:37 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/30 13:55:11 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,9 @@ static t_hit_record	hit_cylinder_side(t_ray ray, t_shape *shape)
 		return (record);
 	record.is_hit = TRUE;
 	record.t = get_minimum_root(a, b, c);
-	record.hit_shape = shape;
 	record.point = add_vec3(ray.origin, scale_vec3(record.t, ray.direction));
 	record.normal = proj_vec3_to_plane(sub_vec3(record.point, shape->coord), shape->form_vector);
-	record.color = shape->rgb;
+	record.rgb = shape->rgb;
 	record.is_front = dot_vec3(ray.direction, record.normal) > 0.;
 	return (record);
 }
