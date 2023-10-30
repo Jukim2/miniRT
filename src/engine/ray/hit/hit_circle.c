@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 17:56:31 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/30 13:55:40 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/30 15:00:33 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,39 +15,18 @@
 
 #include <stdio.h>
 
-t_hit_record	hit_circle(t_ray ray, t_vec3 c, t_vec3 n, double r, t_vec3 rgb)
+t_hit_record	hit_circle(t_ray ray, t_shape *shape)
 {
-	t_shape			circle;
-	t_hit_record	record;
-	t_vec3			inter_point;
+	t_hit_record	hr;
 
-	circle.next = 0;
-	circle.type = PLANE;
-	circle.face = 1;
-	circle.material = 0;
-	circle.diameter = 2 * r;
-	circle.height = 0;
-	circle.coord = c;
-	circle.form_vector = n;
-	circle.rgb = rgb;
-	record = hit_plane(ray, &circle);
-	if (!record.is_hit)
-	{
-		return (record);
-	}
+	hr = hit_plane(ray, shape);
+	if (!hr.is_hit)
+		return (hr);
+	else if (vec3len(sub_vec3(shape->coord, hr.point)) <= shape->diameter / 2)
+		return (hr);
 	else
 	{
-		inter_point = add_vec3(ray.origin, scale_vec3(record.t, ray.direction));
-		if (vec3len(sub_vec3(c, inter_point)) >= r)
-		{
-			record.is_hit = FALSE;
-			return (record);
-		}
-		else
-		{
-			// printf("t : %f \n", record.t);
-			record.rgb = rgb;
-			return (record);
-		}
+		hr.is_hit = FALSE;
+		return (hr);
 	}
 }

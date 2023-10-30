@@ -6,18 +6,19 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 21:59:44 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/30 13:55:51 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/30 14:55:24 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ray.h"
 
-void	init_hit_record(t_hit_record *record)
+void	init_hit_record(t_hit_record *hr)
 {
-	record->is_hit = FALSE;
-	record->is_front = -1;
-	record->t = 1000000000;
-	record->point = vec3(0, 0, 0);
-	record->normal = vec3(0, 0, 0);
-	record->rgb = vec3(0, 0, 0);
+	hr->is_hit = FALSE;
+	hr->t = 1000000000;
+	hr->point = vec3(0, 0, 0);
+	hr->normal = vec3(0, 0, 0);
+	hr->is_front = -1;
+	hr->rgb = vec3(0, 0, 0);
+	hr->mat = 0;
 }

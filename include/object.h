@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 16:45:23 by kjs               #+#    #+#             */
-/*   Updated: 2023/10/10 16:47:33 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/30 14:54:15 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ typedef struct s_shape
 	double			diameter;
 	double			height;
 	t_vec3		coord;
-	t_vec3		surface_normal_vector;
 	t_vec3		form_vector;
 	t_vec3		rgb;
 }	t_shape;

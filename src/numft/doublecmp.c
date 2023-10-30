@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   compare_double.c                                   :+:      :+:    :+:   */
+/*   doublecmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 23:43:02 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/16 23:46:19 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/30 14:59:20 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static double	abs_double(double d)
 		return (-d);
 }
 
-int	compare_double(double d1, double d2)
+int	doublecmp(double d1, double d2)
 {
 	double	diff;
 

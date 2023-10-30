@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 16:42:43 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/30 13:55:04 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/30 14:59:11 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static double	get_minimum_root(double a, double b, double c)
 
 	t1 = (-b + sqrt(b * b - a * c)) / a;
 	t2 = (-b - sqrt(b * b - a * c)) / a;
-	if (compare_double(t2, 0.) <= 0)
+	if (doublecmp(t2, 0.) <= 0)
 		return t1;
 	else
 		return t2;
@@ -29,26 +29,27 @@ static double	get_minimum_root(double a, double b, double c)
 
 t_hit_record	hit_sphere(t_ray ray, t_shape *shape)
 {
-	t_hit_record	record;
+	t_hit_record	hr;
 	t_vec3			oc;
 	double			a;
 	double			b;
 	double			c;
 
-	init_hit_record(&record);
+	init_hit_record(&hr);
 	oc = sub_vec3(ray.origin, shape->coord);
 	a = dot_vec3(ray.direction, ray.direction);
 	b = dot_vec3(oc, ray.direction);
 	c = dot_vec3(oc, oc) - (shape->diameter / 2.) * (shape->diameter / 2.);
-	if (compare_double((b * b - a * c), 0.) <= 0)
-		return (record);
-	else if (compare_double((-b + sqrt(b * b - a * c)) / a, 0.) < 0)
-		return (record);
-	record.is_hit = TRUE;
-	record.t = get_minimum_root(a, b, c);
-	record.point = add_vec3(ray.origin, scale_vec3(record.t, ray.direction));
-	record.normal = norm_vec3(sub_vec3(record.point, shape->coord));
-	record.rgb = shape->rgb;
-	record.is_front = dot_vec3(ray.direction, record.normal) > 0.;	
-	return (record);
+	if (doublecmp((b * b - a * c), 0.) <= 0)
+		return (hr);
+	else if (doublecmp((-b + sqrt(b * b - a * c)) / a, 0.) < 0)
+		return (hr);
+	hr.is_hit = TRUE;
+	hr.t = get_minimum_root(a, b, c);
+	hr.point = add_vec3(ray.origin, scale_vec3(hr.t, ray.direction));
+	hr.normal = norm_vec3(sub_vec3(hr.point, shape->coord));
+	hr.is_front = dot_vec3(ray.direction, hr.normal) > 0.;	
+	hr.rgb = shape->rgb;
+	hr.mat = shape->material;
+	return (hr);
 }
