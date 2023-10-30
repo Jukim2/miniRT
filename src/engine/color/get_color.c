@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 11:13:05 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/30 16:17:04 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/30 16:41:37 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ int	get_color(t_engine *e, int x, int y)
 	if (r.is_hit)
 	{
 		color_vector_sum = add_vec3(color_vector_sum, scale_vec3(e->objs.ambient_light.light_ratio, r.rgb));
+		correct_color(&color_vector_sum, r.rgb);
 		color_vector_sum = add_vec3(color_vector_sum, get_specular_color(e->objs.light.coord, r));
-		correct_color(&color_vector_sum, r.rgb); // 이게 맞나
-		
+		correct_color(&color_vector_sum, r.rgb);
 	}
 	return (convert_color_vec3(color_vector_sum));
 }

@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 13:13:52 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/30 16:19:23 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/30 16:42:43 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	parse_plane(t_objects *objects, char *line)
 	idx = parse_doubles(&tmp->coord, line, check_misconfiguration(objects, line, 2));
 	idx = parse_doubles(&tmp->orientation, line, check_misconfiguration(objects, line, idx));
 	idx = parse_doubles(&tmp->rgb, line, check_misconfiguration(objects, line, idx));
+	tmp->rgb = scale_vec3(1 / 255., tmp->rgb);
 	check_endconfiguration(objects, line, idx);
 	add_shape(&objects->shape, tmp);
 }
