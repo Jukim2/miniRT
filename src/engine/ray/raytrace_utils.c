@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raytrace_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: kjs <kjs@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 11:08:02 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/30 16:47:50 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/30 23:44:51 by kjs              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,13 @@ t_vec3	get_reflected_direction(t_ray ray, t_hit_record record)
 	return (direction);
 }
 
-int	is_shadowed(t_shape *shape, t_ray reflected_ray, t_vec3 light)
+int	is_shadowed(t_shape *shape, t_vec3 origin, t_vec3 light_vector)
 {
 	double	t;
 	t_ray	tolight;
 
-	tolight.origin = reflected_ray.origin;
-	tolight.direction = light;
+	tolight.origin = origin;
+	tolight.direction = light_vector;
 	t_hit_record r = get_hit_record(tolight, shape);
 	return (r.is_hit);
 }

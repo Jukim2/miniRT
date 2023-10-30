@@ -17,23 +17,23 @@
 #include "color.h"
 #include "parse.h"
 
-t_vec3	raytrace(t_ray ray, t_shape *shape, int depth)
+t_vec3	raytrace(t_ray ray, t_objects *objs, int depth)
 {
 	t_hit_record	record;
 	t_ray			reflected_ray;
-	t_vec3			light;
+	t_vec3			light_vector;
 	
 	if (depth <= 0)
 		return (vec3(0, 0, 0));
-	record = get_hit_record(ray, shape);
+	record = get_hit_record(ray, objs->shape);
 	if (record.is_hit)
 	{
 		reflected_ray.origin = record.point;
 		reflected_ray.direction = get_reflected_direction(ray, record);
-		light = norm_vec3(sub_vec3(vec3(2, 2, 1), reflected_ray.origin));
-		if (is_shadowed(shape, reflected_ray, light) || dot_vec3(record.normal, light) <= 0)
+		light_vector = norm_vec3(sub_vec3(objs->light.coord, record.point));
+		if (is_shadowed(objs->shape, record.point, light_vector) || dot_vec3(record.normal, light_vector) <= 0)
 			return (vec3(0, 0, 0));
-		return (scale_vec3(dot_vec3(record.normal, light), multiply_color_vec3(record.rgb, raytrace(reflected_ray, shape, depth -1))));
+		return (scale_vec3(dot_vec3(record.normal, light_vector), multiply_color_vec3(record.rgb, raytrace(reflected_ray, objs, depth -1))));
 	}
 	return (vec3(1, 1, 1));
 }

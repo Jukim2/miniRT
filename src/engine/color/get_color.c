@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_color.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: kjs <kjs@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 11:13:05 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/30 16:41:37 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/30 23:46:11 by kjs              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,18 @@
 #include "color.h"
 #include <math.h>
 
-t_vec3	get_specular_color(t_vec3 light_coord, t_hit_record r)
+t_vec3	get_specular_color(t_objects *objs, t_hit_record r)
 {
-	t_vec3	light_vector;
 	t_vec3	reflected_vector;
 	t_vec3	view_vector;
 	t_vec3	specular_color;
+	t_ray	ray;
 
-	light_vector = norm_vec3(sub_vec3(r.point, light_coord));
-	reflected_vector = norm_vec3(add_vec3(light_vector, scale_vec3(2, r.normal)));
+	ray.origin = r.point;
+	ray.direction = norm_vec3(sub_vec3(objs->light.coord, r.point));
+	if (is_shadowed(objs->shape, ray.origin, ray.direction))
+		return (vec3(0, 0, 0));
+	reflected_vector = norm_vec3(add_vec3(scale_vec3(-1, ray.direction), scale_vec3(2, r.normal)));
 	view_vector = norm_vec3(sub_vec3(vec3(0, 0, 1), r.point));
 	specular_color = scale_vec3(pow(dot_vec3(view_vector, reflected_vector), 15), vec3(1, 1, 1));
 	return (specular_color);
@@ -45,7 +48,7 @@ int	get_color(t_engine *e, int x, int y)
 		t_vec3 offset = add_vec3(scale_vec3(x + rand_double(-0.5, 0.5), e->display.px_dt[WD]), \
 								scale_vec3(y + rand_double(-0.5, 0.5), e->display.px_dt[HT]));
 		ray.direction = norm_vec3(add_vec3(e->display.bot_lt_px, offset));
-		color_vector_sum = add_vec3(color_vector_sum, raytrace(ray, e->objs.shape, 20));
+		color_vector_sum = add_vec3(color_vector_sum, raytrace(ray, &e->objs, 20));
 		sampling++;
 	}
 	color_vector_sum = scale_vec3(1. / SAMPLE_CNT, color_vector_sum);
@@ -54,7 +57,7 @@ int	get_color(t_engine *e, int x, int y)
 	{
 		color_vector_sum = add_vec3(color_vector_sum, scale_vec3(e->objs.ambient_light.light_ratio, r.rgb));
 		correct_color(&color_vector_sum, r.rgb);
-		color_vector_sum = add_vec3(color_vector_sum, get_specular_color(e->objs.light.coord, r));
+		color_vector_sum = add_vec3(color_vector_sum, get_specular_color(&e->objs, r));
 		correct_color(&color_vector_sum, r.rgb);
 	}
 	return (convert_color_vec3(color_vector_sum));
