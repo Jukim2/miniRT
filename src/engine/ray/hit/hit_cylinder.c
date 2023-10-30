@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 22:36:40 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/27 17:46:39 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/30 13:47:37 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 #include "numft.h"
 #include <math.h>
 
-static double	get_minimum_root(double a, double b, double c);
-static t_hit_record	hit_cylinder_side(t_ray ray, t_shape *shape);
 static t_hit_record	hit_cylinder_base(t_ray ray, t_shape *shape);
+static t_hit_record	hit_cylinder_side(t_ray ray, t_shape *shape);
+static double		get_minimum_root(double a, double b, double c);
 
 t_hit_record	hit_cylinder(t_ray ray, t_shape *shape)
 {
@@ -35,6 +35,8 @@ t_hit_record	hit_cylinder(t_ray ray, t_shape *shape)
 	}
 	else if (base.is_hit)
 		return (base);
+	else if (side.is_hit)
+		return (side);
 	else
 		return (side);
 }
@@ -86,11 +88,9 @@ static t_hit_record	hit_cylinder_side(t_ray ray, t_shape *shape)
 
 static t_hit_record	hit_cylinder_base(t_ray ray, t_shape *shape)
 {
-	// t_hit_record	record;
 	t_hit_record	up;
 	t_hit_record	down;
 
-	// init_hit_record(&record);
 	up = hit_circle(ray, \
 					add_vec3(shape->coord, scale_vec3(shape->height / 2, shape->form_vector)), \
 					shape->form_vector, \
