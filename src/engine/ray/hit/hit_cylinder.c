@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 22:36:40 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/27 17:44:02 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/27 17:46:39 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,30 @@
 #include "numft.h"
 #include <math.h>
 
-#include <stdio.h>
+static double	get_minimum_root(double a, double b, double c);
+static t_hit_record	hit_cylinder_side(t_ray ray, t_shape *shape);
+static t_hit_record	hit_cylinder_base(t_ray ray, t_shape *shape);
+
+t_hit_record	hit_cylinder(t_ray ray, t_shape *shape)
+{
+	t_hit_record	side;
+	t_hit_record	base;
+	
+	side = hit_cylinder_side(ray, shape);
+	base = hit_cylinder_base(ray, shape);
+	if (side.is_hit && base.is_hit)
+	{
+		if (compare_double(side.t, base.t) <= 0)
+			return (side);
+		else
+			return (base);
+	}
+	else if (base.is_hit)
+		return (base);
+	else
+		return (side);
+}
+
 
 static double	get_minimum_root(double a, double b, double c)
 {
@@ -61,34 +84,7 @@ static t_hit_record	hit_cylinder_side(t_ray ray, t_shape *shape)
 	return (record);
 }
 
-double	min_double2(double a, double b)
-{
-	if (compare_double(a, b) <= 0)
-		return (0);
-	else
-		return (1);
-}
-
-double	min_double3(double a, double b, double c)
-{
-	double	min;
-
-	min = min_double2(a, b);
-	min = min_double2(min, c);
-	return (min);
-}
-
-static int	min_idx_double3(double a, double b, double c)
-{
-	if (compare_double(a, b) <= 0 && compare_double(a, c) <= 0)
-		return (a);
-	else if (compare_double(b, a) <= 0 && compare_double(b, c) <= 0)
-		return (b);
-	else
-		return (c);
-}
-
-t_hit_record	hit_cylinder_base(t_ray ray, t_shape *shape)
+static t_hit_record	hit_cylinder_base(t_ray ray, t_shape *shape)
 {
 	// t_hit_record	record;
 	t_hit_record	up;
@@ -109,26 +105,4 @@ t_hit_record	hit_cylinder_base(t_ray ray, t_shape *shape)
 		return (up);
 	else
 		return (down);
-}
-
-t_hit_record	hit_cylinder(t_ray ray, t_shape *shape)
-{
-	t_hit_record	side;
-	t_hit_record	base;
-	
-	side = hit_cylinder_side(ray, shape);
-	base = hit_cylinder_base(ray, shape);
-	if (side.is_hit && base.is_hit)
-	{
-		if (compare_double(side.t, base.t) <= 0)
-			return (side);
-		else
-			return (base);
-	}
-	else if (side.is_hit)
-		return (side);
-	else if (base.is_hit)
-		return (base);
-	else
-		return (side);
 }

@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 22:38:25 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/10 16:45:48 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/27 17:35:34 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ static void	set_vport_img(t_engine *e)
 		}
 		x++;
 	}
+	ft_putstr_fd("done\n", 1);
 }
 
 void	execute_engine(t_engine *e)
