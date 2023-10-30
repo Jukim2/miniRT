@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 22:36:40 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/30 15:04:58 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/30 16:22:31 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,11 @@ static t_hit_record	hit_cylinder_side(t_ray ray, t_shape *shape)
 	double			c;
 
 	init_hit_record(&record);
-	t_vec3	proj = proj_vec3_to_plane(ray.direction, shape->form_vector);
-	t_vec3	temp = sub_vec3(ray.origin, add_vec3(shape->coord, scale_vec3(dot_vec3(sub_vec3(ray.origin, shape->coord), shape->form_vector), shape->form_vector)));
+	t_vec3	proj = proj_vec3_to_plane(ray.direction, shape->orientation);
+	t_vec3	temp = sub_vec3(ray.origin, add_vec3(shape->coord, scale_vec3(dot_vec3(sub_vec3(ray.origin, shape->coord), shape->orientation), shape->orientation)));
 	a = dot_vec3(proj, proj);
 	b = dot_vec3(temp, proj);
-	c = dot_vec3(temp, temp) - (shape->diameter / 2.0) * (shape->diameter / 2.0);
+	c = dot_vec3(temp, temp) - shape->radius * shape->radius;
 	if (doublecmp((b * b - a * c), 0.) <= 0)
 		return (record);
 	else if (doublecmp((-b + sqrt(b * b - a * c)) / a, 0.) < 0)
@@ -79,12 +79,12 @@ static t_hit_record	hit_cylinder_side(t_ray ray, t_shape *shape)
 	// 	return (record);
 	double t1 = get_minimum_root(a, b, c);
 	t_vec3 cp = add_vec3(ray.origin, scale_vec3(t1, ray.direction));
-	if (vec3len(sub_vec3(cp, shape->coord)) * vec3len(sub_vec3(cp, shape->coord)) - (shape->diameter / 2.) * (shape->diameter / 2.) > (shape->height / 2) * (shape->height / 2))
+	if (vec3len(sub_vec3(cp, shape->coord)) * vec3len(sub_vec3(cp, shape->coord)) - shape->radius * shape->radius > (shape->height / 2) * (shape->height / 2))
 		return (record);
 	record.is_hit = TRUE;
 	record.t = get_minimum_root(a, b, c);
 	record.point = add_vec3(ray.origin, scale_vec3(record.t, ray.direction));
-	record.normal = proj_vec3_to_plane(sub_vec3(record.point, shape->coord), shape->form_vector);
+	record.normal = proj_vec3_to_plane(sub_vec3(record.point, shape->coord), shape->orientation);
 	record.is_front = dot_vec3(ray.direction, record.normal) > 0.;
 	record.rgb = shape->rgb;
 	record.mat = shape->material;
@@ -101,14 +101,14 @@ static t_hit_record	hit_cylinder_base(t_ray ray, t_shape *shape)
 	base.type = CIRCLE;
 	base.face = 1;
 	base.material = shape->material;
-	base.diameter = shape->diameter;
+	base.radius = shape->radius;
 	base.height = 0;
-	base.coord = add_vec3(shape->coord, scale_vec3(shape->height / 2, shape->form_vector));
-	base.form_vector = shape->form_vector;
+	base.coord = add_vec3(shape->coord, scale_vec3(shape->height / 2, shape->orientation));
+	base.orientation = shape->orientation;
 	base.rgb = shape->rgb;
 	up = hit_circle(ray, &base);
-	base.coord = add_vec3(shape->coord, scale_vec3(-shape->height / 2, shape->form_vector));
-	base.form_vector = invert_vec3(shape->form_vector);
+	base.coord = add_vec3(shape->coord, scale_vec3(-shape->height / 2, shape->orientation));
+	base.orientation = invert_vec3(shape->orientation);
 	down = hit_circle(ray, &base);
 	if (up.is_hit)
 		return (up);

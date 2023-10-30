@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 11:24:23 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/30 15:38:23 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/30 16:18:42 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "object.h"
 # include "engine.h"
 
-# define SAMPLE_CNT 1
+# define SAMPLE_CNT 5
 
 /* ===============srcs/color=============== */
 

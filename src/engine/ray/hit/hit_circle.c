@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 17:56:31 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/30 15:00:33 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/30 16:21:59 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_hit_record	hit_circle(t_ray ray, t_shape *shape)
 	hr = hit_plane(ray, shape);
 	if (!hr.is_hit)
 		return (hr);
-	else if (vec3len(sub_vec3(shape->coord, hr.point)) <= shape->diameter / 2)
+	else if (vec3len(sub_vec3(shape->coord, hr.point)) <= shape->radius)
 		return (hr);
 	else
 	{

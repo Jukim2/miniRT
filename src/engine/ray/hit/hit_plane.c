@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 19:02:19 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/30 14:59:11 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/30 16:19:23 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,17 @@ t_hit_record	hit_plane(t_ray ray, t_shape *shape)
 
 	init_hit_record(&hr);
 	o_c = sub_vec3(ray.origin, shape->coord);
-	t = dot_vec3(shape->form_vector, sub_vec3(shape->coord, ray.origin)) \
-		/ dot_vec3(shape->form_vector, ray.direction);
+	t = dot_vec3(shape->orientation, sub_vec3(shape->coord, ray.origin)) \
+		/ dot_vec3(shape->orientation, ray.direction);
 	if (doublecmp(t, 0.) <= 0)
 		return (hr);
 	hr.is_hit = TRUE;
 	hr.t = t;
 	hr.point = add_vec3(ray.origin, scale_vec3(hr.t, ray.direction));
-	if (dot_vec3(ray.direction, shape->form_vector) > 0.)
-		hr.normal = shape->form_vector;
+	if (dot_vec3(ray.direction, shape->orientation) > 0.)
+		hr.normal = shape->orientation;
 	else
-		hr.normal = invert_vec3(shape->form_vector);
+		hr.normal = invert_vec3(shape->orientation);
 	hr.is_front = TRUE;
 	hr.rgb = shape->rgb;
 	hr.mat = shape->material;
