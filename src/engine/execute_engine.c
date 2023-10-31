@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 22:38:25 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/27 17:35:34 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/31 17:16:33 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	press_key(int keycode, void *ptr)
 	(void) ptr;
 	if (keycode == KEY_ESC)
 		terminate_engine(ptr);
-	return (0);	
+	return (0);
 }
 
 int	exit_(void)
@@ -40,6 +40,7 @@ static void	set_vport_img(t_engine *e)
 	int		x;
 	int		y;
 	int		width;
+	int		color;
 
 	width = e->img.line_len / 4;
 	x = 0;
@@ -48,7 +49,11 @@ static void	set_vport_img(t_engine *e)
 		y = 0;
 		while (y < WIN_H)
 		{
-			e->img.addr[(WIN_H - y - 1) * width + x] = get_color(e, x, y);
+			if (e->display.need_inversion)
+				color = get_color(e, WIN_W - x - 1, WIN_H - y - 1);
+			else
+				color = get_color(e, x, y);
+			e->img.addr[(WIN_H - y - 1) * width + x] = color;
 			y++;
 		}
 		x++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_engine.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjs <kjs@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 22:22:57 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/26 15:28:36 by kjs              ###   ########.fr       */
+/*   Updated: 2023/10/31 17:08:25 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,13 @@ static int	init_display_settings(t_engine *e)
 	e->display.px_dt[WD] = vec3(e->display.vport[WD] / WIN_W, 0, 0);
 	e->display.px_dt[HT] = vec3(0, e->display.vport[HT] / WIN_H, 0);
 	e->display.rot_quat = get_rot_quat(vec3(0, 0, -1), e->objs.camera.forward_vector);
-	
+	if (doublecmp(dot_vec3(vec3(0, 0, -1), e->objs.camera.forward_vector), 0) < 0)
+		e->display.need_inversion = TRUE;
+	else
+		e->display.need_inversion = FALSE;
+	print_vec3(e->objs.camera.forward_vector);
+	printf("%f ", e->display.rot_quat.w);
+	print_vec3(e->display.rot_quat.v);
 	e->display.bot_lt_px = rot_vec3(e->display.bot_lt_px, e->display.rot_quat);
 	e->display.px_dt[WD] = rot_vec3(e->display.px_dt[WD], e->display.rot_quat);
 	e->display.px_dt[HT] = rot_vec3(e->display.px_dt[HT], e->display.rot_quat);

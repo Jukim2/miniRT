@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 22:17:55 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/10 16:46:57 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/31 17:06:26 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_display
 	t_vec3	bot_lt_px;
 	t_vec3	px_dt[2];
 	t_quat	rot_quat;
+	t_bool	need_inversion;
 }	t_display;
 
 /*
