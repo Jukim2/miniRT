@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 16:45:23 by kjs               #+#    #+#             */
-/*   Updated: 2023/10/30 16:21:33 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/31 14:57:19 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,11 @@ typedef struct s_shape
 	struct s_shape	*next;
 	int				type;
 	int				face;
-	int				material;
+	int				mat;
 	double			radius;
 	double			height;
 	t_vec3			coord;
-	t_vec3			orientation;
+	t_vec3			orient;
 	t_vec3			rgb;
 }	t_shape;
 

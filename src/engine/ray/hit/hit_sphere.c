@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 16:42:43 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/31 14:57:09 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/31 15:33:00 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ static double	get_minimum_root(double a, double b, double c)
 	t1 = (-b + sqrt(b * b - a * c)) / a;
 	t2 = (-b - sqrt(b * b - a * c)) / a;
 	if (doublecmp(t2, 0.) <= 0)
-		return t1;
+		return (t1);
 	else
-		return t2;
+		return (t2);
 }
 
 t_hit_record	hit_sphere(t_ray ray, t_shape *shape)
@@ -48,7 +48,7 @@ t_hit_record	hit_sphere(t_ray ray, t_shape *shape)
 	hr.t = get_minimum_root(a, b, c);
 	hr.point = add_vec3(ray.origin, scale_vec3(hr.t, ray.direction));
 	hr.normal = norm_vec3(sub_vec3(hr.point, shape->coord));
-	hr.is_front = dot_vec3(ray.direction, hr.normal) > 0.;	
+	hr.is_front = dot_vec3(ray.direction, hr.normal) > 0.;
 	hr.rgb = shape->rgb;
 	hr.mat = shape->mat;
 	return (hr);

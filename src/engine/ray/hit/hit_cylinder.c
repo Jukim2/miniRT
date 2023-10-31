@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 22:36:40 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/31 15:02:30 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/31 15:33:20 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,15 @@
 #include <math.h>
 
 static double		get_minimum_root(double a, double b, double c);
-static t_hit_record	hit_cylinder_base(t_ray ray, t_shape *shape);
-static t_hit_record	hit_cylinder_side(t_ray ray, t_shape *shape);
+static t_vec3		get_tmp_vec3(t_vec3 origin, t_vec3 coord, t_vec3 orient);
+static t_hit_record	hit_cylinder_base(t_ray ray, t_shape *shp);
+static t_hit_record	hit_cylinder_side(t_ray ray, t_shape *shp);
 
 t_hit_record	hit_cylinder(t_ray ray, t_shape *shape)
 {
 	t_hit_record	side;
 	t_hit_record	base;
-	
+
 	base = hit_cylinder_base(ray, shape);
 	side = hit_cylinder_side(ray, shape);
 	if (side.is_hit && base.is_hit)
@@ -41,7 +42,6 @@ t_hit_record	hit_cylinder(t_ray ray, t_shape *shape)
 		return (base);
 }
 
-
 static double	get_minimum_root(double a, double b, double c)
 {
 	double	t1;
@@ -50,48 +50,50 @@ static double	get_minimum_root(double a, double b, double c)
 	t1 = (-b + sqrt(b * b - a * c)) / a;
 	t2 = (-b - sqrt(b * b - a * c)) / a;
 	if (doublecmp(t2, 0.) <= 0)
-		return t1;
+		return (t1);
 	else
-		return t2;
+		return (t2);
 }
 
-static t_hit_record	hit_cylinder_side(t_ray ray, t_shape *shape)
+static t_vec3	get_tmp_vec3(t_vec3 origin, t_vec3 coord, t_vec3 orient)
 {
-	t_hit_record	record;
-	double			a;
-	double			b;
-	double			c;
+	t_vec3	tmp;
 
-	init_hit_record(&record);
-	t_vec3	proj = proj_vec3_to_plane(ray.direction, shape->orient);
-	t_vec3	temp = sub_vec3(ray.origin, add_vec3(shape->coord, scale_vec3(dot_vec3(sub_vec3(ray.origin, shape->coord), shape->orient), shape->orient)));
-	a = dot_vec3(proj, proj);
-	b = dot_vec3(temp, proj);
-	c = dot_vec3(temp, temp) - shape->radius * shape->radius;
-	if (doublecmp((b * b - a * c), 0.) <= 0)
-		return (record);
-	else if (doublecmp((-b + sqrt(b * b - a * c)) / a, 0.) < 0)
-		return (record);
-	// record.t = get_minimum_root(a, b, c);
-	// record.point = add_vec3(ray.origin, scale_vec3(record.t, ray.direction));
-	// if (vec3len(sub_vec3(record.point, shape->coord)) * vec3len(sub_vec3(record.point, shape->coord)) \
-	// 	- (shape->diameter / 2.) * (shape->diameter / 2.) > (shape->height / 2) * (shape->height / 2))
-	// 	return (record);
-	double t1 = get_minimum_root(a, b, c);
-	t_vec3 cp = add_vec3(ray.origin, scale_vec3(t1, ray.direction));
-	if (vec3len(sub_vec3(cp, shape->coord)) * vec3len(sub_vec3(cp, shape->coord)) - shape->radius * shape->radius > (shape->height / 2) * (shape->height / 2))
-		return (record);
-	record.is_hit = TRUE;
-	record.t = get_minimum_root(a, b, c);
-	record.point = add_vec3(ray.origin, scale_vec3(record.t, ray.direction));
-	record.normal = proj_vec3_to_plane(sub_vec3(record.point, shape->coord), shape->orient);
-	record.is_front = dot_vec3(ray.direction, record.normal) > 0.;
-	record.rgb = shape->rgb;
-	record.mat = shape->mat;
-	return (record);
+	tmp = sub_vec3(origin, add_vec3(coord, scale_vec3(dot_vec3(\
+			sub_vec3(origin, coord), orient), orient)));
+	return (tmp);
 }
 
-static t_hit_record	hit_cylinder_base(t_ray ray, t_shape *shape)
+static t_hit_record	hit_cylinder_side(t_ray ray, t_shape *shp)
+{
+	t_hit_record	r;
+	const t_vec3	proj = proj_vec3_to_plane(ray.direction, shp->orient);
+	const t_vec3	tmp = get_tmp_vec3(ray.origin, shp->coord, shp->orient);
+	double			d;
+
+	init_hit_record(&r);
+	d = pow(dot_vec3(tmp, proj), 2) - \
+		dot_vec3(proj, proj) * (dot_vec3(tmp, tmp) - pow(shp->radius, 2));
+	if (doublecmp(d, 0.) <= 0)
+		return (r);
+	else if (doublecmp((-dot_vec3(tmp, proj) + sqrt(d)) \
+			/ dot_vec3(proj, proj), 0.) < 0)
+		return (r);
+	r.t = get_minimum_root(dot_vec3(proj, proj), dot_vec3(tmp, proj), \
+			dot_vec3(tmp, tmp) - pow(shp->radius, 2));
+	r.point = add_vec3(ray.origin, scale_vec3(r.t, ray.direction));
+	if (doublecmp(pow(vec3len(sub_vec3(r.point, shp->coord)), 2) \
+		- pow(shp->radius, 2.), pow(shp->height / 2., 2)) > 0)
+		return (r);
+	r.is_hit = TRUE;
+	r.normal = proj_vec3_to_plane(sub_vec3(r.point, shp->coord), shp->orient);
+	r.is_front = dot_vec3(ray.direction, r.normal) > 0.;
+	r.rgb = shp->rgb;
+	r.mat = shp->mat;
+	return (r);
+}
+
+static t_hit_record	hit_cylinder_base(t_ray ray, t_shape *shp)
 {
 	t_shape			b;
 	t_hit_record	up;
@@ -100,15 +102,15 @@ static t_hit_record	hit_cylinder_base(t_ray ray, t_shape *shape)
 	b.next = 0;
 	b.type = CIRCLE;
 	b.face = 1;
-	b.mat = shape->mat;
-	b.radius = shape->radius;
+	b.mat = shp->mat;
+	b.radius = shp->radius;
 	b.height = 0;
-	b.coord = add_vec3(shape->coord, scale_vec3(shape->height / 2, shape->orient));
-	b.orient = shape->orient;
-	b.rgb = shape->rgb;
+	b.coord = add_vec3(shp->coord, scale_vec3(shp->height / 2, shp->orient));
+	b.orient = shp->orient;
+	b.rgb = shp->rgb;
 	up = hit_circle(ray, &b);
-	b.coord = add_vec3(shape->coord, scale_vec3(-shape->height / 2, shape->orient));
-	b.orient = invert_vec3(shape->orient);
+	b.coord = add_vec3(shp->coord, scale_vec3(-shp->height / 2, shp->orient));
+	b.orient = invert_vec3(shp->orient);
 	down = hit_circle(ray, &b);
 	if (up.is_hit)
 		return (up);
