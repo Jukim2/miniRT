@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 15:05:39 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/10 16:43:51 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/31 15:35:16 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_quat	get_rot_quat(t_vec3 u, t_vec3 v)
 		c = norm_vec3(c);
 	cos = dot_vec3(u, v);
 	sin_half = sqrt((1.0 - cos) / 2.0);
-	cos_half = sqrt((1.0 + cos) / 2.0);	
+	cos_half = sqrt((1.0 + cos) / 2.0);
 	q = quat(cos_half, c.x * sin_half, c.y * sin_half, c.z * sin_half);
 	q = norm_quat(q);
 	return (q);
