@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 22:36:40 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/30 16:22:31 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/31 15:02:30 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ static t_hit_record	hit_cylinder_side(t_ray ray, t_shape *shape)
 	double			c;
 
 	init_hit_record(&record);
-	t_vec3	proj = proj_vec3_to_plane(ray.direction, shape->orientation);
-	t_vec3	temp = sub_vec3(ray.origin, add_vec3(shape->coord, scale_vec3(dot_vec3(sub_vec3(ray.origin, shape->coord), shape->orientation), shape->orientation)));
+	t_vec3	proj = proj_vec3_to_plane(ray.direction, shape->orient);
+	t_vec3	temp = sub_vec3(ray.origin, add_vec3(shape->coord, scale_vec3(dot_vec3(sub_vec3(ray.origin, shape->coord), shape->orient), shape->orient)));
 	a = dot_vec3(proj, proj);
 	b = dot_vec3(temp, proj);
 	c = dot_vec3(temp, temp) - shape->radius * shape->radius;
@@ -84,39 +84,36 @@ static t_hit_record	hit_cylinder_side(t_ray ray, t_shape *shape)
 	record.is_hit = TRUE;
 	record.t = get_minimum_root(a, b, c);
 	record.point = add_vec3(ray.origin, scale_vec3(record.t, ray.direction));
-	record.normal = proj_vec3_to_plane(sub_vec3(record.point, shape->coord), shape->orientation);
+	record.normal = proj_vec3_to_plane(sub_vec3(record.point, shape->coord), shape->orient);
 	record.is_front = dot_vec3(ray.direction, record.normal) > 0.;
 	record.rgb = shape->rgb;
-	record.mat = shape->material;
+	record.mat = shape->mat;
 	return (record);
 }
 
 static t_hit_record	hit_cylinder_base(t_ray ray, t_shape *shape)
 {
-	t_shape			base;
+	t_shape			b;
 	t_hit_record	up;
 	t_hit_record	down;
 
-	base.next = 0;
-	base.type = CIRCLE;
-	base.face = 1;
-	base.material = shape->material;
-	base.radius = shape->radius;
-	base.height = 0;
-	base.coord = add_vec3(shape->coord, scale_vec3(shape->height / 2, shape->orientation));
-	base.orientation = shape->orientation;
-	base.rgb = shape->rgb;
-	up = hit_circle(ray, &base);
-	base.coord = add_vec3(shape->coord, scale_vec3(-shape->height / 2, shape->orientation));
-	base.orientation = invert_vec3(shape->orientation);
-	down = hit_circle(ray, &base);
+	b.next = 0;
+	b.type = CIRCLE;
+	b.face = 1;
+	b.mat = shape->mat;
+	b.radius = shape->radius;
+	b.height = 0;
+	b.coord = add_vec3(shape->coord, scale_vec3(shape->height / 2, shape->orient));
+	b.orient = shape->orient;
+	b.rgb = shape->rgb;
+	up = hit_circle(ray, &b);
+	b.coord = add_vec3(shape->coord, scale_vec3(-shape->height / 2, shape->orient));
+	b.orient = invert_vec3(shape->orient);
+	down = hit_circle(ray, &b);
 	if (up.is_hit)
 		return (up);
 	else if (down.is_hit)
 		return (down);
-	else
-	{
-		init_hit_record(&down);
-		return (down);
-	}
+	init_hit_record(&down);
+	return (down);
 }

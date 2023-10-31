@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 16:42:43 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/30 16:22:43 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/31 14:57:09 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,6 @@ t_hit_record	hit_sphere(t_ray ray, t_shape *shape)
 	hr.normal = norm_vec3(sub_vec3(hr.point, shape->coord));
 	hr.is_front = dot_vec3(ray.direction, hr.normal) > 0.;	
 	hr.rgb = shape->rgb;
-	hr.mat = shape->material;
+	hr.mat = shape->mat;
 	return (hr);
 }

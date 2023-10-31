@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 13:13:46 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/30 16:42:40 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/31 14:57:19 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	parse_cylinder(t_objects *objects, char *line)
 		clean_program(objects, line);
 	tmp->type = CYLINDER;
 	idx = parse_doubles(&tmp->coord, line, check_misconfiguration(objects, line, 2));
-	idx = parse_doubles(&tmp->orientation, line, check_misconfiguration(objects, line, idx));
+	idx = parse_doubles(&tmp->orient, line, check_misconfiguration(objects, line, idx));
 	idx = parse_double(&tmp->radius, line, check_misconfiguration(objects, line, idx));
 	tmp->radius /= 2;
 	idx = parse_double(&tmp->height, line, check_misconfiguration(objects, line, idx));
