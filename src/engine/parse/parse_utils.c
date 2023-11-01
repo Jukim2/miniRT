@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 14:52:57 by jukim2            #+#    #+#             */
-/*   Updated: 2023/11/01 13:24:53 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/01 14:51:53 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	clean_program(t_objects *objects, char *line)
 	exit (0);
 }
 
-int	check_misconfiguration(t_objects *objects, char *line, int idx)
+int	check_misconfig(t_objects *objects, char *line, int idx)
 {
 	char	ch;
 

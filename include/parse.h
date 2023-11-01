@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjs <kjs@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 13:13:27 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/26 15:57:31 by kjs              ###   ########.fr       */
+/*   Updated: 2023/11/01 14:51:52 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ enum e_parse
 void	parse_camera(t_objects *objects, char *line);
 void	parse_sphere(t_objects *objects, char *line);
 void	clean_program(t_objects *objects, char *line);
-int		check_misconfiguration(t_objects *objects, char *line, int idx);
+int		check_misconfig(t_objects *objects, char *line, int idx);
 void	check_endconfiguration(t_objects *objects, char *line, int idx);
 void	add_shape(t_shape **shape, t_shape *new);
 int		parse_id(t_objects *objects, char *line);
