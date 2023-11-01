@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 11:13:05 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/31 16:50:40 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/01 13:41:18 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	get_color(t_engine *e, int x, int y)
 	t_hit_record r = get_hit_record(ray, e->objs.shape);
 	if (r.is_hit)
 	{
-		color_vector_sum = add_vec3(color_vector_sum, scale_vec3(e->objs.ambient_light.light_ratio, r.rgb));
+		color_vector_sum = add_vec3(color_vector_sum, scale_vec3(e->objs.ambient_light.ambient, r.rgb));
 		correct_color(&color_vector_sum, r.rgb);
 		color_vector_sum = add_vec3(color_vector_sum, get_specular_color(&e->objs, r));
 		correct_color(&color_vector_sum, r.rgb);

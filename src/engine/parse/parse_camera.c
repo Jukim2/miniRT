@@ -3,25 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   parse_camera.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjs <kjs@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 13:13:41 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/26 16:40:37 by kjs              ###   ########.fr       */
+/*   Updated: 2023/11/01 13:25:28 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "object.h"
 #include "parse.h"
 
-
-#include <stdio.h>
 void	parse_camera(t_objects *objects, char *line)
 {
-	int idx;
+	int	idx;
 
 	idx = parse_doubles(&objects->camera.coord, line, \
 	check_misconfiguration(objects, line, 1));
-	idx = parse_doubles(&objects->camera.forward_vector, line, \
+	idx = parse_doubles(&objects->camera.forward, line, \
 	check_misconfiguration(objects, line, idx));
 	idx = parse_double(&objects->camera.fov, line, \
 	check_misconfiguration(objects, line, idx));

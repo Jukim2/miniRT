@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjs <kjs@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 14:52:57 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/26 22:46:10 by kjs              ###   ########.fr       */
+/*   Updated: 2023/11/01 13:24:53 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	clean_program(t_objects *objects, char *line)
 	t_shape	*tmp;
 
 	iter = objects->shape;
-    while (iter)
+	while (iter)
 	{
 		tmp = iter;
 		iter = iter->next;
@@ -34,7 +34,7 @@ void	clean_program(t_objects *objects, char *line)
 int	check_misconfiguration(t_objects *objects, char *line, int idx)
 {
 	char	ch;
-	
+
 	while (line[idx] == ' ')
 		idx++;
 	ch = line[idx];
