@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 13:13:52 by jukim2            #+#    #+#             */
-/*   Updated: 2023/11/01 14:52:49 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/01 14:53:51 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	parse_plane(t_objects *objects, char *line)
 	idx = parse_doubles(&tmp->orient, line, check_misconfig(objects, line, idx));
 	if (doublecmp(vec3len(tmp->orient), 0.) <= 0)
 	{
-		printf("Error\ncamera orientation vector should have length\n");
+		printf("Error\nplane orientation vector should have length\n");
 		clean_program(objects, line);
 	}
 	else
