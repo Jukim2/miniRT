@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 16:24:42 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/30 14:59:11 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/01 15:38:10 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef enum e_bool
 
 /* ===============./numft================ */
 
+double	abs_double(double d);
 int		doublecmp(double d1, double d2);
 t_vec3	proj_vec3_to_plane(t_vec3 v, t_vec3 plane_normal);
 t_vec3	rot_vec3(t_vec3 v, t_quat rot_quat);

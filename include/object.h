@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 16:45:23 by kjs               #+#    #+#             */
-/*   Updated: 2023/11/01 13:41:18 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/01 15:24:14 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ typedef struct s_shape
 
 typedef struct s_objects
 {
-	t_ambient_light	ambient_light;
+	t_ambient_light	ambient;
 	t_camera		camera;
 	t_light			light;
 	t_shape			*shape;
