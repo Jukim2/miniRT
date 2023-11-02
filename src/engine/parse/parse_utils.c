@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 14:52:57 by jukim2            #+#    #+#             */
-/*   Updated: 2023/11/02 16:21:18 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/02 20:30:47 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,23 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void	clean_program(t_objects *objects, char *line)
+void	clean_program(t_objects *objs, char *line)
 {
 	t_shape	*iter;
 	t_shape	*tmp;
 
-	iter = objects->shape;
+	iter = objs->shape;
 	while (iter)
 	{
 		tmp = iter;
 		iter = iter->next;
-		free(iter);
+		free(tmp);
 	}
+	free(line);
 	exit (0);
 }
 
-int	check_misconfig(t_objects *objects, char *line, int idx)
+int	check_misconfig(t_objects *objs, char *line, int idx)
 {
 	char	ch;
 
@@ -41,20 +42,20 @@ int	check_misconfig(t_objects *objects, char *line, int idx)
 	if (ch != '\n' && ch != '\0' && ch != '+'
 		&& ch != '-' && (ch < '0' || ch > '9'))
 	{
-		printf("Error\nFile misconfiguration\n");
-		clean_program(objects, line);
+		printf("miniRT: file misconfiguration error\n");
+		clean_program(objs, line);
 	}
 	return (idx);
 }
 
-void	check_endconfiguration(t_objects *objects, char *line, int idx)
+void	check_endconfiguration(t_objects *objs, char *line, int idx)
 {
 	while (line[idx])
 	{
 		if (line[idx] != ' ' && line[idx] != '\n')
 		{
-			printf("Error\nFile misconfiguration\n");
-			clean_program(objects, line);
+			printf("miniRT: file misconfiguration error\n");
+			clean_program(objs, line);
 		}
 		idx++;
 	}

@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 00:59:00 by kjs               #+#    #+#             */
-/*   Updated: 2023/11/02 16:22:13 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/02 20:31:01 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <fcntl.h>
 #include <stdio.h>
 
-static int	check_argument(char *arg);
+static int	is_valid_argument(char *arg);
 static int	is_directory(char *filename);
 
 int	main(int argc, char **argv)
@@ -27,9 +27,10 @@ int	main(int argc, char **argv)
 		printf("miniRT: not enough argument\n");
 	else if (argc > 2)
 		printf("miniRT: too many argument\n");
-	else if (check_argument(argv[1]))
+	else if (is_valid_argument(argv[1]))
 	{
-		init_engine(&e, argv[1]);
+		if (!init_engine(&e, argv[1]))
+			return (0);
 		execute_engine(&e);
 	}
 	return (0);
@@ -49,7 +50,7 @@ static int	is_directory(char *filename)
 		return (0);
 }
 
-static int	check_argument(char *arg)
+static int	is_valid_argument(char *arg)
 {
 	int	fd;
 

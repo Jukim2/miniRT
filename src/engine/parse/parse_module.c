@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_module.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjs <kjs@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 13:21:53 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/26 16:42:20 by kjs              ###   ########.fr       */
+/*   Updated: 2023/11/02 20:24:21 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	parse_id(t_objects *objects, char *line)
 		return (PARSE_SPHERE);
 	else if (ft_strncmp(line, "cy", i) == 0)
 		return (PARSE_CYLINDER);
-	printf("Error\nWrong Character\n");
+	printf("miniRT: wrong symbol error\n");
 	return (PARSE_ERROR);
 }
 

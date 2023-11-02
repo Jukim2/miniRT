@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 12:51:35 by jukim2            #+#    #+#             */
-/*   Updated: 2023/11/01 15:24:14 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/02 20:07:44 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,18 @@
 
 #include <stdio.h>
 
-void	parse_ambient_light(t_objects *objects, char *line)
+void	parse_ambient_light(t_objects *objs, char *line)
 {
 	int	idx;
 
-	idx = parse_double(&objects->ambient.ambient, line, \
-	check_misconfig(objects, line, 1));
-	if (objects->ambient.ambient < 0 || objects->ambient.ambient > 1)
+	idx = parse_double(&objs->ambient.ambient, line, \
+	check_misconfig(objs, line, 1));
+	if (objs->ambient.ambient < 0 || objs->ambient.ambient > 1)
 	{
 		printf("Error\nAmbient Light should be between [0.0, 1.0]\n");
-		clean_program(objects, line);
+		clean_program(objs, line);
 	}
-	idx = parse_doubles(&objects->ambient.rgb, line, \
-	check_misconfig(objects, line, idx));
-	check_endconfiguration(objects, line, idx);
+	idx = parse_doubles(&objs->ambient.rgb, line, \
+	check_misconfig(objs, line, idx));
+	check_endconfiguration(objs, line, idx);
 }

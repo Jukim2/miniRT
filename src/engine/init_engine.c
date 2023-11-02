@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 22:22:57 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/02 20:01:00 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/02 20:06:46 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,11 @@ static int	init_display_settings(t_engine *e)
 	return (1);
 }
 
-int	init_engine(t_engine *e, char *conf)
+int	init_engine(t_engine *e, char *filename)
 {
 	init_objects(&e->objs);
-	parse(&e->objs, conf);
+	if (!parse(&e->objs, filename))
+		return (0);
 	init_display_settings(e);
 	e->mlx = mlx_init();
 	e->win = mlx_new_window(e->mlx, WIN_W, WIN_H, "miniRT");
