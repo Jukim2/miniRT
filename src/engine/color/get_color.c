@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 11:13:05 by jukim2            #+#    #+#             */
-/*   Updated: 2023/11/01 17:40:25 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/02 13:30:42 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,29 +16,6 @@
 #include "ray.h"
 #include "color.h"
 #include <math.h>
-
-static t_vec3	get_specular_color(t_objects *objs, t_hit_record r)
-{
-	t_vec3	reflected_vector;
-	t_vec3	view_vector;
-	t_vec3	specular_color;
-	t_ray	ray;
-
-	ray.origin = r.point;
-	ray.direction = norm_vec3(sub_vec3(objs->light.coord, r.point));
-	if (is_shadowed(objs->shape, ray.origin, ray.direction))
-		return (vec3(0, 0, 0));
-	// reflected_vector = norm_vec3(add_vec3(scale_vec3(-1, ray.direction), scale_vec3(2, r.normal)));
-	reflected_vector = norm_vec3(add_vec3(scale_vec3(-1, ray.direction), scale_vec3(abs_double(dot_vec3(ray.direction, r.normal)) * 2, r.normal)));
-	view_vector = norm_vec3(sub_vec3(objs->camera.coord, r.point));
-	double dot = dot_vec3(view_vector, reflected_vector);
-	if (dot > 0)
-		specular_color = scale_vec3(\
-			pow(dot_vec3(view_vector, reflected_vector), 15), vec3(1, 1, 1));
-	else
-		specular_color = vec3(0, 0, 0);
-	return (specular_color);
-}
 
 int	get_color(t_engine *e, int x, int y)
 {
@@ -60,7 +37,6 @@ int	get_color(t_engine *e, int x, int y)
 	}
 	rgb_sum = scale_vec3(1. / SAMPLE_CNT, rgb_sum);
 	r = get_hit_record(ray, e->objs.shape);
-	// rgb_sum = vec3(0, 0, 0);
 	if (r.is_hit)
 	{
 		rgb_sum = add_vec3(rgb_sum, scale_vec3(e->objs.ambient.ambient, r.rgb));
