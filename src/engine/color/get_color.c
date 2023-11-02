@@ -6,16 +6,15 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 11:13:05 by jukim2            #+#    #+#             */
-/*   Updated: 2023/11/02 13:30:42 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/02 13:41:32 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "numft.h"
+#include "color.h"
 #include "engine.h"
+#include "numft.h"
 #include "object.h"
 #include "ray.h"
-#include "color.h"
-#include <math.h>
 
 int	get_color(t_engine *e, int x, int y)
 {

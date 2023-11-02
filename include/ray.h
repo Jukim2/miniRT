@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 11:22:24 by jukim2            #+#    #+#             */
-/*   Updated: 2023/11/01 15:26:54 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/02 13:43:25 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct s_hit_record
 
 t_vec3			raytrace(t_ray ray, t_objects *objs, int depth);
 t_hit_record	get_hit_record(t_ray ray, t_shape *shape);
-void			nit_hit_record(t_hit_record *record);
+void			init_hit_record(t_hit_record *record);
 t_vec3			get_reflected_direction(t_ray ray, t_hit_record record);
 int				is_shadowed(t_shape *shape, t_vec3 origin, t_vec3 light_vector);
 t_hit_record	hit_circle(t_ray ray, t_shape *shape);

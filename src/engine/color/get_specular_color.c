@@ -6,11 +6,10 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 13:24:05 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/02 13:39:21 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/02 13:41:43 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "color.h"
 #include "numft.h"
 #include "ray.h"
 #include <math.h>
