@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 22:22:57 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/01 13:25:28 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/02 20:01:00 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ static int	init_display_settings(t_engine *e)
 	e->display.px_dt[HT] = vec3(0, e->display.vport[HT] / WIN_H, 0);
 	e->display.rot_quat = get_rot_quat(vec3(0, 0, -1), e->objs.camera.forward);
 	if (doublecmp(dot_vec3(vec3(0, 0, -1), e->objs.camera.forward), 0) < 0)
-		e->display.need_inversion = TRUE;
+		e->display.inversion = TRUE;
 	else
-		e->display.need_inversion = FALSE;
+		e->display.inversion = FALSE;
 	print_vec3(e->objs.camera.forward);
 	printf("%f ", e->display.rot_quat.w);
 	print_vec3(e->display.rot_quat.v);
@@ -58,9 +58,7 @@ int	init_engine(t_engine *e, char *conf)
 	e->mlx = mlx_init();
 	e->win = mlx_new_window(e->mlx, WIN_W, WIN_H, "miniRT");
 	e->img.ptr = mlx_new_image(e->mlx, WIN_W, WIN_H);
-	e->img.addr = (unsigned int *)mlx_get_data_addr(e->img.ptr, \
-													&e->img.bpp, \
-													&e->img.line_len, \
-													&e->img.endian);
+	e->img.addr = (unsigned int *)mlx_get_data_addr(\
+		e->img.ptr, &e->img.bpp, &e->img.line_len, &e->img.endian);
 	return (1);
 }

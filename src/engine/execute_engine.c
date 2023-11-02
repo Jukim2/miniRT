@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 22:38:25 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/31 17:16:33 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/02 20:01:00 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	set_vport_img(t_engine *e)
 		y = 0;
 		while (y < WIN_H)
 		{
-			if (e->display.need_inversion)
+			if (e->display.inversion)
 				color = get_color(e, WIN_W - x - 1, WIN_H - y - 1);
 			else
 				color = get_color(e, x, y);
