@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 22:17:55 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/02 20:06:45 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/02 21:29:52 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,6 @@ typedef struct s_engine
 
 int		init_engine(t_engine *e, char *filename);
 void	execute_engine(t_engine *e);
-void	terminate_engine(t_engine *e);
+int		terminate_engine(t_engine *e);
 
 #endif

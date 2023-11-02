@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 22:38:25 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/02 20:01:00 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/02 21:28:38 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,8 @@
 
 int	press_key(int keycode, void *ptr)
 {
-	(void) ptr;
 	if (keycode == KEY_ESC)
 		terminate_engine(ptr);
-	return (0);
-}
-
-int	exit_(void)
-{
-	exit(0);
 	return (0);
 }
 
@@ -64,8 +57,8 @@ static void	set_vport_img(t_engine *e)
 void	execute_engine(t_engine *e)
 {
 	set_vport_img(e);
-	mlx_key_hook(e->win, press_key, e);
-	mlx_hook(e->win, BTN_EXIT, 0, &exit_, 0);
+	mlx_key_hook(e->win, press_key, (void *)e);
+	mlx_hook(e->win, BTN_EXIT, 0, &terminate_engine, (void *)e);
 	mlx_put_image_to_window(e->mlx, e->win, e->img.ptr, 0, 0);
 	mlx_loop(e->mlx);
 }
