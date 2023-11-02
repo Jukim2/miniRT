@@ -6,15 +6,15 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 16:44:45 by kjs               #+#    #+#             */
-/*   Updated: 2023/11/02 20:24:13 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/02 20:32:57 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "object.h"
-#include "libft.h" // for ft_strcmp, for gnl
+#include "libft.h"
 #include "parse.h"
-#include <fcntl.h> // for O_RDONLY
-#include <stdio.h> // for print err
+#include <fcntl.h>
+#include <stdio.h>
 
 int	parse(t_objects *objs, char *filename)
 {
