@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjs <kjs@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 16:44:45 by kjs               #+#    #+#             */
-/*   Updated: 2023/10/26 16:43:16 by kjs              ###   ########.fr       */
+/*   Updated: 2023/11/02 16:20:29 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,6 @@ int	parse(t_objects *objects, char *file_name)
 
 	initialize_parsers(parsers);
 	fd = open(file_name, O_RDONLY);
-	if (fd == -1)
-	{
-		printf("Error\nWrong file name\n");
-		exit(1);
-	}
 	while (1)
 	{
 		line = get_next_line(fd);
@@ -56,7 +51,7 @@ void	parse_line(void (*parsers[])(t_objects *, char *), t_objects *objects, char
 {
 	static int	arr[3];
 	int			id;
-	
+
 	if (ft_strncmp(line, "\n", ft_strlen(line)) == 0)
 		return ;
 	id = parse_id(objects, line);

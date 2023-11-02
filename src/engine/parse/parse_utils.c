@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 14:52:57 by jukim2            #+#    #+#             */
-/*   Updated: 2023/11/01 14:51:53 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/02 16:21:18 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	check_endconfiguration(t_objects *objects, char *line, int idx)
 void	add_shape(t_shape **shape, t_shape *new)
 {
 	t_shape	*tmp;
-	
+
 	tmp = *shape;
 	if (!*shape)
 		*shape = new;
@@ -73,21 +73,4 @@ void	add_shape(t_shape **shape, t_shape *new)
 			tmp = tmp->next;
 		tmp->next = new;
 	}
-}
-
-int	is_wrong_file_name(char *file_name)
-{
-	const int	len = ft_strlen(file_name);
-	const int	fd = open(file_name, O_DIRECTORY);
-	
-	if (len < 3)
-		return (1);
-	else if (fd >= 0)
-	{
-		close(fd);
-		return (1);
-	}
-	else
-		return (ft_strncmp(&file_name[len - 3], ".rt", 3));
-	
 }

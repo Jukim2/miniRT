@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 13:13:27 by jukim2            #+#    #+#             */
-/*   Updated: 2023/11/01 14:51:52 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/02 15:50:52 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,5 @@ void	initialize_parsers(void (*parsers[])(t_objects *, char *));
 void	parse_line(void (*parsers[])(t_objects *, char *), t_objects *objects, char *line);
 void	parse_cylinder(t_objects *objects, char *line);
 void	parse_plane(t_objects *objects, char *line);
-int		is_wrong_file_name(char *file_name);
 
 #endif
