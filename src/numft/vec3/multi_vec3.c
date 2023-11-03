@@ -1,25 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color_utils.c                                      :+:      :+:    :+:   */
+/*   multi_vec3.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/03 19:33:12 by jukim2            #+#    #+#             */
-/*   Updated: 2023/11/03 14:35:37 by gyoon            ###   ########.fr       */
+/*   Created: 2023/11/03 14:34:57 by gyoon             #+#    #+#             */
+/*   Updated: 2023/11/03 14:38:52 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "object.h"
-#include "numft.h"
-#include <math.h>
+#include "numft/vec3.h"
 
-void	correct_color(t_vec3 *color_vector_sum, t_vec3 rgb)
+t_vec3	multi_vec3(t_vec3 u, t_vec3 v)
 {
-	if (color_vector_sum->x > 1)
-		color_vector_sum->x = 1;
-	if (color_vector_sum->y > 1)
-		color_vector_sum->y = 1;
-	if (color_vector_sum->z > 1)
-		color_vector_sum->z = 1;
+	return (vec3(u.x * v.x, u.y * v.y, u.z * v.z));
 }
