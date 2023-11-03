@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 16:44:45 by kjs               #+#    #+#             */
-/*   Updated: 2023/11/02 20:32:57 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/03 13:54:45 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	parse_line(void (*parsers[])(t_objects *, char *), \
 	id = parse_id(objs, line);
 	if (id < 3 && arr[id]++ != 0)
 	{
-		printf("miniRT: multiple symbol error\n");
+		printf("Error\nminiRT: multiple symbol in configuration\n");
 		clean_program(objs, line);
 	}
 	parsers[id](objs, line);

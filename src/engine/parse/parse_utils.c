@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 14:52:57 by jukim2            #+#    #+#             */
-/*   Updated: 2023/11/02 20:30:47 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/03 13:55:28 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	check_misconfig(t_objects *objs, char *line, int idx)
 	if (ch != '\n' && ch != '\0' && ch != '+'
 		&& ch != '-' && (ch < '0' || ch > '9'))
 	{
-		printf("miniRT: file misconfiguration error\n");
+		printf("Error\nminiRT: file misconfiguration error\n");
 		clean_program(objs, line);
 	}
 	return (idx);
@@ -54,7 +54,7 @@ void	check_endconfiguration(t_objects *objs, char *line, int idx)
 	{
 		if (line[idx] != ' ' && line[idx] != '\n')
 		{
-			printf("miniRT: file misconfiguration error\n");
+			printf("Error\nminiRT: file misconfiguration error\n");
 			clean_program(objs, line);
 		}
 		idx++;
