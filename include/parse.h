@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 13:13:27 by jukim2            #+#    #+#             */
-/*   Updated: 2023/11/03 14:04:44 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/03 17:42:22 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	clean_program(t_objects *objs, char *line);
 int		check_misconfig(t_objects *objs, char *line, int idx);
 void	check_endconfig(t_objects *objs, char *line, int idx);
 void	add_shape(t_shape **shape, t_shape *new);
+t_bool	is_valid_norm_vector(t_vec3	n);
 int		parse_id(t_objects *objs, char *line);
 int		parse_double(double *f, char *str, int i);
 int		parse_doubles(t_vec3 *vec, char *line, int idx);

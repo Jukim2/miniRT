@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 14:52:57 by jukim2            #+#    #+#             */
-/*   Updated: 2023/11/03 14:04:44 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/03 17:42:07 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,12 @@ void	add_shape(t_shape **shape, t_shape *new)
 			tmp = tmp->next;
 		tmp->next = new;
 	}
+}
+
+t_bool	is_valid_norm_vector(t_vec3	n)
+{
+	if ((n.x < -1 || n.x > 1) || (n.y < -1 || n.y > 1) || (n.z < -1 || n.z > 1))
+		return (FALSE);
+	else
+		return (TRUE);
 }
