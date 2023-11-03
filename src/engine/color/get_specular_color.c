@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 13:24:05 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/02 13:41:43 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/04 02:00:08 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_vec3	get_specular_color(t_objects *objs, t_hit_record r)
 
 	ray.origin = r.point;
 	ray.direction = norm_vec3(sub_vec3(objs->light.coord, r.point));
-	if (is_shadowed(objs->shape, ray.origin, ray.direction))
+	if (is_shadowed(objs->shape, ray.origin, ray.direction, objs->light.coord))
 		return (vec3(0, 0, 0));
 	reflected = norm_vec3(add_vec3(scale_vec3(-1, ray.direction), \
 	scale_vec3(abs_double(dot_vec3(ray.direction, r.normal)) * 2, r.normal)));

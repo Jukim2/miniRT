@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 22:22:57 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/02 20:06:46 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/04 02:07:39 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include "libft.h"
 #include "numft.h"
 #include <math.h>
-#include <stdio.h>
 
 static void	init_objects(t_objects *objects)
 {
@@ -41,9 +40,6 @@ static int	init_display_settings(t_engine *e)
 		e->display.inversion = TRUE;
 	else
 		e->display.inversion = FALSE;
-	print_vec3(e->objs.camera.forward);
-	printf("%f ", e->display.rot_quat.w);
-	print_vec3(e->display.rot_quat.v);
 	e->display.bot_lt_px = rot_vec3(e->display.bot_lt_px, e->display.rot_quat);
 	e->display.px_dt[WD] = rot_vec3(e->display.px_dt[WD], e->display.rot_quat);
 	e->display.px_dt[HT] = rot_vec3(e->display.px_dt[HT], e->display.rot_quat);
