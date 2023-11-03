@@ -36,5 +36,5 @@ t_vec3	raytrace(t_ray ray, t_objects *objs, int depth)
 		return (scale_vec3(dot_vec3(record.normal, light_vector), record.rgb));
 		// return (scale_vec3(dot_vec3(record.normal, light_vector), multi_vec3(record.rgb, raytrace(reflected_ray, objs, depth -1))));
 	}
-	return (vec3(1, 1, 1));
+	return (vec3(0, 0, 0));
 }
