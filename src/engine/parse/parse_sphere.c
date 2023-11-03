@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 13:13:55 by jukim2            #+#    #+#             */
-/*   Updated: 2023/11/02 20:17:34 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/03 14:04:44 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	parse_sphere(t_objects *objs, char *line)
 	idx = parse_double(&tmp->radius, line, check_misconfig(objs, line, idx));
 	tmp->radius /= 2;
 	idx = parse_doubles(&tmp->rgb, line, check_misconfig(objs, line, idx));
-	check_endconfiguration(objs, line, idx);
+	check_endconfig(objs, line, idx);
 	tmp->rgb = scale_vec3(1 / 255., tmp->rgb);
 	add_shape(&objs->shape, tmp);
 }

@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 14:52:57 by jukim2            #+#    #+#             */
-/*   Updated: 2023/11/03 13:55:28 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/03 14:04:44 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	check_misconfig(t_objects *objs, char *line, int idx)
 	return (idx);
 }
 
-void	check_endconfiguration(t_objects *objs, char *line, int idx)
+void	check_endconfig(t_objects *objs, char *line, int idx)
 {
 	while (line[idx])
 	{
