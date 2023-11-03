@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raytrace_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjs <kjs@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 11:08:02 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/30 23:44:51 by kjs              ###   ########.fr       */
+/*   Updated: 2023/11/03 22:54:59 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,6 @@ int	is_shadowed(t_shape *shape, t_vec3 origin, t_vec3 light_vector)
 	tolight.origin = origin;
 	tolight.direction = light_vector;
 	t_hit_record r = get_hit_record(tolight, shape);
+	// 이렇게하면 point -> light.coord -> object 이때도 shadow로 판정
 	return (r.is_hit);
 }

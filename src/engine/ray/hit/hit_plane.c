@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 19:02:19 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/31 14:57:19 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/03 22:51:02 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ t_hit_record	hit_plane(t_ray ray, t_shape *shape)
 
 	init_hit_record(&hr);
 	o_c = sub_vec3(ray.origin, shape->coord);
+	if (dot_vec3(shape->orient, ray.direction) == 0)
+		return (hr);
 	t = dot_vec3(shape->orient, sub_vec3(shape->coord, ray.origin)) \
 		/ dot_vec3(shape->orient, ray.direction);
 	if (doublecmp(t, 0.) <= 0)

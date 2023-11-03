@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 16:42:43 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/31 15:33:00 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/03 22:52:59 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_hit_record	hit_sphere(t_ray ray, t_shape *shape)
 	a = dot_vec3(ray.direction, ray.direction);
 	b = dot_vec3(oc, ray.direction);
 	c = dot_vec3(oc, oc) - shape->radius * shape->radius;
-	if (doublecmp((b * b - a * c), 0.) <= 0)
+	if (doublecmp((b * b - a * c), 0.) <= 0 || a < 0)
 		return (hr);
 	else if (doublecmp((-b + sqrt(b * b - a * c)) / a, 0.) < 0)
 		return (hr);
