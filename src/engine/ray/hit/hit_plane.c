@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 19:02:19 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/03 22:51:02 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/03 23:28:51 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ t_hit_record	hit_plane(t_ray ray, t_shape *shape)
 	hr.t = t;
 	hr.point = add_vec3(ray.origin, scale_vec3(hr.t, ray.direction));
 	if (dot_vec3(ray.direction, shape->orient) > 0.)
-		hr.normal = shape->orient;
-	else
 		hr.normal = invert_vec3(shape->orient);
+	else
+		hr.normal = shape->orient;
 	hr.is_front = TRUE;
 	hr.rgb = shape->rgb;
 	hr.mat = shape->mat;
