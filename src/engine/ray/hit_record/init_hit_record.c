@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 21:59:44 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/30 14:55:24 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/04 23:34:48 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	init_hit_record(t_hit_record *hr)
 	hr->t = 1000000000;
 	hr->point = vec3(0, 0, 0);
 	hr->normal = vec3(0, 0, 0);
-	hr->is_front = -1;
 	hr->rgb = vec3(0, 0, 0);
 	hr->mat = 0;
 }

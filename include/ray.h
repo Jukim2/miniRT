@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 11:22:24 by jukim2            #+#    #+#             */
-/*   Updated: 2023/11/04 00:22:02 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/04 23:34:52 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ typedef struct s_hit_record
 	double	t;
 	t_vec3	point;
 	t_vec3	normal;
-
-	t_bool	is_front;
 	t_vec3	rgb;
 	int		mat;
 }	t_hit_record;
