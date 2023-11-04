@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 19:33:12 by jukim2            #+#    #+#             */
-/*   Updated: 2023/11/03 14:35:37 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/04 17:24:41 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "numft.h"
 #include <math.h>
 
-void	correct_color(t_vec3 *color_vector_sum, t_vec3 rgb)
+void	correct_color(t_vec3 *color_vector_sum)
 {
 	if (color_vector_sum->x > 1)
 		color_vector_sum->x = 1;

@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 13:21:53 by jukim2            #+#    #+#             */
-/*   Updated: 2023/11/04 17:13:09 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/04 17:25:46 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "numft.h"
 #include <stdio.h> // test
 
-int	parse_id(t_objects *objects, char *line)
+int	parse_id(char *line)
 {
 	int	i;
 

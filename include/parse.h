@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 13:13:27 by jukim2            #+#    #+#             */
-/*   Updated: 2023/11/03 17:42:22 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/04 17:25:53 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,27 @@
 # define PARSE_H
 
 # include "object.h"
+
+# define ERR_MSG_WRONG_SYMBOL "Wrong Symbol Detected"
+# define ERR_MSG_AMBIENT_RATIO "Ambient Light should be between [0,0,1.0]"
+# define ERR_MSG_AMBIENT_RGB "Ambient Light RGB be betwwen [0-255]"
+# define ERR_MSG_CAM_ORIENT_RANGE \
+		"Camera Orientation Vector must have values in [-1,1]"
+# define ERR_MSG_CAM_ORIENT_LEN "Camera Orientation Vector should have length"
+# define ERR_MSG_CAM_FOV "Camera filed of view should be in [0,180]"
+# define ERR_MSG_LIGHT_BRIGHTNESS "Light brightness should be in [0.0,1.0]"
+# define ERR_MSG_LIGHT_RGB "Light RGB should be between [0-255]"
+# define ERR_MSG_CY_ORIENT_RANGE \
+		"Cylinder Orient Vector must have values in [-1,1]"
+# define ERR_MSG_CY_ORIENT_LEN "Cylinder Orientation Vector should have length"
+# define ERR_MSG_CY_RGB "Cylinder RGB should be betwwen [0-255]"
+# define ERR_MSG_PL_ORIENT_RANGE \
+		"Plane Orientation Vector must have values in [-1,1]"
+# define ERR_MSG_PL_ORIENT_LEN "Plane Orientation Vector should have length"
+# define ERR_MSG_PL_RGB "Plane RGB should be between [0-255]"
+# define ERR_MSG_SPHERE_RADIUS "Sphere Radius should be bigger than zero"
+# define ERR_MSG_SHPERE_RGB "Sphere RGB should be between [0-255]"
+# define ERR_MSG_SHAPE_NOT_ALLOC "Shape does not allocated"
 
 enum e_parse
 {
@@ -30,12 +51,12 @@ enum e_parse
 
 void	parse_camera(t_objects *objs, char *line);
 void	parse_sphere(t_objects *objs, char *line);
-void	clean_program(t_objects *objs, char *line);
+void	parse_failed(t_objects *objs, char *line);
 int		check_misconfig(t_objects *objs, char *line, int idx);
 void	check_endconfig(t_objects *objs, char *line, int idx);
 void	add_shape(t_shape **shape, t_shape *new);
 t_bool	is_valid_norm_vector(t_vec3	n);
-int		parse_id(t_objects *objs, char *line);
+int		parse_id(char *line);
 int		parse_double(double *f, char *str, int i);
 int		parse_doubles(t_vec3 *vec, char *line, int idx);
 void	parse_ambient_light(t_objects *objs, char *line);

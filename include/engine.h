@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 22:17:55 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/02 21:29:52 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/04 17:24:24 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include "mlx.h"
 # include "object.h"
 # include "numft.h"
-// # include "quat.h"
 
 # define WIN_W 1280
 # define WIN_H 720
@@ -70,8 +69,10 @@ typedef struct s_engine
 	t_objects	objs;
 }	t_engine;
 
+void	clean_engine(t_objects *objs, char *line);
 int		init_engine(t_engine *e, char *filename);
 void	execute_engine(t_engine *e);
-int		terminate_engine(t_engine *e);
+int		quit_engine(void *ptr);
+void	term_engine(char *errmsg, t_objects *objs, char *line);
 
 #endif

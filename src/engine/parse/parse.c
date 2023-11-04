@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 16:44:45 by kjs               #+#    #+#             */
-/*   Updated: 2023/11/04 17:16:40 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/04 17:26:02 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	parse_line(void (*parsers[])(t_objects *, char *), \
 
 	if (ft_strncmp(line, "\n", ft_strlen(line)) == 0)
 		return ;
-	id = parse_id(objs, line);
+	id = parse_id(line);
 	if (id < 3 && arr[id]++ != 0)
 		term_engine("miniRT: multiple symbol in configuration", objs, line);
 	parsers[id](objs, line);
