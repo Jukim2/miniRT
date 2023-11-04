@@ -3,17 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parse_light.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: kjs <kjs@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 13:13:48 by jukim2            #+#    #+#             */
-/*   Updated: 2023/11/04 17:12:46 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/05 01:30:21 by kjs              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "color.h"
-#include "object.h"
 #include "parse.h"
-#include <stdio.h>
 
 void	parse_light(t_objects *objs, char *line)
 {
@@ -29,5 +27,6 @@ void	parse_light(t_objects *objs, char *line)
 						check_misconfig(objs, line, idx));
 	if (!is_valid_color_hex(objs->light.rgb))
 		term_engine(ERR_MSG_LIGHT_RGB, objs, line);
+	objs->light.rgb = scale_vec3(1 / 255., objs->light.rgb);
 	check_endconfig(objs, line, idx);
 }

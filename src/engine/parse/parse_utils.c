@@ -3,18 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: kjs <kjs@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 14:52:57 by jukim2            #+#    #+#             */
-/*   Updated: 2023/11/04 16:55:15 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/05 01:26:23 by kjs              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "engine.h"
-#include "libft.h"
-#include <fcntl.h>
-#include <stdio.h>
-#include <stdlib.h>
 
 int	check_misconfig(t_objects *objs, char *line, int idx)
 {

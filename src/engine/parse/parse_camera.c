@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parse_camera.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: kjs <kjs@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 13:13:41 by jukim2            #+#    #+#             */
-/*   Updated: 2023/11/04 17:09:02 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/05 01:28:07 by kjs              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "engine.h"
 #include "parse.h"
-#include <stdio.h>
 
 void	parse_camera(t_objects *objs, char *line)
 {

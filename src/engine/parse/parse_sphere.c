@@ -3,18 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parse_sphere.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: kjs <kjs@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 13:13:55 by jukim2            #+#    #+#             */
-/*   Updated: 2023/11/04 17:16:45 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/05 01:30:53 by kjs              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "color.h"
-#include "object.h"
 #include "parse.h"
 #include "libft.h"
-#include <stdio.h>
 
 void	parse_sphere(t_objects *objs, char *line)
 {

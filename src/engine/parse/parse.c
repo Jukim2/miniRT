@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: kjs <kjs@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 16:44:45 by kjs               #+#    #+#             */
-/*   Updated: 2023/11/04 17:26:02 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/05 01:22:15 by kjs              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "libft.h"
 #include "parse.h"
 #include <fcntl.h>
-#include <stdio.h>
 
 int	parse(t_objects *objs, char *filename)
 {

@@ -3,18 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parse_ambient_light.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: kjs <kjs@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 12:51:35 by jukim2            #+#    #+#             */
-/*   Updated: 2023/11/04 17:05:49 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/05 01:30:44 by kjs              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "color.h"
-#include "object.h"
 #include "parse.h"
-
-#include <stdio.h>
 
 void	parse_ambient_light(t_objects *objs, char *line)
 {
