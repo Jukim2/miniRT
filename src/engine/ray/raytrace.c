@@ -21,7 +21,7 @@ t_vec3	raytrace(t_ray ray, t_objects *objs, int depth)
 {
 	t_hit_record	record;
 	t_ray			reflected_ray;
-	t_vec3			light_vector;
+	t_vec3			light;
 
 	if (depth <= 0)
 		return (vec3(0, 0, 0));
@@ -30,11 +30,14 @@ t_vec3	raytrace(t_ray ray, t_objects *objs, int depth)
 	{
 		reflected_ray.origin = record.point;
 		reflected_ray.direction = get_reflected_direction(ray, record);
-		light_vector = norm_vec3(sub_vec3(objs->light.coord, record.point));
-		if (is_shadowed(objs->shape, record.point, light_vector, objs->light.coord) || dot_vec3(record.normal, light_vector) <= 0)
+		light = norm_vec3(sub_vec3(objs->light.coord, record.point));
+		if (is_shadowed(objs->shape, record.point, light, objs->light.coord) \
+			|| dot_vec3(record.normal, light) <= 0)
 			return (vec3(0, 0, 0));
-		return (scale_vec3(dot_vec3(record.normal, light_vector), record.rgb));
-		// return (scale_vec3(dot_vec3(record.normal, light_vector), multi_vec3(record.rgb, raytrace(reflected_ray, objs, depth -1))));
+		return (scale_vec3(dot_vec3(record.normal, light), record.rgb));
 	}
 	return (vec3(0, 0, 0));
 }
+
+// return (scale_vec3(dot_vec3(record.normal, light),
+// (record.rgb, raytrace(reflected_ray, objs, depth -1))));

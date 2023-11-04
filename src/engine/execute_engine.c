@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 22:38:25 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/02 21:28:38 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/04 17:17:00 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,12 @@
 #include "color.h"
 #include "numft.h"
 
-
-/* TODO: error handling when fov == 0 or 180 */
 /* TODO: handle window ratio */
 
 int	press_key(int keycode, void *ptr)
 {
 	if (keycode == KEY_ESC)
-		terminate_engine(ptr);
+		quit_engine(ptr);
 	return (0);
 }
 
@@ -58,7 +56,7 @@ void	execute_engine(t_engine *e)
 {
 	set_vport_img(e);
 	mlx_key_hook(e->win, press_key, (void *)e);
-	mlx_hook(e->win, BTN_EXIT, 0, &terminate_engine, (void *)e);
+	mlx_hook(e->win, BTN_EXIT, 0, &quit_engine, (void *)e);
 	mlx_put_image_to_window(e->mlx, e->win, e->img.ptr, 0, 0);
 	mlx_loop(e->mlx);
 }

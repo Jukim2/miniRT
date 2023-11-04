@@ -6,11 +6,11 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 16:44:45 by kjs               #+#    #+#             */
-/*   Updated: 2023/11/03 13:54:45 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/04 17:16:40 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "object.h"
+#include "engine.h"
 #include "libft.h"
 #include "parse.h"
 #include <fcntl.h>
@@ -46,7 +46,7 @@ void	init_parsers(void (*parsers[])(t_objects *, char *))
 	parsers[PARSE_SPHERE] = parse_sphere;
 	parsers[PARSE_PLANE] = parse_plane;
 	parsers[PARSE_CYLINDER] = parse_cylinder;
-	parsers[PARSE_ERROR] = clean_program;
+	parsers[PARSE_ERROR] = parse_failed;
 }
 
 void	parse_line(void (*parsers[])(t_objects *, char *), \
@@ -59,11 +59,6 @@ void	parse_line(void (*parsers[])(t_objects *, char *), \
 		return ;
 	id = parse_id(objs, line);
 	if (id < 3 && arr[id]++ != 0)
-	{
-		printf("Error\nminiRT: multiple symbol in configuration\n");
-		clean_program(objs, line);
-	}
+		term_engine("miniRT: multiple symbol in configuration", objs, line);
 	parsers[id](objs, line);
 }
-
-

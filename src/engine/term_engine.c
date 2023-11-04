@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   terminate_engine.c                                 :+:      :+:    :+:   */
+/*   term_engine.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/08 17:13:03 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/02 21:30:41 by gyoon            ###   ########.fr       */
+/*   Created: 2023/11/04 16:27:31 by gyoon             #+#    #+#             */
+/*   Updated: 2023/11/04 16:35:17 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "engine.h"
-#include "parse.h"
+#include "libft.h"
 #include <stdlib.h>
 
-int	terminate_engine(t_engine *e)
+void	term_engine(char *errmsg, t_objects *objs, char *line)
 {
-	mlx_clear_window(e->mlx, e->win);
-	clean_program(&e->objs, 0);
-	exit(0);
-	return (0);
+	ft_putendl_fd("Error", 2);
+	ft_putendl_fd(errmsg, 2);
+	clean_engine(objs, line);
+	exit(1);
 }

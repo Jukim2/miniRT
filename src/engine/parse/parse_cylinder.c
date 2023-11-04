@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 13:13:46 by jukim2            #+#    #+#             */
-/*   Updated: 2023/11/03 22:54:53 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/04 17:09:26 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,30 +23,21 @@ void	parse_cylinder(t_objects *objs, char *line)
 
 	tmp = ft_calloc(1, sizeof(t_shape));
 	if (!tmp)
-		clean_program(objs, line);
+		term_engine(ERR_MSG_SHAPE_NOT_ALLOC, objs, line);
 	tmp->type = CYLINDER;
 	idx = parse_doubles(&tmp->coord, line, check_misconfig(objs, line, 2));
 	idx = parse_doubles(&tmp->orient, line, check_misconfig(objs, line, idx));
 	if (!is_valid_norm_vector(tmp->orient))
-	{
-		printf("Error\nCylinder Orientation Vector must have values in [-1,1]\n");
-		clean_program(objs, line);
-	}
+		term_engine(ERR_MSG_CY_ORIENT_RANGE, objs, line);
 	else if (doublecmp(vec3len(tmp->orient), 0.) <= 0)
-	{
-		printf("Error\ncylinder orientation vector should have length\n");
-		clean_program(objs, line);
-	}
+		term_engine(ERR_MSG_CY_ORIENT_LEN, objs, line);
 	tmp->orient = norm_vec3(tmp->orient);
 	idx = parse_double(&tmp->radius, line, check_misconfig(objs, line, idx));
 	tmp->radius /= 2;
 	idx = parse_double(&tmp->height, line, check_misconfig(objs, line, idx));
 	idx = parse_doubles(&tmp->rgb, line, check_misconfig(objs, line, idx));
 	if (!is_valid_color_hex(tmp->rgb))
-	{
-		printf("Error\nCylinder RGB should be between [0-255]\n");
-		clean_program(objs, line);
-	}
+		term_engine(ERR_MSG_CY_RGB, objs, line);
 	tmp->rgb = scale_vec3(1 / 255., tmp->rgb);
 	check_endconfig(objs, line, idx);
 	add_shape(&objs->shape, tmp);

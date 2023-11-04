@@ -6,31 +6,15 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 14:52:57 by jukim2            #+#    #+#             */
-/*   Updated: 2023/11/03 17:42:07 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/04 16:55:15 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "object.h"
+#include "engine.h"
 #include "libft.h"
 #include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
-
-void	clean_program(t_objects *objs, char *line)
-{
-	t_shape	*iter;
-	t_shape	*tmp;
-
-	iter = objs->shape;
-	while (iter)
-	{
-		tmp = iter;
-		iter = iter->next;
-		free(tmp);
-	}
-	free(line);
-	exit (0);
-}
 
 int	check_misconfig(t_objects *objs, char *line, int idx)
 {
@@ -41,10 +25,7 @@ int	check_misconfig(t_objects *objs, char *line, int idx)
 	ch = line[idx];
 	if (ch != '\n' && ch != '\0' && ch != '+'
 		&& ch != '-' && (ch < '0' || ch > '9'))
-	{
-		printf("Error\nminiRT: file misconfiguration error\n");
-		clean_program(objs, line);
-	}
+		term_engine("miniRT: file misconfiguration error", objs, line);
 	return (idx);
 }
 
@@ -53,10 +34,7 @@ void	check_endconfig(t_objects *objs, char *line, int idx)
 	while (line[idx])
 	{
 		if (line[idx] != ' ' && line[idx] != '\n')
-		{
-			printf("Error\nminiRT: file misconfiguration error\n");
-			clean_program(objs, line);
-		}
+			term_engine("miniRT: file misconfiguration error", objs, line);
 		idx++;
 	}
 }
