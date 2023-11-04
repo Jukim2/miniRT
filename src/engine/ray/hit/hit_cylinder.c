@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 22:36:40 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/05 00:01:03 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/05 01:40:01 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static t_hit_record	hit_cylinder_side(t_ray ray, t_shape *shp)
 	init_hit_record(&r);
 	d = pow(dot_vec3(tmp, p), 2) - \
 		dot_vec3(p, p) * (dot_vec3(tmp, tmp) - pow(shp->radius, 2));
-	if (doublecmp(d, 0.) <= 0 || dot_vec3(p, p) < 0)
+	if (doublecmp(d, 0.) <= 0 || dot_vec3(p, p) == 0)
 		return (r);
 	else if (doublecmp((-dot_vec3(tmp, p) + sqrt(d)) / dot_vec3(p, p), 0.) < 0)
 		return (r);

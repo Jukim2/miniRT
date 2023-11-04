@@ -6,14 +6,12 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 17:56:31 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/30 16:21:59 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/05 01:31:07 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "numft.h"
 #include "ray.h"
-
-#include <stdio.h>
 
 t_hit_record	hit_circle(t_ray ray, t_shape *shape)
 {

@@ -6,17 +6,12 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 19:02:19 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/04 23:34:58 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/05 01:32:25 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ray.h"
 
-// normal : n
-// center : c (plane point)
-// ray origin : o
-// ray direction : d
-// t = ((N dot C) - (N dot O)) / (N dot D)
 t_hit_record	hit_plane(t_ray ray, t_shape *shape)
 {
 	t_hit_record	hr;

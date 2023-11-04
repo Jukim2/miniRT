@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 11:13:05 by jukim2            #+#    #+#             */
-/*   Updated: 2023/11/05 01:27:17 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/05 01:45:55 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	get_color(t_engine *e, int x, int y)
 		ray.direction = norm_vec3(add_vec3(e->display.bot_lt_px, \
 		add_vec3(scale_vec3(x + rand_double(-0.5, 0.5), e->display.px_dt[WD]), \
 		scale_vec3(y + rand_double(-0.5, 0.5), e->display.px_dt[HT]))));
-		rgb_sum = add_vec3(rgb_sum, raytrace(ray, &e->objs, 20));
+		rgb_sum = add_vec3(rgb_sum, raytrace(ray, &e->objs, 1));
 		sampling++;
 	}
 	rgb_sum = scale_vec3(1. / SAMPLE_CNT, rgb_sum);

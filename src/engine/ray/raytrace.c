@@ -11,9 +11,6 @@
 /* ************************************************************************** */
 
 #include "numft.h"
-#include "ray.h"
-#include "object.h"
-#include "engine.h"
 #include "color.h"
 #include "parse.h"
 
@@ -38,6 +35,3 @@ t_vec3	raytrace(t_ray ray, t_objects *objs, int depth)
 	}
 	return (vec3(0, 0, 0));
 }
-
-// return (scale_vec3(dot_vec3(record.normal, light),
-// (record.rgb, raytrace(reflected_ray, objs, depth -1))));
