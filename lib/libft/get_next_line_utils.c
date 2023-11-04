@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jukim2 <jukim2@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 18:40:49 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/01 13:03:43 by jukim2           ###   ########.fr       */
+/*   Updated: 2023/11/05 00:30:39 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_file	*find_file(int fd, t_file *file_list)
 }
 
 int	make_file_node(int fd, t_file **file_list)
-{	
+{
 	t_file	*new_file;
 	t_file	*file;
 

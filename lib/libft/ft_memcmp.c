@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jukim2 <jukim2@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 19:54:01 by jukim2            #+#    #+#             */
-/*   Updated: 2022/11/11 17:09:10 by jukim2           ###   ########.fr       */
+/*   Updated: 2023/11/05 00:30:31 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,6 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 		if (str1[i] != str2[i])
 			return (str1[i] - str2[i]);
 		i++;
-	}	
+	}
 	return (0);
 }

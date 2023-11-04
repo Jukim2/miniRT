@@ -3,15 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jukim2 <jukim2@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 13:11:19 by jukim2            #+#    #+#             */
-/*   Updated: 2023/10/01 12:52:55 by jukim2           ###   ########.fr       */
+/*   Updated: 2023/11/05 00:31:27 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 10
+# endif
 
 # include <stdlib.h>
 # include <unistd.h>
@@ -80,17 +84,20 @@ void			ft_lstadd_back(t_list **lst, t_list *new);
 void			ft_lstdelone(t_list *lst, void (*del)(void *));
 void			ft_lstclear(t_list **lst, void (*del)(void *));
 void			ft_lstiter(t_list *lst, void (*f)(void *));
-t_list			*ft_lstmap(t_list *lst, void *(*f)(void *),
-					void (*del)(void *));
+t_list			*ft_lstmap(t_list *lst, void *(*f)(void *), \
+							void (*del)(void *));
 t_file			*find_file(int fd, t_file *file_list);
 int				make_line_node(t_file *file);
 int				make_file_node(int fd, t_file **file_list);
 int				find_newline(int idx, char *buffer);
-char			*ft_strnjoin(char *str1, char *str2, int start_idx, int end_idx);
+char			*ft_strnjoin(char *str1, char *str2, \
+							int start_idx, int end_idx);
 char			*get_next_line(int fd);
 char			*read_file(int fd, char *buffer, t_file *file);
 int				make_line(int rbyte, t_line *current_line, char *buffer);
-int				push_line(t_line *current_line, char *buffer, int start, int end);
-void			free_all(char *buffer, t_line *line, t_file *file, t_file **file_list);
+int				push_line(t_line *current_line, char *buffer, \
+							int start, int end);
+void			free_all(char *buffer, t_line *line, \
+						t_file *file, t_file **file_list);
 
 #endif
