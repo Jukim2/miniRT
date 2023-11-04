@@ -6,15 +6,13 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 15:05:39 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/04 02:12:48 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/05 01:15:40 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "numft.h"
 #include <math.h>
-#include <stdio.h>
 
-// q = cos(θ/2) + (x * sin(θ/2), y * sin(θ/2), z * sin(θ/2))
 t_quat	get_rot_quat(t_vec3 u, t_vec3 v)
 {
 	t_quat	q;
