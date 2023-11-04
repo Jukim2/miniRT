@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_specular_color.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: kjs <kjs@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 13:24:05 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/04 02:00:08 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/05 01:17:12 by kjs              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_vec3	get_specular_color(t_objects *objs, t_hit_record r)
 	view = norm_vec3(sub_vec3(objs->camera.coord, r.point));
 	dot = dot_vec3(view, reflected);
 	if (dot > 0)
-		return (scale_vec3(pow(dot, 15), vec3(1, 1, 1)));
+		return (scale_vec3(pow(dot, 15), objs->light.rgb));
 	else
 		return (vec3(0, 0, 0));
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_module.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: kjs <kjs@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 13:21:53 by jukim2            #+#    #+#             */
-/*   Updated: 2023/11/05 00:56:25 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/05 01:13:50 by kjs              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int	parse_id(char *line)
 	i = 0;
 	while (line[i] && line[i] != ' ')
 		i++;
+	if (i == 0)
+		return (PARSE_ERROR);
 	if (ft_strncmp(line, "A", i) == 0)
 		return (PARSE_AMBIENT_LIGHT);
 	else if (ft_strncmp(line, "C", i) == 0)
@@ -34,8 +36,7 @@ int	parse_id(char *line)
 		return (PARSE_SPHERE);
 	else if (ft_strncmp(line, "cy", i) == 0)
 		return (PARSE_CYLINDER);
-	else
-		return (PARSE_ERROR);
+	return (PARSE_ERROR);
 }
 
 int	parse_double(double *f, char *str, int i)
