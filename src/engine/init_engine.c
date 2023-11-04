@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_engine.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: kjs <kjs@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 22:22:57 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/04 02:07:39 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/05 00:52:39 by kjs              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,17 @@ int	init_engine(t_engine *e, char *filename)
 		return (0);
 	init_display_settings(e);
 	e->mlx = mlx_init();
+	if (!e->mlx)
+		term_engine("mlx init error", &e->objs, 0);
 	e->win = mlx_new_window(e->mlx, WIN_W, WIN_H, "miniRT");
+	if (!e->win)
+		term_engine("mlx_window_error", &e->objs, 0);
 	e->img.ptr = mlx_new_image(e->mlx, WIN_W, WIN_H);
+	if (!e->img.ptr)
+	{
+		mlx_destroy_window(e->mlx, e->win);
+		term_engine("mlx_img_error", &e->objs, 0);
+	}
 	e->img.addr = (unsigned int *)mlx_get_data_addr(\
 		e->img.ptr, &e->img.bpp, &e->img.line_len, &e->img.endian);
 	return (1);

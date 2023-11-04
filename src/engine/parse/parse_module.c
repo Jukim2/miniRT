@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_module.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: kjs <kjs@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 13:21:53 by jukim2            #+#    #+#             */
-/*   Updated: 2023/11/04 17:25:46 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/05 00:42:29 by kjs              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "parse.h"
 #include "libft.h"
 #include "numft.h"
-#include <stdio.h> // test
 
 int	parse_id(char *line)
 {
@@ -67,16 +66,19 @@ int	parse_double(double *f, char *str, int i)
 	return (i);
 }
 
-int	parse_doubles(t_vec3 *vec, char *line, int idx)
+int parse_doubles(t_vec3 *vec, char *line, int idx)
 {
-	idx = parse_double(&(*vec).x, line, idx);
-	if (line[idx] != ',' || (('0' > line[idx + 1] || line[idx + 1] > '9') \
-		&& line[idx + 1] != '-' && line[idx + 1] != '+'))
-		return (0);
-	idx = parse_double(&(*vec).y, line, ++idx);
-	if (line[idx] != ',' || (('0' > line[idx + 1] || line[idx + 1] > '9') \
-		&& line[idx + 1] != '-' && line[idx + 1] != '+'))
-		return (0);
-	idx = parse_double(&(*vec).z, line, ++idx);
-	return (idx);
+    if (((line[idx] == '-' || line[idx] == '+') && ('0' > line[idx + 1] || line[idx + 1] > '9'))
+    || ((line[idx] != '-' && line[idx] != '+') && ('0' > line[idx] || line[idx] > '9')))
+        return (0);
+    idx = parse_double(&(*vec).x, line, idx);
+    if (line[idx] != ',' || ((line[idx + 1] == '-' || line[idx + 1] == '+') && ('0' > line[idx + 2] 
+    || line[idx + 2] > '9'))|| ((line[idx + 1] != '-' && line[idx + 1] != '+') && ('0' > line[idx + 1] || line[idx + 1] > '9')))
+        return (0);
+    idx = parse_double(&(*vec).y, line, ++idx);
+    if (line[idx] != ',' || ((line[idx + 1] == '-' || line[idx + 1] == '+') && ('0' > line[idx + 2] 
+    || line[idx + 2] > '9'))|| ((line[idx + 1] != '-' && line[idx + 1] != '+') && ('0' > line[idx + 1] || line[idx + 1] > '9')))
+        return (0);
+    idx = parse_double(&(*vec).z, line, ++idx);
+    return (idx);
 }
