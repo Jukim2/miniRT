@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 22:36:40 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/03 22:52:32 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/05 00:01:03 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,27 +67,27 @@ static t_vec3	get_tmp_vec3(t_vec3 origin, t_vec3 coord, t_vec3 orient)
 static t_hit_record	hit_cylinder_side(t_ray ray, t_shape *shp)
 {
 	t_hit_record	r;
-	const t_vec3	proj = proj_vec3_to_plane(ray.direction, shp->orient);
+	const t_vec3	p = proj_vec3(ray.direction, shp->orient);
 	const t_vec3	tmp = get_tmp_vec3(ray.origin, shp->coord, shp->orient);
 	double			d;
 
 	init_hit_record(&r);
-	d = pow(dot_vec3(tmp, proj), 2) - \
-		dot_vec3(proj, proj) * (dot_vec3(tmp, tmp) - pow(shp->radius, 2));
-	if (doublecmp(d, 0.) <= 0 || dot_vec3(proj, proj) < 0)
+	d = pow(dot_vec3(tmp, p), 2) - \
+		dot_vec3(p, p) * (dot_vec3(tmp, tmp) - pow(shp->radius, 2));
+	if (doublecmp(d, 0.) <= 0 || dot_vec3(p, p) < 0)
 		return (r);
-	else if (doublecmp((-dot_vec3(tmp, proj) + sqrt(d)) \
-			/ dot_vec3(proj, proj), 0.) < 0)
+	else if (doublecmp((-dot_vec3(tmp, p) + sqrt(d)) / dot_vec3(p, p), 0.) < 0)
 		return (r);
-	r.t = get_minimum_root(dot_vec3(proj, proj), dot_vec3(tmp, proj), \
+	r.t = get_minimum_root(dot_vec3(p, p), dot_vec3(tmp, p), \
 			dot_vec3(tmp, tmp) - pow(shp->radius, 2));
 	r.point = add_vec3(ray.origin, scale_vec3(r.t, ray.direction));
 	if (doublecmp(pow(vec3len(sub_vec3(r.point, shp->coord)), 2) \
 		- pow(shp->radius, 2.), pow(shp->height / 2., 2)) > 0)
 		return (r);
 	r.is_hit = TRUE;
-	r.normal = proj_vec3_to_plane(sub_vec3(r.point, shp->coord), shp->orient);
-	r.is_front = dot_vec3(ray.direction, r.normal) > 0.;
+	r.normal = norm_vec3(proj_vec3(sub_vec3(r.point, shp->coord), shp->orient));
+	if (dot_vec3(ray.direction, r.normal) > 0.)
+		r.normal = invert_vec3(r.normal);
 	r.rgb = shp->rgb;
 	r.mat = shp->mat;
 	return (r);
