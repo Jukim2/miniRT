@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 22:38:25 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/04 17:17:00 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/05 00:13:59 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	set_vport_img(t_engine *e)
 		}
 		x++;
 	}
-	ft_putstr_fd("done\n", 1);
+	ft_putstr_fd("Ray Tracing is done\n", 1);
 }
 
 void	execute_engine(t_engine *e)
