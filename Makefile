@@ -6,7 +6,7 @@
 #    By: jukim2 <jukim2@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/16 16:53:40 by gyoon             #+#    #+#              #
-#    Updated: 2023/11/05 10:38:46 by jukim2           ###   ########.fr        #
+#    Updated: 2023/11/05 10:47:32 by jukim2           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,9 +37,7 @@ endif
 SRCS		= src/engine/clean_engine.c src/engine/color/convert_color_vec3.c src/engine/color/correct_color.c src/engine/color/get_color.c src/engine/color/get_specular_color.c src/engine/color/is_valid_color_hex.c src/engine/execute_engine.c src/engine/init_engine.c src/engine/parse/parse.c src/engine/parse/parse_ambient_light.c src/engine/parse/parse_camera.c src/engine/parse/parse_cylinder.c src/engine/parse/parse_failed.c src/engine/parse/parse_light.c src/engine/parse/parse_module.c src/engine/parse/parse_plane.c src/engine/parse/parse_sphere.c src/engine/parse/parse_utils.c src/engine/quit_engine.c src/engine/ray/hit/hit_circle.c src/engine/ray/hit/hit_cylinder.c src/engine/ray/hit/hit_plane.c src/engine/ray/hit/hit_sphere.c src/engine/ray/hit_record/get_hit_record.c src/engine/ray/hit_record/init_hit_record.c src/engine/ray/is_shadowed.c src/engine/ray/raytrace.c src/engine/term_engine.c src/main.c src/numft/abs_double.c src/numft/doublecmp.c src/numft/get_radian.c src/numft/proj_vec3.c src/numft/quat/get_conj_quat.c src/numft/quat/get_rot_quat.c src/numft/quat/mul_quat.c src/numft/quat/norm_quat.c src/numft/quat/print_quat.c src/numft/quat/quat.c src/numft/quat/quatlen.c src/numft/rand_double.c src/numft/rand_vec3_hemisphere.c src/numft/rot_vec3.c src/numft/vec3/add_vec3.c src/numft/vec3/cross_vec3.c src/numft/vec3/dot_vec3.c src/numft/vec3/invert_vec3.c src/numft/vec3/multi_vec3.c src/numft/vec3/norm_vec3.c src/numft/vec3/print_vec3.c src/numft/vec3/rand_vec3.c src/numft/vec3/scale_vec3.c src/numft/vec3/sub_vec3.c src/numft/vec3/vec3.c src/numft/vec3/vec3len.c src/numft/vec3_to_quat.c
 OBJS		= $(SRCS:.c=.o)
 
-MLX_PATH	= ./lib/minilibx
 FT_PATH		= ./lib/libft
-MLX			= ./lib/minilibx/libmlx.a
 LIBFT		= ./lib/libft/libft.a
 
 INCLUDE		= ./include
@@ -82,7 +80,6 @@ all : $(NAME)
 
 $(NAME) : $(LIBFT) $(MLX) $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS)\
-		-L$(MLX_PATH) 		\
 		-L$(FT_PATH) 		\
 		-lmlx -lft			\
 		-framework OpenGL	\
@@ -125,15 +122,12 @@ clean :
 	@$(RM) $(OBJS)
 	@$(RM) $(B_OBJS)
 	@make -C $(FT_PATH) clean
-	@make -C $(MLX_PATH) clean
 	@printf "make clean ${bold}${NAME}.${end}\n"
 
 fclean :
 	@make clean
 	@$(RM) $(NAME)
 	@make -C $(FT_PATH) fclean
-	@make -C $(MLX_PATH) clean
-	@$(RM) $(MLX)
 	@printf "make fclean ${bold}${NAME}.${end}\n"
 
 re :
