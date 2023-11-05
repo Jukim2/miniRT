@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 13:13:27 by jukim2            #+#    #+#             */
-/*   Updated: 2023/11/04 17:25:53 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/05 10:38:18 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,15 @@
 # define ERR_MSG_WRONG_SYMBOL "Wrong Symbol Detected"
 # define ERR_MSG_AMBIENT_RATIO "Ambient Light should be between [0,0,1.0]"
 # define ERR_MSG_AMBIENT_RGB "Ambient Light RGB be betwwen [0-255]"
-# define ERR_MSG_CAM_ORIENT_RANGE \
-		"Camera Orientation Vector must have values in [-1,1]"
+# define ERR_MSG_CAM "Camera Orientation Vector must have values in [-1,1]"
 # define ERR_MSG_CAM_ORIENT_LEN "Camera Orientation Vector should have length"
 # define ERR_MSG_CAM_FOV "Camera filed of view should be in [0,180]"
 # define ERR_MSG_LIGHT_BRIGHTNESS "Light brightness should be in [0.0,1.0]"
 # define ERR_MSG_LIGHT_RGB "Light RGB should be between [0-255]"
-# define ERR_MSG_CY_ORIENT_RANGE \
-		"Cylinder Orient Vector must have values in [-1,1]"
+# define ERR_MSG_CY "Cylinder Orient Vector must have values in [-1,1]"
 # define ERR_MSG_CY_ORIENT_LEN "Cylinder Orientation Vector should have length"
 # define ERR_MSG_CY_RGB "Cylinder RGB should be betwwen [0-255]"
-# define ERR_MSG_PL_ORIENT_RANGE \
-		"Plane Orientation Vector must have values in [-1,1]"
+# define ERR_MSG_PL "Plane Orientation Vector must have values in [-1,1]"
 # define ERR_MSG_PL_ORIENT_LEN "Plane Orientation Vector should have length"
 # define ERR_MSG_PL_RGB "Plane RGB should be between [0-255]"
 # define ERR_MSG_SPHERE_RADIUS "Sphere Radius should be bigger than zero"

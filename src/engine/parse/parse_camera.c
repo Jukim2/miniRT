@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_camera.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjs <kjs@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 13:13:41 by jukim2            #+#    #+#             */
-/*   Updated: 2023/11/05 01:28:07 by kjs              ###   ########.fr       */
+/*   Updated: 2023/11/05 10:37:27 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	parse_camera(t_objects *objs, char *line)
 	idx = parse_doubles(&objs->camera.forward, line, \
 	check_misconfig(objs, line, idx));
 	if (!is_valid_norm_vector(objs->camera.forward))
-		term_engine(ERR_MSG_CAM_ORIENT_RANGE, objs, line);
+		term_engine(ERR_MSG_CAM, objs, line);
 	else if (doublecmp(vec3len(objs->camera.forward), 0.) <= 0)
 		term_engine(ERR_MSG_CAM_ORIENT_LEN, objs, line);
 	objs->camera.forward = norm_vec3(objs->camera.forward);
