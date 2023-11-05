@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_engine.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjs <kjs@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 22:22:57 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/05 00:52:39 by kjs              ###   ########.fr       */
+/*   Updated: 2023/11/05 10:54:51 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ static void	init_objects(t_objects *objects)
 
 static int	init_display_settings(t_engine *e)
 {
+	if (WIN_H <= 0 || WIN_W <= 0)
+		term_engine("Win height and width must bigger than zero", &e->objs, 0);
 	e->display.res[WD] = WIN_W;
 	e->display.res[HT] = WIN_H;
 	e->display.ar = WIN_W / WIN_H;

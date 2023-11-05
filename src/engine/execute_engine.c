@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 22:38:25 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/05 00:13:59 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/05 11:02:08 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 #include "ray.h"
 #include "color.h"
 #include "numft.h"
-
-/* TODO: handle window ratio */
 
 int	press_key(int keycode, void *ptr)
 {
